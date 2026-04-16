@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מימון סרטי תיעוד בישראל</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  /* ─── הגדר כאן את כתובת ה-Google Sheet שלך ─── */
+  /* ראה הוראות בתחתית הקובץ */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    direction: rtl;
+    background: #f5f4f0;
+    color: #2c2c2a;
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+  }
+
+  .dash {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .dash-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c2c2a;
+    margin-bottom: 4px;
+  }
+
+  .dash-sub {
+    font-size: 13px;
+    color: #5f5e5a;
+    margin-bottom: 1.5rem;
+  }
+
+  .loading-msg {
+    text-align: center;
+    padding: 3rem;
+    color: #888780;
+    font-size: 15px;
+  }
+
+  .error-msg {
+    background: #fcebeb;
+    border: 1px solid #f09595;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    color: #a32d2d;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+
+  .sec-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888780;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    align-items: center;
+  }
+
+  .chart-type-btn {
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    border: 1px solid #b4b2a9;
+    background: transparent;
+    color: #5f5e5a;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all .15s;
+  }
+  .chart-type-btn:hover { background: #ebebeb; }
+  .chart-type-btn.on {
+    background: #2c2c2a;
+    color: #fff;
+    border-color: #2c2c2a;
+  }
+
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .sources-grid { grid-template-columns: 1fr; }
+  }
+
+  .src-card {
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+
+  .src-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #e8e6df;
+  }
+
+  .src-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .src-cat-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c2c2a;
+    flex: 1;
+  }
+
+  .src-cat-num {
+    font-size: 10px;
+    color: #888780;
+    background: #f1efe8;
+    border-radius: 4px;
+    padding: 1px 6px;
+  }
+
+  .sub-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+  }
+  .sub-row + .sub-row { border-top: 1px solid #f1efe8; }
+
+  .tog {
+    width: 32px;
+    height: 18px;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+  .tog.on  { background: #639922; }
+  .tog.off { background: #d3d1c7; }
+  .tog::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute;
+    top: 2px;
+    transition: right .15s, left .15s;
+  }
+  .tog.on::after  { right: 2px; left: auto; }
+  .tog.off::after { left: 2px; right: auto; }
+
+  .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .sub-name {
+    font-size: 12px;
+    color: #444441;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .sub-num {
+    font-size: 10px;
+    color: #888780;
+    background: #f1efe8;
+    border-radius: 4px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .metric {
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: #5f5e5a;
+    margin-bottom: 4px;
+  }
+
+  .metric-val {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c2c2a;
+  }
+
+  .metric-sub {
+    font-size: 11px;
+    color: #888780;
+    margin-top: 2px;
+  }
+
+  .legend-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 10px;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #5f5e5a;
+  }
+
+  .chart-card {
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+    height: 360px;
+  }
+
+  .last-updated {
+    font-size: 11px;
+    color: #b4b2a9;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* ─── הוראות הגדרה (מוצגות לפני טעינת נתונים) ─── */
+  .setup-box {
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .setup-box h3 { font-size: 15px; margin-bottom: 1rem; color: #2c2c2a; }
+  .step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: #185FA5; color: #fff;
+    font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 13px; color: #444441; line-height: 1.5; }
+  .step-text code {
+    background: #f1efe8;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #185FA5;
+    word-break: break-all;
+  }
+  .url-input-row { display: flex; gap: 8px; margin-top: 1rem; }
+  .url-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #b4b2a9;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    direction: ltr;
+  }
+  .url-input:focus { outline: 2px solid #185FA5; border-color: #185FA5; }
+  .load-btn {
+    padding: 8px 16px;
+    background: #185FA5;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .load-btn:hover { background: #0C447C; }
+</style>
+</head>
+<body>
+<div class="dash">
+  <div class="dash-title">מימון סרטי תיעוד בישראל</div>
+  <div class="dash-sub" id="dash-sub">טוען נתונים...</div>
+
+  <!-- הגדרת מקור נתונים -->
+  <div class="setup-box" id="setup-box">
+    <h3>חיבור ל-Google Sheets</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        צור גיליון Google Sheets חדש לפי <strong>התבנית המצורפת</strong> (ראה קובץ <code>TEMPLATE.md</code> שקיבלת).
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        בגיליון: לחץ <strong>קובץ ← שיתוף ← פרסם לאינטרנט</strong>, בחר את הגיליון הרצוי ופורמט <strong>CSV</strong>, לחץ <strong>פרסם</strong>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        העתק את הכתובת שקיבלת (נראית כך: <code>https://docs.google.com/spreadsheets/d/.../.../pub?output=csv</code>) והדבק למטה.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        לחץ <strong>טען נתונים</strong>. בפעם הבאה הכתובת תישמר אוטומטית בדפדפן.
+      </div>
+    </div>
+    <div class="url-input-row">
+      <input class="url-input" id="sheet-url" type="text" placeholder="הדבק כאן את כתובת ה-CSV של Google Sheets" dir="ltr" />
+      <button class="load-btn" onclick="loadFromInput()">טען נתונים</button>
+    </div>
+    <div id="url-error" style="font-size:12px;color:#a32d2d;margin-top:6px;display:none;"></div>
+  </div>
+
+  <div id="dashboard-content" style="display:none;">
+    <div class="sec-label">סוג גרף</div>
+    <div class="row">
+      <button class="chart-type-btn" data-type="bar">עמודות צמודות</button>
+      <button class="chart-type-btn on" data-type="stacked">ערימה</button>
+    </div>
+
+    <div class="sec-label">מקורות מימון</div>
+    <div class="sources-grid" id="sources-grid"></div>
+
+    <div class="metric-row" id="metric-row"></div>
+
+    <div class="chart-card">
+      <div class="legend-wrap" id="legend-row"></div>
+      <div class="chart-wrap">
+        <canvas id="mainChart" role="img" aria-label="גרף מימון סרטי תיעוד לפי שנה ומקור">נתוני מימון סרטי תיעוד בישראל</canvas>
+      </div>
+    </div>
+    <div class="last-updated" id="last-updated"></div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   הגדרות קטגוריות וצבעים
+   שמות המקורות חייבים להתאים בדיוק לשמות בגיליון
+══════════════════════════════════════════════ */
+const SOURCES = [
+  {
+    id: 'funds', cat: 'קרנות קולנוע', num: '01',
+    shades: ['#042C53','#0C447C','#185FA5','#378ADD','#85B7EB'],
+    items: [
+      { id: 'rabinovitch', name: "קרן רבינוביץ'",                    num: '01.1' },
+      { id: 'new_fund',    name: 'הקרן החדשה לקולנוע ולטלוויזיה',   num: '01.2' },
+      { id: 'makor',       name: 'קרן מקור',                          num: '01.3' },
+      { id: 'gesher',      name: 'קרן גשר',                           num: '01.4' },
+      { id: 'regional',    name: 'קרנות אזוריות',                     num: '01.5' },
+    ]
+  },
+  {
+    id: 'broadcast', cat: 'גופי שידור', num: '02',
+    shades: ['#04342C','#085041','#1D9E75'],
+    items: [
+      { id: 'yes',    name: 'YES',                     num: '02.1' },
+      { id: 'hot',    name: 'HOT',                     num: '02.2' },
+      { id: 'reshet', name: 'הרשות השנייה (12/13)',    num: '02.3' },
+    ]
+  },
+  {
+    id: 'kan', cat: 'כאן 11 — תאגיד השידור', num: '03',
+    shades: ['#534AB7'],
+    items: [
+      { id: 'kan11', name: 'כאן 11', num: '03.1' },
+    ]
+  },
+  {
+    id: 'other', cat: 'מקורות אחרים', num: '04',
+    shades: ['#633806','#EF9F27'],
+    items: [
+      { id: 'mifal',  name: 'מפעל הפיס', num: '04.1' },
+      { id: 'other2', name: 'אחר',        num: '04.2' },
+    ]
+  }
+];
+
+/* ══════════════════════════════════════════════
+   מיפוי: שם בגיליון ← id פנימי
+══════════════════════════════════════════════ */
+const NAME_TO_ID = {};
+SOURCES.forEach(cat => cat.items.forEach(item => { NAME_TO_ID[item.name] = item.id; }));
+
+let YEARS = [];
+let DATA  = {};
+const activeItems = new Set(SOURCES.flatMap(c => c.items.map(i => i.id)));
+let chartType = 'stacked';
+let chartInstance = null;
+
+/* ══ פרסינג CSV ══ */
+function parseCSV(text) {
+  const lines = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/^"|"$/g,'')));
+  if (lines.length < 2) throw new Error('הגיליון ריק או במבנה שגוי');
+
+  const header = lines[0];
+  YEARS = header.slice(1).map(Number).filter(n => !isNaN(n) && n > 1900);
+  if (YEARS.length === 0) throw new Error('לא נמצאו שנים בשורה הראשונה');
+
+  DATA = {};
+  SOURCES.forEach(cat => cat.items.forEach(item => { DATA[item.id] = {}; YEARS.forEach(y => DATA[item.id][y] = 0); }));
+
+  for (let i = 1; i < lines.length; i++) {
+    const row = lines[i];
+    const sourceName = row[0];
+    const id = NAME_TO_ID[sourceName];
+    if (!id) continue;
+    YEARS.forEach((y, idx) => {
+      const val = parseFloat(row[idx + 1]);
+      DATA[id][y] = isNaN(val) ? 0 : val;
+    });
+  }
+  return true;
+}
+
+/* ══ טעינה מגיליון ══ */
+async function loadSheet(url) {
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+  try {
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('שגיאה בטעינת הגיליון');
+    const text = await res.text();
+    parseCSV(text);
+    localStorage.setItem('funding_sheet_url', url);
+    renderDashboard();
+    document.getElementById('last-updated').textContent =
+      'עודכן לאחרונה: ' + new Date().toLocaleString('he-IL');
+  } catch(e) {
+    showError(e.message || 'שגיאה בחיבור לגיליון');
+  }
+}
+
+function loadFromInput() {
+  const url = document.getElementById('sheet-url').value.trim();
+  if (!url || !url.includes('docs.google.com')) {
+    showUrlError('נא להזין כתובת תקינה של Google Sheets CSV');
+    return;
+  }
+  document.getElementById('url-error').style.display = 'none';
+  loadSheet(url);
+}
+
+function showUrlError(msg) {
+  const el = document.getElementById('url-error');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function showError(msg) {
+  const box = document.createElement('div');
+  box.className = 'error-msg';
+  box.textContent = 'שגיאה: ' + msg;
+  document.querySelector('.dash').insertBefore(box, document.getElementById('dashboard-content'));
+}
+
+/* ══ בניית ממשק ══ */
+function renderDashboard() {
+  document.getElementById('setup-box').style.display = 'none';
+  document.getElementById('dashboard-content').style.display = 'block';
+  document.getElementById('dash-sub').textContent = '₪ אלפים | כבה/הדלק מקורות להתאמת התצוגה';
+
+  document.querySelectorAll('.chart-type-btn').forEach(b => {
+    b.onclick = () => {
+      chartType = b.dataset.type;
+      document.querySelectorAll('.chart-type-btn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      update();
+    };
+  });
+
+  buildSources();
+  buildLegend();
+  update();
+}
+
+function buildSources() {
+  const grid = document.getElementById('sources-grid');
+  grid.innerHTML = '';
+  SOURCES.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'src-card';
+    const mid = cat.shades[Math.floor(cat.shades.length / 2)];
+    let html = `<div class="src-card-header">
+      <div class="src-dot" style="background:${mid};"></div>
+      <span class="src-cat-title">${cat.cat}</span>
+      <span class="src-cat-num">${cat.num}</span>
+    </div>`;
+    cat.items.forEach((item, i) => {
+      const color = cat.shades[i] || cat.shades[cat.shades.length - 1];
+      html += `<div class="sub-row">
+        <button class="tog on" data-id="${item.id}"></button>
+        <span class="swatch" style="background:${color};"></span>
+        <span class="sub-name">${item.name}</span>
+        <span class="sub-num">${item.num}</span>
+      </div>`;
+    });
+    card.innerHTML = html;
+    card.querySelectorAll('.tog').forEach(tog => {
+      tog.onclick = () => {
+        const id = tog.dataset.id;
+        activeItems.has(id) ? activeItems.delete(id) : activeItems.add(id);
+        tog.className = 'tog ' + (activeItems.has(id) ? 'on' : 'off');
+        update();
+      };
+    });
+    grid.appendChild(card);
+  });
+}
+
+function buildLegend() {
+  const row = document.getElementById('legend-row');
+  row.innerHTML = '';
+  SOURCES.forEach(cat => {
+    cat.items.forEach((item, i) => {
+      const color = cat.shades[i] || cat.shades[cat.shades.length - 1];
+      const el = document.createElement('span');
+      el.className = 'leg-item';
+      el.innerHTML = `<span class="swatch" style="background:${color};"></span>${item.num} ${item.name}`;
+      row.appendChild(el);
+    });
+  });
+}
+
+function fmt(v) { return '₪' + Math.round(v).toLocaleString('he-IL'); }
+
+function getDatasets() {
+  return SOURCES.flatMap(cat =>
+    cat.items.map((item, i) => {
+      const color = cat.shades[i] || cat.shades[cat.shades.length - 1];
+      const data = activeItems.has(item.id) ? YEARS.map(y => DATA[item.id][y] || 0) : YEARS.map(() => 0);
+      const base = { label: `${item.num} ${item.name}`, data, backgroundColor: color, borderColor: color };
+      return chartType === 'stacked' ? { ...base, stack: 's' } : base;
+    })
+  );
+}
+
+function updateMetrics() {
+  let grand = 0, count = 0;
+  SOURCES.forEach(cat => cat.items.forEach(item => {
+    if (!activeItems.has(item.id)) return;
+    count++;
+    YEARS.forEach(y => { grand += DATA[item.id][y] || 0; });
+  }));
+  const avg = YEARS.length ? Math.round(grand / YEARS.length) : 0;
+  document.getElementById('metric-row').innerHTML = `
+    <div class="metric">
+      <div class="metric-label">סה"כ ${YEARS[0] || ''}–${YEARS[YEARS.length-1] || ''}</div>
+      <div class="metric-val">${fmt(grand)}</div>
+      <div class="metric-sub">${count} מקורות פעילים</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">ממוצע שנתי</div>
+      <div class="metric-val">${fmt(avg)}</div>
+      <div class="metric-sub">על פני ${YEARS.length} שנים</div>
+    </div>`;
+}
+
+function updateChart() {
+  const isStacked = chartType === 'stacked';
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(document.getElementById('mainChart'), {
+    type: 'bar',
+    data: { labels: YEARS.map(String), datasets: getDatasets() },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${fmt(ctx.parsed.y)}` } }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#888780', font: { size: 11 }, autoSkip: false, maxRotation: 0 },
+          stacked: isStacked
+        },
+        y: {
+          grid: { color: 'rgba(136,135,128,.15)' },
+          ticks: { color: '#888780', font: { size: 11 }, callback: v => '₪' + Math.round(v).toLocaleString('he-IL') },
+          stacked: isStacked
+        }
+      }
+    }
+  });
+}
+
+function update() { updateMetrics(); updateChart(); }
+
+/* ══ טעינה אוטומטית אם יש כתובת שמורה ══ */
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('funding_sheet_url');
+  if (saved) {
+    document.getElementById('sheet-url').value = saved;
+    document.getElementById('dash-sub').textContent = 'טוען נתונים מ-Google Sheets...';
+    loadSheet(saved);
+  } else {
+    document.getElementById('dash-sub').textContent = 'יש לחבר גיליון Google Sheets';
+  }
+});
+</script>
+
+<!--
+════════════════════════════════════════════════
+  הוראות עדכון נתונים
+════════════════════════════════════════════════
+
+  1. פתח את ה-Google Sheet שלך
+  2. עדכן את הנתונים בתאים הרלוונטיים
+  3. השמירה אוטומטית — הדשבורד יציג את הנתונים המעודכנים
+     בפעם הבאה שייטען (לא צריך לגעת בקובץ ה-HTML!)
+
+  מבנה הגיליון הנדרש:
+  ─────────────────────────────────────────
+  שורה 1:  מקור          | 2016 | 2017 | ... | 2025
+  שורה 2:  קרן רבינוביץ' | 9800 | 10200 | ...
+  שורה 3:  הקרן החדשה... | 7500 | 8100  | ...
+  ...וכן הלאה לכל מקור
+
+  ⚠️  שמות המקורות חייבים להיות זהים בדיוק לאלה שבקובץ זה!
+════════════════════════════════════════════════
+-->
+</body>
+</html>
