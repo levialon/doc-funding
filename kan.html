@@ -26,13 +26,17 @@
     
 <a class="back-link" href="index.html">→ חזרה למבט על</a>
 <div class="page-header" style="border-bottom: 3px solid #1a56db;">
-  <h1>📺 כאן — תאגיד השידור הציבורי</h1>
+  <h1>כאן — תאגיד השידור הציבורי</h1>
   <div class="sub">השקעה בתוכן תיעודי ועובדתי</div>
 </div>
 
-<!-- Year Selector + Big Number -->
+<!-- Big Number + Year Selector -->
 <div class="total-box" style="margin-bottom: 1.75rem;">
-  <div class="year-selector" id="kanYearSelector" style="justify-content: center; margin-bottom: 1rem;">
+  <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 1rem;">
+    <span id="kanBigNumber" class="big-number" style="color: #1a56db; font-size: 64px;">46.7</span>
+    <span class="big-number-unit">מיליון ₪</span>
+  </div>
+  <div class="year-selector" id="kanYearSelector" style="justify-content: center; margin-bottom: 0;">
     
     <button class="year-btn year-btn-blue "
             data-year="2023" data-amount="43.6">2023</button>
@@ -43,10 +47,6 @@
     <button class="year-btn year-btn-blue active"
             data-year="2025" data-amount="46.7">2025</button>
     
-  </div>
-  <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem;">
-    <span id="kanBigNumber" class="big-number" style="color: #1a56db;">46.7</span>
-    <span class="big-number-unit">מיליון ₪</span>
   </div>
 </div>
 
@@ -59,7 +59,7 @@
 <!-- Budget By Type — Stacked Bar -->
 <div class="chart-section">
   <div class="chart-section-header">
-    <div class="section-title" style="margin-bottom: 0;">חלוקת התקציב לפי סוג תוכן</div>
+    <div class="section-title" style="margin-bottom: 0;">חלוקת סוגי התוכן לפי שעות מסך</div>
     <a class="btn btn-blue" href="#">לרשימת התוכניות →</a>
   </div>
 
@@ -109,6 +109,64 @@
   </div>
 </div>
 
+<!-- Top 5 Contents -->
+<div class="shows-table-wrap" style="margin-bottom: 1.5rem;">
+  <div class="shows-table-header">
+    <div class="section-title" style="margin-bottom: 0.25rem;">5 התכנים המובילים — לפי דקות שידור</div>
+    <div class="shows-table-subtitle">ממוין לפי סך דקות שידור בשנה הנבחרת</div>
+  </div>
+  <div class="table-scroll">
+    <table class="shows-table" id="kanTopContents">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>תוכנית</th>
+          <th>סוג</th>
+          <th>דקות שידור</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">1</td>
+          <td>[שם תוכנית — מקום שמור]</td>
+          <td><span style="font-size: 12px; color: var(--text-secondary);">סדרה תיעודית</span></td>
+          <td><strong>600</strong></td>
+        </tr>
+        
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">2</td>
+          <td>[שם תוכנית — מקום שמור]</td>
+          <td><span style="font-size: 12px; color: var(--text-secondary);">סרט בודד</span></td>
+          <td><strong>440</strong></td>
+        </tr>
+        
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">3</td>
+          <td>[שם תוכנית — מקום שמור]</td>
+          <td><span style="font-size: 12px; color: var(--text-secondary);">סדרה תיעודית</span></td>
+          <td><strong>380</strong></td>
+        </tr>
+        
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">4</td>
+          <td>[שם תוכנית — מקום שמור]</td>
+          <td><span style="font-size: 12px; color: var(--text-secondary);">תוכנית עובדתית</span></td>
+          <td><strong>270</strong></td>
+        </tr>
+        
+        <tr>
+          <td style="color: var(--text-muted); font-size: 13px;">5</td>
+          <td>[שם תוכנית — מקום שמור]</td>
+          <td><span style="font-size: 12px; color: var(--text-secondary);">סדרה תיעודית</span></td>
+          <td><strong>210</strong></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <!-- Future Box -->
 <div class="future-box" style="border-top-color: #1a56db;">
   <div class="future-title">
@@ -129,6 +187,7 @@
 <script>
 (function () {
   var chartData = {"2023": [52, 32, 16], "2024": [54, 31, 15], "2025": [55, 30, 15]};
+  var topContents = {"2023": [{"minutes": 520, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 390, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 310, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 240, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 180, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}], "2024": [{"minutes": 560, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 420, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 350, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 260, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 195, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "2025": [{"minutes": 600, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 440, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 380, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 270, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 210, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}]};
 
   var selector = document.getElementById('kanYearSelector');
   if (!selector) return;
@@ -151,6 +210,19 @@
         seg.style.flexBasis = values[i] + '%';
         seg.querySelector('.segment-pct').textContent = values[i] + '%';
       });
+
+      // Update top-5 table
+      var tbody = document.querySelector('#kanTopContents tbody');
+      if (tbody && topContents[year]) {
+        tbody.innerHTML = topContents[year].map(function (show, i) {
+          return '<tr>' +
+            '<td style="color:var(--text-muted);font-size:13px;">' + (i + 1) + '</td>' +
+            '<td>' + show.name + '</td>' +
+            '<td><span style="font-size:12px;color:var(--text-secondary);">' + show.type + '</span></td>' +
+            '<td><strong>' + show.minutes + '</strong></td>' +
+            '</tr>';
+        }).join('');
+      }
     });
   });
 })();
