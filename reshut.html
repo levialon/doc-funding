@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הרשות השנייה — הכסף של הדוקו</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+  
+</head>
+<body data-page="reshut">
+
+  <nav class="nav">
+    <span class="nav-brand">הכסף של הדוקו</span>
+    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
+    <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
+    <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
+    <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
+  </nav>
+
+  <main class="main">
+    
+<a class="back-link" href="index.html">→ חזרה למבט על</a>
+<div class="page-header" style="border-bottom: 3px solid #9333ea;">
+  <h1>📻 הרשות השנייה</h1>
+  <div class="sub">זכייני השידור המסחרי</div>
+</div>
+
+<!-- Disclaimer -->
+<div class="disclaimer-box disclaimer-severe">
+  <div class="warn-icon">⚠</div>
+  <div>הדוח האחרון של הרשות השנייה פורסם ב-2021. הנתונים לשנים 2022–2025 הם הערכות בלבד המבוססות על מידע חלקי ומקורות משניים.</div>
+</div>
+
+<!-- Regulation Box -->
+<div class="regulation-box" style="border-right: 3px solid #9333ea;">
+  <div class="regulation-box-title">הרגולציה</div>
+  [טקסט על חוק הרשות השנייה לטלוויזיה ורדיו, חובות הזכיינים, ודרישות תוכן תיעודי — מקום שמור]
+</div>
+
+<!-- Broadcaster Cards -->
+<div class="section-title">הזכיינים</div>
+<div class="broadcaster-grid">
+  
+  <div class="broadcaster-card">
+    <div class="broadcaster-name">קשת 12</div>
+    <div class="broadcaster-subtitle">זכיינות ערוץ 12</div>
+    <div class="broadcaster-amount" style="color: #9333ea;">
+      12
+      <span class="broadcaster-amount-unit">מיליון ₪</span>
+    </div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>חובה לפי רישיון</span> <strong>18 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>הושקע בפועל</span> <strong>12 מ׳ ₪</strong></div>
+    <div class="broadcaster-row">
+      <span>פער</span>
+      <strong class="negative">-6 מ׳ ₪</strong>
+    </div>
+    <div class="broadcaster-compliance">
+      <div class="compliance-track">
+        <div class="compliance-fill" style="background: #9333ea; width: 67%;"></div>
+      </div>
+    </div>
+    <div class="broadcaster-row" style="margin-top: 0.4rem; font-size: 12px;">
+      <span>עמידה בחובה</span> <strong>67%</strong>
+    </div>
+  </div>
+  
+  <div class="broadcaster-card">
+    <div class="broadcaster-name">רשת 13</div>
+    <div class="broadcaster-subtitle">זכיינות ערוץ 13</div>
+    <div class="broadcaster-amount" style="color: #9333ea;">
+      8
+      <span class="broadcaster-amount-unit">מיליון ₪</span>
+    </div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>חובה לפי רישיון</span> <strong>14 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>הושקע בפועל</span> <strong>8 מ׳ ₪</strong></div>
+    <div class="broadcaster-row">
+      <span>פער</span>
+      <strong class="negative">-6 מ׳ ₪</strong>
+    </div>
+    <div class="broadcaster-compliance">
+      <div class="compliance-track">
+        <div class="compliance-fill" style="background: #9333ea; width: 57%;"></div>
+      </div>
+    </div>
+    <div class="broadcaster-row" style="margin-top: 0.4rem; font-size: 12px;">
+      <span>עמידה בחובה</span> <strong>57%</strong>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Shows Table -->
+<div class="shows-table-wrap">
+  <div class="shows-table-header">
+    <div class="section-title" style="margin-bottom: 0.25rem;">תוכניות שמדווחות כ״תיעודי״</div>
+    <div class="shows-table-subtitle">מה בדיוק נספר כ״תוכן תיעודי״ בדיווחי הזכיינים?</div>
+  </div>
+  <div class="table-scroll">
+    <table class="shows-table">
+      <thead>
+        <tr>
+          <th>תוכנית</th>
+          <th>ערוץ</th>
+          <th>שעות מופקות</th>
+          <th>% מכלל התקציב</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>שם תוכנית א׳</td>
+          <td>קשת 12</td>
+          <td>42</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 70%;"></div>
+              </div>
+              14%
+            </div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>שם תוכנית ב׳</td>
+          <td>רשת 13</td>
+          <td>36</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 60%;"></div>
+              </div>
+              12%
+            </div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>שם תוכנית ג׳</td>
+          <td>קשת 12</td>
+          <td>28</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 45%;"></div>
+              </div>
+              9%
+            </div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>שם תוכנית ד׳</td>
+          <td>רשת 13</td>
+          <td>24</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 40%;"></div>
+              </div>
+              8%
+            </div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>שם תוכנית ה׳</td>
+          <td>קשת 12</td>
+          <td>18</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 30%;"></div>
+              </div>
+              6%
+            </div>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>שם תוכנית ו׳</td>
+          <td>רשת 13</td>
+          <td>14</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="background: #9333ea; width: 25%;"></div>
+              </div>
+              5%
+            </div>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  <div class="shows-table-footer">* הנתונים מבוססים על דיווחי הזכיינים לרשות השנייה</div>
+</div>
+
+<!-- Future Box -->
+<div class="future-box" style="border-top-color: #9333ea;">
+  <div class="future-title">
+    העתיד
+    <span class="future-badge badge-crashing">מתרסק — ללא אכיפה</span>
+  </div>
+  <div class="future-text">[טקסט על כישלון אכיפת חובות הזכיינים, מגמת ירידה בהשקעה בתוכן תיעודי, ועתיד הרגולציה — מקום שמור]</div>
+</div>
+
+  </main>
+
+  <footer class="footer">
+    עודכן לאחרונה: אפריל 2026
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+  
+</body>
+</html>

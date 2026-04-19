@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>קרנות הקולנוע — הכסף של הדוקו</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+  
+</head>
+<body data-page="funds">
+
+  <nav class="nav">
+    <span class="nav-brand">הכסף של הדוקו</span>
+    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
+    <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
+    <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
+    <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
+  </nav>
+
+  <main class="main">
+    
+<a class="back-link" href="index.html">→ חזרה למבט על</a>
+<div class="page-header" style="border-bottom: 3px solid #b91c1c;">
+  <h1>🎬 קרנות הקולנוע</h1>
+  <div class="sub">מימון לאומי ואזורי לקולנוע תיעודי</div>
+</div>
+
+<!-- Regulation Box -->
+<div class="regulation-box" style="border-right: 3px solid #b91c1c;">
+  <div class="regulation-box-title">הרגולציה</div>
+  [טקסט על מבנה קרנות הקולנוע, מקורות מימונן, וחוקי הפעלתן — מקום שמור]
+</div>
+
+<!-- Big Total -->
+<div class="total-box">
+  <div class="total-box-amount" style="color: #b91c1c;"><span id="nationalTotalAmount">11</span> מיליון ₪</div>
+  <div class="total-box-label">סה״כ תקציב קרנות לקולנוע תיעודי</div>
+  <div class="total-box-note">קרנות לאומיות בלבד — הערכה 2025</div>
+</div>
+
+<!-- National Funds -->
+<div class="bars-section">
+  <div class="section-title">קרנות לאומיות — השלוש הגדולות</div>
+
+  <div class="year-selector" data-group="national" data-max="6">
+    <button class="year-btn" data-year="2023">2023</button>
+    <button class="year-btn" data-year="2024">2024</button>
+    <button class="year-btn active" data-year="2025">2025</button>
+  </div>
+
+  
+  <div class="bar-row">
+    <div class="bar-name">קרן רבינוביץ&#39; - פרויקט הקולנוע</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="national"
+        data-y2023="4.8"
+        data-y2024="5.0"
+        data-y2025="5.2"
+        style="background: #b91c1c; width: 87%;">
+        <span class="bar-value">5.2 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bar-row">
+    <div class="bar-name">הקרן החדשה לקולנוע ולטלוויזיה</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="national"
+        data-y2023="4.0"
+        data-y2024="3.9"
+        data-y2025="4.1"
+        style="background: #ef4444; width: 68%;">
+        <span class="bar-value">4.1 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bar-row">
+    <div class="bar-name">קרן מקור</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="national"
+        data-y2023="2.0"
+        data-y2024="1.8"
+        data-y2025="1.9"
+        style="background: #f87171; width: 32%;">
+        <span class="bar-value">1.9 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- National Fund Stats -->
+<div class="section-title">סטטיסטיקות — קרנות לאומיות</div>
+<div class="stat-cards" style="margin-bottom: 2rem;">
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #b91c1c;"></span>
+      <span class="stat-card-name">רבינוביץ׳</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>124</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>18</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>15%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #b91c1c; width: 15%;"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #ef4444;"></span>
+      <span class="stat-card-name">מפעל הפיס</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>98</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>22</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>22%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #ef4444; width: 22%;"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #f87171;"></span>
+      <span class="stat-card-name">גשר</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>67</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>12</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>18%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #f87171; width: 18%;"></div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Regional Total -->
+<div class="total-box">
+  <div class="total-box-amount" style="color: #b91c1c;"><span id="regionalTotalAmount">3.9</span> מיליון ₪</div>
+  <div class="total-box-label">סה״כ תקציב קרנות אזוריות לקולנוע תיעודי</div>
+  <div class="total-box-note">קרנות אזוריות בלבד — הערכה 2025</div>
+</div>
+
+<!-- Regional Funds -->
+<div class="bars-section">
+  <div class="section-title">קרנות אזוריות</div>
+
+  <div class="year-selector" data-group="regional" data-max="2.5">
+    <button class="year-btn" data-year="2023">2023</button>
+    <button class="year-btn" data-year="2024">2024</button>
+    <button class="year-btn active" data-year="2025">2025</button>
+  </div>
+
+  
+  <div class="bar-row">
+    <div class="bar-name">קרן השומרון</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="regional"
+        data-y2023="1.8"
+        data-y2024="1.7"
+        data-y2025="1.9"
+        style="background: #7f1d1d; width: 76%;">
+        <span class="bar-value">1.9 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bar-row">
+    <div class="bar-name">הקרן הדרומית (מאוחד)</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="regional"
+        data-y2023="1.1"
+        data-y2024="1.2"
+        data-y2025="1.1"
+        style="background: #dc2626; width: 44%;">
+        <span class="bar-value">1.1 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bar-row">
+    <div class="bar-name">פרויקט הקולנוע הגלילי</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="regional"
+        data-y2023="0.7"
+        data-y2024="0.8"
+        data-y2025="0.9"
+        style="background: #f87171; width: 36%;">
+        <span class="bar-value">0.9 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bar-row">
+    <div class="bar-name">מרכז תרבות נוף הגליל</div>
+    <div class="bar-track">
+      <div class="bar-fill"
+        data-group="regional"
+        data-y2023="0.7"
+        data-y2024="0.8"
+        data-y2025="0.9"
+        style="background: #f87171; width: 36%;">
+        <span class="bar-value">0.9 מ׳ ₪</span>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Regional Fund Stats -->
+<div class="section-title">סטטיסטיקות — קרנות אזוריות</div>
+<div class="stat-cards">
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #7f1d1d;"></span>
+      <span class="stat-card-name">ירושלים</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>54</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>9</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>17%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #7f1d1d; width: 17%;"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #dc2626;"></span>
+      <span class="stat-card-name">חיפה</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>41</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>8</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>20%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #dc2626; width: 20%;"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card">
+    <div class="stat-card-header">
+      <span class="stat-dot" style="background: #f87171;"></span>
+      <span class="stat-card-name">נגב</span>
+    </div>
+    <div class="stat-row"><span>הגישו</span> <strong>28</strong></div>
+    <div class="stat-row"><span>אושרו</span> <strong>6</strong></div>
+    <div class="stat-row"><span>אחוז אישור</span> <strong>21%</strong></div>
+    <div class="stat-progress-track">
+      <div class="stat-progress-fill" style="background: #f87171; width: 21%;"></div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Future Box -->
+<div class="future-box" style="border-top-color: #b91c1c;">
+  <div class="future-title">
+    העתיד
+    <span class="future-badge badge-changing">משתנה — רגולציה חדשה</span>
+  </div>
+  <div class="future-text">[טקסט על שינויים צפויים במבנה קרנות הקולנוע, מיזוגים אפשריים, ותקציבים עתידיים — מקום שמור]</div>
+  
+  <a class="btn btn-red" href="#">למחשבון המימון →</a>
+  
+</div>
+
+  </main>
+
+  <footer class="footer">
+    עודכן לאחרונה: אפריל 2026
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+  
+<script>
+var nationalFundData = [{"2023": 4.8, "2024": 5.0, "2025": 5.2}, {"2023": 4.0, "2024": 3.9, "2025": 4.1}, {"2023": 2.0, "2024": 1.8, "2025": 1.9}];
+var regionalFundData = [{"2023": 1.8, "2024": 1.7, "2025": 1.9}, {"2023": 1.1, "2024": 1.2, "2025": 1.1}, {"2023": 0.7, "2024": 0.8, "2025": 0.9}, {"2023": 0.7, "2024": 0.8, "2025": 0.9}];
+
+function sumYear(fundsData, year) {
+  return Math.round(fundsData.reduce(function (acc, d) { return acc + (d[year] || 0); }, 0) * 10) / 10;
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.year-selector').forEach(function (selector) {
+    var groupId = selector.dataset.group;
+    var maxVal = parseFloat(selector.dataset.max);
+    var bars = document.querySelectorAll('.bar-fill[data-group="' + groupId + '"]');
+
+    selector.querySelectorAll('.year-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        selector.querySelectorAll('.year-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var year = btn.dataset.year;
+
+        bars.forEach(function (bar) {
+          var val = parseFloat(bar.dataset['y' + year]);
+          var pct = Math.round((val / maxVal) * 100);
+          bar.style.width = pct + '%';
+          var label = bar.querySelector('.bar-value');
+          if (label) label.textContent = val + ' מ׳ ₪';
+        });
+
+        if (groupId === 'national') {
+          var el = document.getElementById('nationalTotalAmount');
+          if (el) el.textContent = sumYear(nationalFundData, year);
+        }
+        if (groupId === 'regional') {
+          var el = document.getElementById('regionalTotalAmount');
+          if (el) el.textContent = sumYear(regionalFundData, year);
+        }
+      });
+    });
+  });
+});
+</script>
+
+</body>
+</html>

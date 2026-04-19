@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כבלים ולוויין — הכסף של הדוקו</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+  
+</head>
+<body data-page="cable">
+
+  <nav class="nav">
+    <span class="nav-brand">הכסף של הדוקו</span>
+    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
+    <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
+    <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
+    <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
+  </nav>
+
+  <main class="main">
+    
+<a class="back-link" href="index.html">→ חזרה למבט על</a>
+<div class="page-header" style="border-bottom: 3px solid #047857;">
+  <h1>📡 כבלים ולוויין</h1>
+  <div class="sub">חובות שידור תוכן תיעודי</div>
+</div>
+
+<!-- Disclaimer -->
+<div class="disclaimer-box disclaimer-warning">
+  <div class="warn-icon">⚠</div>
+  <div>הדוח האחרון של המועצה לכבלים ולוויין פורסם ב-2022. הנתונים לשנים 2023–2025 הם הערכות המבוססות על מגמות קודמות ומידע חלקי.</div>
+</div>
+
+<!-- Regulation Box -->
+<div class="regulation-box" style="border-right: 3px solid #047857;">
+  <div class="regulation-box-title">הרגולציה</div>
+  [טקסט על חובות השידור של ספקיות הכבלים והלוויין, רישיונות הפעלה ודרישות תוכן מקומי — מקום שמור]
+</div>
+
+<!-- Current Status -->
+<div class="status-box">
+  <div class="section-title">מצב נוכחי — 2025 (הערכה)</div>
+  <div class="status-big-pct">75-85%%</div>
+  <div class="status-text">[טקסט על מצב העמידה בחובות הרגולטוריות של ספקיות הכבלים והלוויין בשנת 2025 — מקום שמור]</div>
+  <div class="status-bar-track">
+    <div class="status-bar-regulated" style="background: #047857; width: 20%;"></div>
+    <div class="status-bar-unregulated" style="background: #b91c1c;"></div>
+  </div>
+  <div class="status-bar-legend">
+    <span><span class="legend-swatch" style="background: #047857;"></span>עומדים בחובה</span>
+    <span><span class="legend-swatch" style="background: #b91c1c;"></span>אינם עומדים בחובה</span>
+  </div>
+</div>
+
+<!-- Broadcaster Cards -->
+<div class="section-title">מפיצי התוכן</div>
+<div class="broadcaster-grid">
+  
+  <div class="broadcaster-card">
+    <div class="broadcaster-name">YES</div>
+    <div class="broadcaster-subtitle">לוויין — בבעלות בזק</div>
+    <div class="broadcaster-amount" style="color: #047857;">
+      9.2
+      <span class="broadcaster-amount-unit">מיליון ₪</span>
+    </div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>חובה</span> <strong>14 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>בפועל</span> <strong>9.2 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>עמידה</span> <strong>66%</strong></div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>סרטים תיעודיים בודדים</span> <strong>27%</strong></div>
+    <div class="broadcaster-compliance">
+      <div class="compliance-track">
+        <div class="compliance-fill" style="background: #047857; width: 66%;"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="broadcaster-card">
+    <div class="broadcaster-name">HOT</div>
+    <div class="broadcaster-subtitle">כבלים — בבעלות אלטיס</div>
+    <div class="broadcaster-amount" style="color: #047857;">
+      6.8
+      <span class="broadcaster-amount-unit">מיליון ₪</span>
+    </div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>חובה</span> <strong>12 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>בפועל</span> <strong>6.8 מ׳ ₪</strong></div>
+    <div class="broadcaster-row"><span>עמידה</span> <strong>57%</strong></div>
+    <hr class="broadcaster-divider">
+    <div class="broadcaster-row"><span>סרטים תיעודיים בודדים</span> <strong>19%</strong></div>
+    <div class="broadcaster-compliance">
+      <div class="compliance-track">
+        <div class="compliance-fill" style="background: #047857; width: 57%;"></div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Future Box -->
+<div class="future-box" style="border-top-color: #047857;">
+  <div class="future-title">
+    העתיד
+    <span class="future-badge badge-declining">בירידה — רגולציה כושלת</span>
+  </div>
+  <div class="future-text">[טקסט על העתיד הצפוי לרגולציה על ספקיות הכבלים והלוויין, שינויים בשוק, ומגמות ירידה — מקום שמור]</div>
+</div>
+
+  </main>
+
+  <footer class="footer">
+    עודכן לאחרונה: אפריל 2026
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+  
+</body>
+</html>
