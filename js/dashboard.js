@@ -159,15 +159,15 @@ function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
   const threshold = 50; // minimum swipe distance in pixels
   const diff = startX - endX;
 
-  // Swipe left (diff > 0) = next page
-  if (diff > threshold) {
+  // RTL (Hebrew): Swipe right (diff < 0) = next page
+  if (diff < -threshold) {
     const nextPage = pageMap[currentPage];
     if (nextPage) {
       window.location.href = nextPage + '.html';
     }
   }
-  // Swipe right (diff < 0) = previous page
-  else if (diff < -threshold) {
+  // RTL (Hebrew): Swipe left (diff > 0) = previous page
+  else if (diff > threshold) {
     const prevPage = pageMapReverse[currentPage];
     if (prevPage) {
       window.location.href = prevPage + '.html';
