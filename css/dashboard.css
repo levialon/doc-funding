@@ -17,7 +17,95 @@
   --radius: 12px;
   --shadow: 0 1px 6px rgba(0,0,0,0.4);
   --shadow-md: 0 6px 20px rgba(0,0,0,0.5);
+
+  /* === Source colors (overview cards, gap bars, stacked bar) === */
+  --color-kan:    #375683;
+  --color-funds:  #2d4568;
+  --color-cable:  #25354d;
+  --color-reshut: #16263e;
+
+  /* === Sub-page accent colors === */
+  --accent-kan:    #e05050;
+  --accent-funds:  #e05050;
+  --accent-cable:  #e05050;
+  --accent-reshut: #e05050;
+
+  /* === National fund bar colors === */
+  --color-nat-1: #1a76a5;
+  --color-nat-2: #0c5378;
+  --color-nat-3: #17465e;
+
+  /* === Regional fund bar colors === */
+  --color-reg-1: #1a76a5;
+  --color-reg-2: #0c5378;
+  --color-reg-3: #17465e;
+  --color-reg-4: #0b2b3c;
+
+  /* === Kan content category colors === */
+  --color-cat-1: #1a76a5;
+  --color-cat-2: #0c5378;
+  --color-cat-3: #17465e;
 }
+
+/* --- Per-page accent (set on body) --- */
+.page-kan    { --page-accent: var(--accent-kan); }
+.page-funds  { --page-accent: var(--accent-funds); }
+.page-cable  { --page-accent: var(--accent-cable); }
+.page-reshut { --page-accent: var(--accent-reshut); }
+
+/* --- Source segment color classes --- */
+.seg-kan    { background-color: var(--color-kan); }
+.seg-funds  { background-color: var(--color-funds); }
+.seg-cable  { background-color: var(--color-cable); }
+.seg-reshut { background-color: var(--color-reshut); }
+
+/* Context bar: gray by default; current-page segment gets its color */
+.context-bar .stacked-segment                  { background-color: var(--border-color); }
+.page-kan    .context-bar .seg-kan             { background-color: #999999 } /* var(--color-kan); */
+.page-funds  .context-bar .seg-funds           { background-color: #999999 }
+.page-cable  .context-bar .seg-cable           { background-color: #999999 }
+.page-reshut .context-bar .seg-reshut          { background-color: #999999; }
+
+/* Source card right-side background */
+.source-card-right.seg-kan    { background-color: var(--color-kan); }
+.source-card-right.seg-funds  { background-color: var(--color-funds); }
+.source-card-right.seg-cable  { background-color: var(--color-cable); }
+.source-card-right.seg-reshut { background-color: var(--color-reshut); }
+
+/* Source gap bar fill */
+.source-card-gap-fill.seg-kan    { background-color: #376a97}
+.source-card-gap-fill.seg-funds  { background-color: #376a97}
+.source-card-gap-fill.seg-cable  { background-color: #376a97}
+.source-card-gap-fill.seg-reshut { background-color: #376a97}
+
+/* --- Page-accent utilities (used on all sub-pages) --- */
+.page-header    { /*border-bottom: 3px solid var(--page-accent, transparent);*/ }
+.regulation-box { border-right:  3px solid var(--page-accent, transparent); }
+.future-box     { border-top-color: var(--page-accent, transparent); }
+.page-accent-text { color:            var(--page-accent); }
+.page-accent-bg   { background-color: var(--page-accent); }
+
+/* --- Fund bar colors --- */
+.nat-1 { background-color: var(--color-nat-1); }
+.nat-2 { background-color: var(--color-nat-2); }
+.nat-3 { background-color: var(--color-nat-3); }
+.reg-1 { background-color: var(--color-reg-1); }
+.reg-2 { background-color: var(--color-reg-2); }
+.reg-3 { background-color: var(--color-reg-3); }
+.reg-4 { background-color: var(--color-reg-4); }
+
+/* Stat dot and fill colors */
+.dot-nat-1, .fill-nat-1 { background-color: var(--color-nat-1); }
+.dot-nat-2, .fill-nat-2 { background-color: var(--color-nat-2); }
+.dot-nat-3, .fill-nat-3 { background-color: var(--color-nat-3); }
+.dot-reg-1, .fill-reg-1 { background-color: var(--color-reg-1); }
+.dot-reg-2, .fill-reg-2 { background-color: var(--color-reg-2); }
+.dot-reg-3, .fill-reg-3 { background-color: var(--color-reg-3); }
+
+/* --- Content category colors (kan page) --- */
+.cat-1 { background-color: var(--color-cat-1); }
+.cat-2 { background-color: var(--color-cat-2); }
+.cat-3 { background-color: var(--color-cat-3); }
 
 /* --- Reset & Base --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -94,14 +182,14 @@ a { color: inherit; text-decoration: none; }
 /* --- Page Header --- */
 .page-header {
   padding-bottom: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0px;
 }
 
 .page-header h1 {
   font-family: var(--font-heading);
-  font-size: 26px;
+  font-size: 36px;
   font-weight: 700;
-  margin-bottom: 0.35rem;
+ 
 }
 
 .page-header .sub {
@@ -167,6 +255,14 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 
+.budget-actual {
+  color: #e05050;
+}
+
+.budget-theoretical {
+  color: #edeef2;
+}
+
 /* =========================================================
    Source Cards (Overview Page)
    ========================================================= */
@@ -193,70 +289,80 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-2px);
 }
 
-.source-card-bar {
-  height: 3px;
+.source-card-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100px;
 }
 
-.source-card-body {
-  padding: 1rem 1rem 0.75rem;
-  flex: 1;
-}
-
-.source-card-main {
+.source-card-left {
+  padding: 1rem;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.25rem;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-secondary);
 }
-
-.source-card-name-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.source-card-icon { font-size: 16px; }
 
 .source-card-name {
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
+  margin-bottom: 0.4rem;
 }
 
-.sc-trend-wrap {
+.source-card-trend {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 3px;
-  flex-shrink: 0;
+  gap: 0.35rem;
+  margin-bottom: 0.4rem;
 }
 
-.sc-trend-label {
+.source-card-trend svg {
+  width: 16px;
+  height: 10px;
+  color: var(--text-secondary);
+}
+
+.source-card-trend-label {
   font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 600;
+  color: var(--text-secondary);
 }
 
-.sc-amount-center {
+.source-card-right {
+  padding: 1rem;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0.6rem 0 0.5rem;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.sc-amount-num {
+.source-card-amount {
   font-family: var(--font-heading);
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 700;
   line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  color: #fff;
 }
 
-.sc-amount-unit {
+.source-card-unit {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.source-card-theoretical {
+  font-family: var(--font-body);
   font-size: 13px;
-  color: var(--text-secondary);
+  opacity: 0.85;
+  color: #fff;
 }
 
 .source-card-gap-track {
@@ -538,7 +644,7 @@ a { color: inherit; text-decoration: none; }
 
 .context-bar {
   height: 32px;
-  margin-top: 0.75rem;
+  /*margin-top: 0.75rem;*/
   margin-bottom: 1.5rem;
 }
 
@@ -572,14 +678,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .year-btn-blue.active {
-  background: #1a56db;
+  background: var(--page-accent);
   color: #fff;
-  border-color: #1a56db;
+  border-color: var(--page-accent);
 }
 
 .year-btn-blue:hover:not(.active) {
-  border-color: #1a56db;
-  color: #6fa3ef;
+  border-color: var(--page-accent);
+  color: var(--page-accent);
 }
 
 /* =========================================================
@@ -634,12 +740,12 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
-.year-btn:hover { border-color: #b91c1c; color: #b91c1c; }
+.year-btn:hover { border-color: var(--page-accent); color: var(--page-accent); }
 
 .year-btn.active {
-  background: #b91c1c;
+  background: var(--page-accent);
   color: #fff;
-  border-color: #b91c1c;
+  border-color: var(--page-accent);
 }
 
 /* =========================================================
@@ -1205,7 +1311,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-heading);
   font-size: 13px;
   font-weight: 600;
-  color: #38bcd0;
+  color: #caf1f8;
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -1229,7 +1335,7 @@ details[open] .tldr-summary::before { transform: rotate(90deg); }
   padding: 0.75rem 1rem 1rem;
   font-size: 14px;
   line-height: 1.75;
-  color: #7dd8e8;
+  color: #caf1f8;
   border-top: 1px solid #0e3d48;
 }
 

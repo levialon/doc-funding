@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   
 </head>
-<body data-page="reshut">
+<body class="page-reshut">
 
   <nav class="nav">
     <span class="nav-brand">הכסף של הדוקו</span>
@@ -24,14 +24,9 @@
 
   <main class="main">
     
-<div class="page-header" style="border-bottom: 3px solid #9333ea;">
+<div class="page-header">
   <h1>הרשות השנייה</h1>
 </div>
-
-<details class="tldr-box" open>
-  <summary class="tldr-summary">באמלק</summary>
-  <div class="tldr-content">קשת 12 ורשת 13 מחויבות להשקיע בתוכן תיעודי לפי רישיון הזכיינות, אך הדוח האחרון פורסם ב-2021 ומאז אין אכיפה של ממש. הנתונים מצביעים על פער עצום בין החובה לבין ההשקעה בפועל, ועל דפוס מוכר: תוכניות ריאליטי ועובדתיות מסווגות כ״תיעודי״ כדי לעמוד בדרישות — מה שמייתר בפועל את הפיקוח.</div>
-</details>
 
 <!-- Context bar -->
 
@@ -39,26 +34,31 @@
 <div class="stacked-bar context-bar">
   
   
-  <div class="stacked-segment" style="flex-basis: 69%; background: var(--border-color);">
+  <div class="stacked-segment seg-kan" style="flex-basis: 69%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 19%; background: var(--border-color);">
+  <div class="stacked-segment seg-funds" style="flex-basis: 19%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 9%; background: var(--border-color);">
+  <div class="stacked-segment seg-cable" style="flex-basis: 9%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 3%; background: #9333ea;">
+  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;">
     <span class="segment-pct">3%</span>
   </div>
   
 </div>
+
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">קשת 12 ורשת 13 מחויבות להשקיע בתוכן תיעודי לפי רישיון הזכיינות, אך הדוח האחרון פורסם ב-2021 ומאז אין אכיפה של ממש. הנתונים מצביעים על פער עצום בין החובה לבין ההשקעה בפועל, ועל דפוס מוכר: תוכניות ריאליטי ועובדתיות מסווגות כ״תיעודי״ כדי לעמוד בדרישות — מה שמייתר בפועל את הפיקוח.</div>
+</details>
 
 <!-- Disclaimer -->
 <div class="disclaimer-box disclaimer-severe">
@@ -113,7 +113,7 @@
 
 <div class="total-box" style="margin-bottom: 1.75rem;">
   <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-    <span class="big-number" style="color: #9333ea; font-size: 64px;">32</span>
+    <span class="big-number page-accent-text" style="font-size: 64px;">32</span>
     <span class="big-number-unit">מיליון ₪</span>
   </div>
   <div style="text-align: center; font-size: 14px; color: var(--text-secondary);">
@@ -146,7 +146,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 70%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 70%;"></div>
               </div>
               14%
             </div>
@@ -160,7 +160,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 60%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 60%;"></div>
               </div>
               12%
             </div>
@@ -174,7 +174,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 45%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 45%;"></div>
               </div>
               9%
             </div>
@@ -188,7 +188,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 40%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 40%;"></div>
               </div>
               8%
             </div>
@@ -202,7 +202,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 30%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 30%;"></div>
               </div>
               6%
             </div>
@@ -216,7 +216,7 @@
           <td>
             <div class="mini-bar-wrap">
               <div class="mini-bar-track">
-                <div class="mini-bar-fill" style="background: #9333ea; width: 25%;"></div>
+                <div class="mini-bar-fill page-accent-bg" style="width: 25%;"></div>
               </div>
               5%
             </div>
@@ -230,13 +230,13 @@
 </div>
 
 <!-- Regulation Box -->
-<div class="regulation-box" style="border-right: 3px solid #9333ea;">
+<div class="regulation-box">
   <div class="regulation-box-title">הרגולציה</div>
   [טקסט על חוק הרשות השנייה לטלוויזיה ורדיו, חובות הזכיינים, ודרישות תוכן תיעודי — מקום שמור]
 </div>
 
 <!-- Future Box -->
-<div class="future-box" style="border-top-color: #9333ea;">
+<div class="future-box">
   <div class="future-title">
     העתיד
     <span class="future-badge badge-crashing">מתרסק — ללא אכיפה</span>

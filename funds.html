@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   
 </head>
-<body data-page="funds">
+<body class="page-funds">
 
   <nav class="nav">
     <span class="nav-brand">הכסף של הדוקו</span>
@@ -24,14 +24,9 @@
 
   <main class="main">
     
-<div class="page-header" style="border-bottom: 3px solid #b91c1c;">
+<div class="page-header">
   <h1>קרנות הקולנוע</h1>
 </div>
-
-<details class="tldr-box" open>
-  <summary class="tldr-summary">באמלק</summary>
-  <div class="tldr-content">קרנות הקולנוע — לאומיות ואזוריות — הן המנגנון העיקרי למימון פרויקטי דוקו עצמאיים בישראל. סך ההשקעה הכולל עומד על כ-11 מיליון ₪ בשנה, עם שיעור אישור של כ-15–20% בלבד. הקרנות פועלות ללא תיאום מרכזי, התקציבים קפואים זה שנים, והתחרות על כל שקל גבוהה מאי פעם — מה שמקשה מאוד על ייצור פרויקטים ארוכי טווח.</div>
-</details>
 
 <!-- Context bar -->
 
@@ -39,30 +34,35 @@
 <div class="stacked-bar context-bar">
   
   
-  <div class="stacked-segment" style="flex-basis: 69%; background: var(--border-color);">
+  <div class="stacked-segment seg-kan" style="flex-basis: 69%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 19%; background: #b91c1c;">
+  <div class="stacked-segment seg-funds" style="flex-basis: 19%;">
     <span class="segment-pct">19%</span>
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 9%; background: var(--border-color);">
+  <div class="stacked-segment seg-cable" style="flex-basis: 9%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 3%; background: var(--border-color);">
+  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;">
     
   </div>
   
 </div>
 
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">קרנות הקולנוע — לאומיות ואזוריות — הן המנגנון העיקרי למימון פרויקטי דוקו עצמאיים בישראל. סך ההשקעה הכולל עומד על כ-11 מיליון ₪ בשנה, עם שיעור אישור של כ-15–20% בלבד. הקרנות פועלות ללא תיאום מרכזי, התקציבים קפואים זה שנים, והתחרות על כל שקל גבוהה מאי פעם — מה שמקשה מאוד על ייצור פרויקטים ארוכי טווח.</div>
+</details>
+
 <!-- Big Total -->
 <div class="total-box">
-  <div class="total-box-amount" style="color: #b91c1c;"><span id="nationalTotalAmount">11</span> מיליון ₪</div>
+  <div class="total-box-amount page-accent-text"><span id="nationalTotalAmount">11</span> מיליון ₪</div>
   <div class="total-box-label">סה״כ תקציב קרנות לקולנוע תיעודי</div>
   <div class="total-box-note">קרנות לאומיות בלבד — הערכה 2025</div>
 </div>
@@ -81,12 +81,12 @@
   <div class="bar-row">
     <div class="bar-name">קרן רבינוביץ&#39; - פרויקט הקולנוע</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill nat-1"
         data-group="national"
         data-y2023="4.8"
         data-y2024="5.0"
         data-y2025="5.2"
-        style="background: #b91c1c; width: 87%;">
+        style="width: 87%;">
         <span class="bar-value">5.2 מ׳ ₪</span>
       </div>
     </div>
@@ -95,12 +95,12 @@
   <div class="bar-row">
     <div class="bar-name">הקרן החדשה לקולנוע ולטלוויזיה</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill nat-2"
         data-group="national"
         data-y2023="4.0"
         data-y2024="3.9"
         data-y2025="4.1"
-        style="background: #ef4444; width: 68%;">
+        style="width: 68%;">
         <span class="bar-value">4.1 מ׳ ₪</span>
       </div>
     </div>
@@ -109,12 +109,12 @@
   <div class="bar-row">
     <div class="bar-name">קרן מקור</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill nat-3"
         data-group="national"
         data-y2023="2.0"
         data-y2024="1.8"
         data-y2025="1.9"
-        style="background: #f87171; width: 32%;">
+        style="width: 32%;">
         <span class="bar-value">1.9 מ׳ ₪</span>
       </div>
     </div>
@@ -176,7 +176,7 @@
 
 <!-- Regional Total -->
 <div class="total-box">
-  <div class="total-box-amount" style="color: #b91c1c;"><span id="regionalTotalAmount">3.9</span> מיליון ₪</div>
+  <div class="total-box-amount page-accent-text"><span id="regionalTotalAmount">3.9</span> מיליון ₪</div>
   <div class="total-box-label">סה״כ תקציב קרנות אזוריות לקולנוע תיעודי</div>
   <div class="total-box-note">קרנות אזוריות בלבד — הערכה 2025</div>
 </div>
@@ -195,12 +195,12 @@
   <div class="bar-row">
     <div class="bar-name">קרן השומרון</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill reg-1"
         data-group="regional"
         data-y2023="1.8"
         data-y2024="1.7"
         data-y2025="1.9"
-        style="background: #7f1d1d; width: 76%;">
+        style="width: 76%;">
         <span class="bar-value">1.9 מ׳ ₪</span>
       </div>
     </div>
@@ -209,12 +209,12 @@
   <div class="bar-row">
     <div class="bar-name">הקרן הדרומית (מאוחד)</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill reg-2"
         data-group="regional"
         data-y2023="1.1"
         data-y2024="1.2"
         data-y2025="1.1"
-        style="background: #dc2626; width: 44%;">
+        style="width: 44%;">
         <span class="bar-value">1.1 מ׳ ₪</span>
       </div>
     </div>
@@ -223,12 +223,12 @@
   <div class="bar-row">
     <div class="bar-name">פרויקט הקולנוע הגלילי</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill reg-3"
         data-group="regional"
         data-y2023="0.7"
         data-y2024="0.8"
         data-y2025="0.9"
-        style="background: #f87171; width: 36%;">
+        style="width: 36%;">
         <span class="bar-value">0.9 מ׳ ₪</span>
       </div>
     </div>
@@ -237,12 +237,12 @@
   <div class="bar-row">
     <div class="bar-name">מרכז תרבות נוף הגליל</div>
     <div class="bar-track">
-      <div class="bar-fill"
+      <div class="bar-fill reg-4"
         data-group="regional"
         data-y2023="0.7"
         data-y2024="0.8"
         data-y2025="0.9"
-        style="background: #f87171; width: 36%;">
+        style="width: 36%;">
         <span class="bar-value">0.9 מ׳ ₪</span>
       </div>
     </div>
@@ -310,12 +310,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #b91c1c;"></span>
+      <span class="stat-dot dot-nat-1"></span>
       רבינוביץ׳
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 15%; background: #b91c1c;"></div>
+        <div class="stat-list-fill fill-nat-1" style="width: 15%;"></div>
       </div>
       <span class="stat-list-pct">15%</span>
     </div>
@@ -324,12 +324,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #ef4444;"></span>
+      <span class="stat-dot dot-nat-2"></span>
       מפעל הפיס
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 22%; background: #ef4444;"></div>
+        <div class="stat-list-fill fill-nat-2" style="width: 22%;"></div>
       </div>
       <span class="stat-list-pct">22%</span>
     </div>
@@ -338,12 +338,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #f87171;"></span>
+      <span class="stat-dot dot-nat-3"></span>
       גשר
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 18%; background: #f87171;"></div>
+        <div class="stat-list-fill fill-nat-3" style="width: 18%;"></div>
       </div>
       <span class="stat-list-pct">18%</span>
     </div>
@@ -355,12 +355,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #7f1d1d;"></span>
+      <span class="stat-dot dot-reg-1"></span>
       ירושלים
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 17%; background: #7f1d1d;"></div>
+        <div class="stat-list-fill fill-reg-1" style="width: 17%;"></div>
       </div>
       <span class="stat-list-pct">17%</span>
     </div>
@@ -369,12 +369,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #dc2626;"></span>
+      <span class="stat-dot dot-reg-2"></span>
       חיפה
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 20%; background: #dc2626;"></div>
+        <div class="stat-list-fill fill-reg-2" style="width: 20%;"></div>
       </div>
       <span class="stat-list-pct">20%</span>
     </div>
@@ -383,12 +383,12 @@
   
   <div class="stat-list-row">
     <div class="stat-list-name">
-      <span class="stat-dot" style="background: #f87171;"></span>
+      <span class="stat-dot dot-reg-3"></span>
       נגב
     </div>
     <div class="stat-list-bar-wrap">
       <div class="stat-list-track">
-        <div class="stat-list-fill" style="width: 21%; background: #f87171;"></div>
+        <div class="stat-list-fill fill-reg-3" style="width: 21%;"></div>
       </div>
       <span class="stat-list-pct">21%</span>
     </div>
@@ -398,13 +398,13 @@
 </div>
 
 <!-- Regulation Box -->
-<div class="regulation-box" style="border-right: 3px solid #b91c1c;">
+<div class="regulation-box">
   <div class="regulation-box-title">הרגולציה</div>
   [טקסט על מבנה קרנות הקולנוע, מקורות מימונן, וחוקי הפעלתן — מקום שמור]
 </div>
 
 <!-- Future Box -->
-<div class="future-box" style="border-top-color: #b91c1c;">
+<div class="future-box">
   <div class="future-title">
     העתיד
     <span class="future-badge badge-changing">משתנה — רגולציה חדשה</span>

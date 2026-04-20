@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   
 </head>
-<body data-page="kan">
+<body class="page-kan">
 
   <nav class="nav">
     <span class="nav-brand">הכסף של הדוקו</span>
@@ -24,14 +24,9 @@
 
   <main class="main">
     
-<div class="page-header" style="border-bottom: 3px solid #1a56db;">
+<div class="page-header">
   <h1>כאן — תאגיד השידור הציבורי</h1>
 </div>
-
-<details class="tldr-box" open>
-  <summary class="tldr-summary">באמלק</summary>
-  <div class="tldr-content">כאן הוא המממן הציבורי הגדול ביותר של דוקו בישראל, עם השקעה שנתית של כ-45 מיליון ₪ המעוגנת בחוק תאגיד השידור. ההשקעה יציבה יחסית לאורך השנים, אך חלק ניכר ממנה מוקדש לתוכניות עובדתיות שאינן דוקומנטרי קלאסי — סדרות ריאליטי ועיתונאות תחקירית נספרות גם הן תחת אותו סעיף תקציבי. המשמעות: הנתון הגלמי מנפח את התמונה.</div>
-</details>
 
 <!-- Context bar -->
 
@@ -39,31 +34,36 @@
 <div class="stacked-bar context-bar">
   
   
-  <div class="stacked-segment" style="flex-basis: 69%; background: #1a56db;">
+  <div class="stacked-segment seg-kan" style="flex-basis: 69%;">
     <span class="segment-pct">69%</span>
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 19%; background: var(--border-color);">
+  <div class="stacked-segment seg-funds" style="flex-basis: 19%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 9%; background: var(--border-color);">
+  <div class="stacked-segment seg-cable" style="flex-basis: 9%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 3%; background: var(--border-color);">
+  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;">
     
   </div>
   
 </div>
 
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">כאן הוא המממן הציבורי הגדול ביותר של דוקו בישראל, עם השקעה שנתית של כ-45 מיליון ₪ המעוגנת בחוק תאגיד השידור. ההשקעה יציבה יחסית לאורך השנים, אך חלק ניכר ממנה מוקדש לתוכניות עובדתיות שאינן דוקומנטרי קלאסי — סדרות ריאליטי ועיתונאות תחקירית נספרות גם הן תחת אותו סעיף תקציבי. המשמעות: הנתון הגלמי מנפח את התמונה.</div>
+</details>
+
 <!-- Big Number + Year Selector -->
 <div class="total-box" style="margin-bottom: 1.75rem;">
   <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 1rem;">
-    <span id="kanBigNumber" class="big-number" style="color: #1a56db; font-size: 64px;">46.7</span>
+    <span id="kanBigNumber" class="big-number page-accent-text" style="font-size: 64px;">46.7</span>
     <span class="big-number-unit">מיליון ₪</span>
   </div>
   <div class="year-selector" id="kanYearSelector" style="justify-content: center; margin-bottom: 0;">
@@ -81,7 +81,7 @@
 </div>
 
 <!-- Regulation Box -->
-<div class="regulation-box" style="border-right: 3px solid #1a56db;">
+<div class="regulation-box">
   <div class="regulation-box-title">הרגולציה</div>
   [טקסט על חוק תאגיד השידור הציבורי וסעיפי ההשקעה בתוכן תיעודי — מקום שמור]
 </div>
@@ -96,23 +96,23 @@
   <div class="stacked-bar" id="kanStackedBar">
     
     
-    <div class="stacked-segment"
+    <div class="stacked-segment cat-1"
          data-index="0"
-         style="flex-basis: 55%; background: #1a56db;">
+         style="flex-basis: 55%;">
       <span class="segment-label">סדרות תיעודיות</span>
       <span class="segment-pct">55%</span>
     </div>
     
-    <div class="stacked-segment"
+    <div class="stacked-segment cat-2"
          data-index="1"
-         style="flex-basis: 30%; background: #3b82f6;">
+         style="flex-basis: 30%;">
       <span class="segment-label">סרטים בודדים</span>
       <span class="segment-pct">30%</span>
     </div>
     
-    <div class="stacked-segment"
+    <div class="stacked-segment cat-3"
          data-index="2"
-         style="flex-basis: 15%; background: #93c5fd;">
+         style="flex-basis: 15%;">
       <span class="segment-label">תוכניות עובדתיות</span>
       <span class="segment-pct">15%</span>
     </div>
@@ -122,17 +122,17 @@
   <div class="chart-legend">
     
     <div class="legend-item">
-      <span class="legend-dot" style="background: #1a56db;"></span>
+      <span class="legend-dot cat-1"></span>
       סדרות תיעודיות
     </div>
     
     <div class="legend-item">
-      <span class="legend-dot" style="background: #3b82f6;"></span>
+      <span class="legend-dot cat-2"></span>
       סרטים בודדים
     </div>
     
     <div class="legend-item">
-      <span class="legend-dot" style="background: #93c5fd;"></span>
+      <span class="legend-dot cat-3"></span>
       תוכניות עובדתיות
     </div>
     
@@ -198,7 +198,7 @@
 </div>
 
 <!-- Future Box -->
-<div class="future-box" style="border-top-color: #1a56db;">
+<div class="future-box">
   <div class="future-title">
     העתיד
     <span class="future-badge badge-stable">יציב — מעוגן בחוק</span>

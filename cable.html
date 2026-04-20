@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   
 </head>
-<body data-page="cable">
+<body class="page-cable">
 
   <nav class="nav">
     <span class="nav-brand">הכסף של הדוקו</span>
@@ -24,14 +24,9 @@
 
   <main class="main">
     
-<div class="page-header" style="border-bottom: 3px solid #047857;">
+<div class="page-header">
   <h1>כבלים ולוויין</h1>
 </div>
-
-<details class="tldr-box" open>
-  <summary class="tldr-summary">באמלק</summary>
-  <div class="tldr-content">YES ו-HOT מחויבות בהשקעה בתוכן מקומי לפי רישיון, אך הדוח הרגולטורי האחרון פורסם ב-2022 — ומאז אין נתונים רשמיים. לפי הערכות, רמת הציות ירדה דרמטית. שלוש הפלטפורמות הגדולות — פרטנר, סלקום, Netflix ו-Disney+ — אינן מחויבות כלל בהשקעה בתוכן ישראלי, למרות שהן מחזיקות נתח גדל והולך משוק הצפייה.</div>
-</details>
 
 <!-- Context bar -->
 
@@ -39,29 +34,34 @@
 <div class="stacked-bar context-bar">
   
   
-  <div class="stacked-segment" style="flex-basis: 69%; background: var(--border-color);">
+  <div class="stacked-segment seg-kan" style="flex-basis: 69%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 19%; background: var(--border-color);">
+  <div class="stacked-segment seg-funds" style="flex-basis: 19%;">
     
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 9%; background: #047857;">
+  <div class="stacked-segment seg-cable" style="flex-basis: 9%;">
     <span class="segment-pct">9%</span>
   </div>
   
   
-  <div class="stacked-segment" style="flex-basis: 3%; background: var(--border-color);">
+  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;">
     
   </div>
   
 </div>
 
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">YES ו-HOT מחויבות בהשקעה בתוכן מקומי לפי רישיון, אך הדוח הרגולטורי האחרון פורסם ב-2022 — ומאז אין נתונים רשמיים. לפי הערכות, רמת הציות ירדה דרמטית. שלוש הפלטפורמות הגדולות — פרטנר, סלקום, Netflix ו-Disney+ — אינן מחויבות כלל בהשקעה בתוכן ישראלי, למרות שהן מחזיקות נתח גדל והולך משוק הצפייה.</div>
+</details>
+
 <!-- Tab Navigation -->
-<div class="tab-nav" id="cableTabNav" style="--tab-accent: #047857;">
+<div class="tab-nav" id="cableTabNav">
   
   <button class="tab-btn active" data-tab="tab2022">מצב 2022</button>
   
@@ -82,14 +82,14 @@
       <div class="broadcaster-subtitle">לוויין — בבעלות בזק</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">9.2 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">9.2 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <hr class="broadcaster-divider">
         <div class="broadcaster-row"><span>חובה</span> <strong>14 מ׳ ₪</strong></div>
         <div class="broadcaster-row"><span>בפועל</span> <strong>9.2 מ׳ ₪</strong></div>
         <div class="broadcaster-row"><span>עמידה</span> <strong>66%</strong></div>
         <div class="broadcaster-compliance">
           <div class="compliance-track">
-            <div class="compliance-fill" style="background: #047857; width: 66%;"></div>
+            <div class="compliance-fill page-accent-bg" style="width: 66%;"></div>
           </div>
         </div>
         
@@ -104,14 +104,14 @@
       <div class="broadcaster-subtitle">כבלים — בבעלות אלטיס</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">6.8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">6.8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <hr class="broadcaster-divider">
         <div class="broadcaster-row"><span>חובה</span> <strong>12 מ׳ ₪</strong></div>
         <div class="broadcaster-row"><span>בפועל</span> <strong>6.8 מ׳ ₪</strong></div>
         <div class="broadcaster-row"><span>עמידה</span> <strong>57%</strong></div>
         <div class="broadcaster-compliance">
           <div class="compliance-track">
-            <div class="compliance-fill" style="background: #047857; width: 57%;"></div>
+            <div class="compliance-fill page-accent-bg" style="width: 57%;"></div>
           </div>
         </div>
         
@@ -126,7 +126,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -137,7 +137,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -148,7 +148,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -158,7 +158,7 @@
   
   
   <div class="tab-total-box">
-<span class="tab-total-amount" style="color: #047857;">16.0 <span class="tab-total-unit">מיליון ₪</span></span>
+<span class="tab-total-amount page-accent-text">16.0 <span class="tab-total-unit">מיליון ₪</span></span>
   </div>
 </div>
 
@@ -171,13 +171,13 @@
       <div class="broadcaster-subtitle">לוויין — בבעלות בזק</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">1.8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">1.8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-partial">רגולציה חלקית</span>
         <hr class="broadcaster-divider">
         <div class="broadcaster-row"><span>חובה</span> <strong>14 מ׳ ₪</strong></div>
         <div class="broadcaster-compliance" style="margin-top: 0.5rem;">
           <div class="compliance-track">
-            <div class="compliance-fill" style="background: #047857; width: 13%;"></div>
+            <div class="compliance-fill page-accent-bg" style="width: 13%;"></div>
           </div>
         </div>
 
@@ -189,13 +189,13 @@
       <div class="broadcaster-subtitle">כבלים — בבעלות אלטיס</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">1.4 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">1.4 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-partial">רגולציה חלקית</span>
         <hr class="broadcaster-divider">
         <div class="broadcaster-row"><span>חובה</span> <strong>12 מ׳ ₪</strong></div>
         <div class="broadcaster-compliance" style="margin-top: 0.5rem;">
           <div class="compliance-track">
-            <div class="compliance-fill" style="background: #047857; width: 12%;"></div>
+            <div class="compliance-fill page-accent-bg" style="width: 12%;"></div>
           </div>
         </div>
 
@@ -207,7 +207,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -218,7 +218,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -229,7 +229,7 @@
       
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">0 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-noregulation">אין חובה רגולטורית</span>
 
       
@@ -239,7 +239,7 @@
   
   
   <div class="tab-total-box">
-<span class="tab-total-amount" style="color: #047857;">3.2 <span class="tab-total-unit">מיליון ₪</span></span>
+<span class="tab-total-amount page-accent-text">3.2 <span class="tab-total-unit">מיליון ₪</span></span>
   </div>
 </div>
 
@@ -252,7 +252,7 @@
       <div class="broadcaster-subtitle">לוויין — בבעלות בזק</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">20 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">20 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-theoretical">8% חובת הפקה</span>
 
       
@@ -263,7 +263,7 @@
       <div class="broadcaster-subtitle">כבלים — בבעלות אלטיס</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">16 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">16 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-theoretical">8% חובת הפקה</span>
 
       
@@ -274,7 +274,7 @@
       <div class="broadcaster-subtitle">IPTV — בבעלות פרטנר</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">8 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-theoretical">8% חובת הפקה</span>
 
       
@@ -285,7 +285,7 @@
       <div class="broadcaster-subtitle">IPTV — בבעלות סלקום</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">6 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">6 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-theoretical">8% חובת הפקה</span>
 
       
@@ -296,7 +296,7 @@
       <div class="broadcaster-subtitle">פלטפורמות סטרימינג</div>
 
       
-        <div class="broadcaster-amount" style="color: #047857; margin-top: 0.75rem;">80 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
+        <div class="broadcaster-amount page-accent-text" style="margin-top: 0.75rem;">80 <span class="broadcaster-amount-unit">מיליון ₪</span></div>
         <span class="bc-badge bc-badge-theoretical">8% חובת הפקה</span>
 
       
@@ -306,7 +306,7 @@
   
   
   <div class="tab-total-box">
-<span class="tab-total-amount" style="color: #047857;">130 <span class="tab-total-unit">מיליון ₪</span></span>
+<span class="tab-total-amount page-accent-text">130 <span class="tab-total-unit">מיליון ₪</span></span>
   </div>
 </div>
 
@@ -318,13 +318,13 @@
 </div>
 
 <!-- Regulation Box -->
-<div class="regulation-box" style="border-right: 3px solid #047857;">
+<div class="regulation-box">
   <div class="regulation-box-title">הרגולציה</div>
   [טקסט על חובות השידור של ספקיות הכבלים והלוויין, רישיונות הפעלה ודרישות תוכן מקומי — מקום שמור]
 </div>
 
 <!-- Future Box -->
-<div class="future-box" style="border-top-color: #047857;">
+<div class="future-box">
   <div class="future-title">
     העתיד
     <span class="future-badge badge-declining">בירידה — רגולציה כושלת</span>
