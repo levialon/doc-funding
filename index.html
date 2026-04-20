@@ -24,10 +24,19 @@
 
   <main class="main">
     
-<div class="page-header" style="border-bottom: 3px solid #374151;">
-  <h1>הכסף של הדוקו</h1>
-  <div class="sub">מאיפה מגיע הכסף לקולנוע תיעודי בישראל? — מבט על</div>
+
+<!-- Hero Strip -->
+<div class="hero-strip">
+  
+  <img src="images/hero.jpg" alt="" class="hero-strip-img">
+  
 </div>
+
+<!-- TLDR (open by default) -->
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">ארבעה גורמי מימון — כאן, קרנות הקולנוע, כבלים ולוויין, והרשות השנייה — אמורים לספק ביחד כ-104 מיליון ₪ בשנה לקולנוע תיעודי בישראל. בפועל מגיעים כ-65 מיליון ₪ בלבד. הפער של כמעט 40% נובע מרגולציה שאינה נאכפת, מדיווחים חלקיים, ומהגדרות רחבות של ״תוכן תיעודי״ שמאפשרות לשדרים לעמוד בחובה מבלי לממן דוקומנטרי של ממש.</div>
+</details>
 
 <!-- Budget Summary -->
 <div class="budget-summary-box">
@@ -50,91 +59,127 @@
   <a class="source-card" href="kan.html">
     <div class="source-card-bar" style="background: #1a56db;"></div>
     <div class="source-card-body">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-        <div class="source-card-name" style="margin-bottom: 0;">כאן</div>
-        
-        <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
-          <line x1="1" y1="6" x2="21" y2="6" stroke="#1a56db" stroke-width="2" stroke-linecap="round"/>
-          <polyline points="16,2 21,6 16,10" fill="none" stroke="#1a56db" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        
+      <!-- Top row: name+icon right | trend left -->
+      <div class="source-card-main">
+        <div class="source-card-name-wrap">
+          <span class="source-card-icon"></span>
+          <span class="source-card-name">כאן11</span>
+        </div>
+        <div class="sc-trend-wrap">
+          
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="6" x2="21" y2="6" stroke="#1a56db" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="16,2 21,6 16,10" fill="none" stroke="#1a56db" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          
+          <div class="sc-trend-label" style="color: #1a56db;">יציב</div>
+        </div>
       </div>
-      <div style="display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.25rem;">
-        <span class="amount-num" style="color: #1a56db; font-size: 36px;">45</span>
-        <span class="amount-theoretical">(40)</span>
-        <span class="amount-unit">מ׳ ₪</span>
+      <!-- Centered number -->
+      <div class="sc-amount-center">
+        <span class="sc-amount-num" style="color: #1a56db;">45</span>
+        <span class="sc-amount-unit">מיליון ₪</span>
       </div>
     </div>
+    
     <div class="source-card-gap-track">
       <div class="source-card-gap-fill" style="width: 112%; background: #1a56db;"></div>
+      <div class="source-card-gap-pct">112% מהחובה</div>
     </div>
   </a>
   
   <a class="source-card" href="funds.html">
     <div class="source-card-bar" style="background: #b91c1c;"></div>
     <div class="source-card-body">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-        <div class="source-card-name" style="margin-bottom: 0;">קרנות הקולנוע</div>
-        
-        <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
-          <polyline points="1,9 7,3 13,9 21,2" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        
+      <!-- Top row: name+icon right | trend left -->
+      <div class="source-card-main">
+        <div class="source-card-name-wrap">
+          <span class="source-card-icon"></span>
+          <span class="source-card-name">קרנות הקולנוע</span>
+        </div>
+        <div class="sc-trend-wrap">
+          
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+            <polyline points="1,9 7,3 13,9 21,2" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          
+          <div class="sc-trend-label" style="color: #b91c1c;">משתנה</div>
+        </div>
       </div>
-      <div style="display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.25rem;">
-        <span class="amount-num" style="color: #b91c1c; font-size: 36px;">12.5</span>
-        <span class="amount-theoretical">(12.5)</span>
-        <span class="amount-unit">מ׳ ₪</span>
+      <!-- Centered number -->
+      <div class="sc-amount-center">
+        <span class="sc-amount-num" style="color: #b91c1c;">12.5</span>
+        <span class="sc-amount-unit">מיליון ₪</span>
       </div>
     </div>
+    
     <div class="source-card-gap-track">
       <div class="source-card-gap-fill" style="width: 100%; background: #b91c1c;"></div>
+      <div class="source-card-gap-pct">100% מהחובה</div>
     </div>
   </a>
   
   <a class="source-card" href="cable.html">
     <div class="source-card-bar" style="background: #047857;"></div>
     <div class="source-card-body">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-        <div class="source-card-name" style="margin-bottom: 0;">כבלים ולוויין</div>
-        
-        <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
-          <line x1="1" y1="2" x2="21" y2="10" stroke="#047857" stroke-width="2" stroke-linecap="round"/>
-          <polyline points="14,10 21,10 21,4" fill="none" stroke="#047857" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        
+      <!-- Top row: name+icon right | trend left -->
+      <div class="source-card-main">
+        <div class="source-card-name-wrap">
+          <span class="source-card-icon"></span>
+          <span class="source-card-name">כבלים ולוויין</span>
+        </div>
+        <div class="sc-trend-wrap">
+          
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="2" x2="21" y2="10" stroke="#047857" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="14,10 21,10 21,4" fill="none" stroke="#047857" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          
+          <div class="sc-trend-label" style="color: #047857;">בירידה</div>
+        </div>
       </div>
-      <div style="display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.25rem;">
-        <span class="amount-num" style="color: #047857; font-size: 36px;">6</span>
-        <span class="amount-theoretical">(16)</span>
-        <span class="amount-unit">מ׳ ₪</span>
+      <!-- Centered number -->
+      <div class="sc-amount-center">
+        <span class="sc-amount-num" style="color: #047857;">6</span>
+        <span class="sc-amount-unit">מיליון ₪</span>
       </div>
     </div>
+    
     <div class="source-card-gap-track">
       <div class="source-card-gap-fill" style="width: 38%; background: #047857;"></div>
+      <div class="source-card-gap-pct">38% מהחובה</div>
     </div>
   </a>
   
   <a class="source-card" href="reshut.html">
     <div class="source-card-bar" style="background: #9333ea;"></div>
     <div class="source-card-body">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-        <div class="source-card-name" style="margin-bottom: 0;">הרשות השנייה</div>
-        
-        <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
-          <line x1="1" y1="1" x2="21" y2="11" stroke="#9333ea" stroke-width="2.5" stroke-linecap="round"/>
-          <polyline points="13,11 21,11 21,4" fill="none" stroke="#9333ea" stroke-width="2.5" stroke-linejoin="round"/>
-        </svg>
-        
+      <!-- Top row: name+icon right | trend left -->
+      <div class="source-card-main">
+        <div class="source-card-name-wrap">
+          <span class="source-card-icon"></span>
+          <span class="source-card-name">הרשות השנייה</span>
+        </div>
+        <div class="sc-trend-wrap">
+          
+          <svg width="22" height="12" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="1" x2="21" y2="11" stroke="#9333ea" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="13,11 21,11 21,4" fill="none" stroke="#9333ea" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          
+          <div class="sc-trend-label" style="color: #9333ea;">מתרסק</div>
+        </div>
       </div>
-      <div style="display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.25rem;">
-        <span class="amount-num" style="color: #9333ea; font-size: 36px;">2</span>
-        <span class="amount-theoretical">(36)</span>
-        <span class="amount-unit">מ׳ ₪</span>
+      <!-- Centered number -->
+      <div class="sc-amount-center">
+        <span class="sc-amount-num" style="color: #9333ea;">2</span>
+        <span class="sc-amount-unit">מיליון ₪</span>
       </div>
     </div>
+    
     <div class="source-card-gap-track">
       <div class="source-card-gap-fill" style="width: 6%; background: #9333ea;"></div>
+      <div class="source-card-gap-pct">6% מהחובה</div>
     </div>
   </a>
   
@@ -148,7 +193,7 @@
   
   
   <div class="stacked-segment" style="flex-basis: 69%; background: #1a56db;">
-    <span class="segment-label">כאן</span>
+    <span class="segment-label">כאן11</span>
     <span class="segment-pct">69%</span>
   </div>
   
