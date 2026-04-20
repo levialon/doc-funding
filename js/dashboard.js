@@ -62,10 +62,29 @@ function initFundsBars() {
 
 /* --- Nav: highlight current page --- */
 function highlightNav() {
-  const page = document.body.dataset.page;
-  if (!page) return;
+  const bodyClass = document.body.className;
+  const pageMatch = bodyClass.match(/page-(\w+)/);
+  if (!pageMatch) return;
+
+  const currentPage = pageMatch[1];
+
+  // Map page IDs to nav data-page values
+  const pageMap = {
+    'index': 'index',      // landing page (no nav highlight)
+    'overview': 'overview',
+    'kan': 'kan',
+    'funds': 'funds',
+    'cable': 'cable',
+    'reshut': 'reshut'
+  };
+
+  const navPage = pageMap[currentPage];
+  if (!navPage || navPage === 'index') return; // Don't highlight on landing page
+
   document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.dataset.page === page) link.classList.add('active');
+    if (link.dataset.page === navPage) {
+      link.classList.add('active');
+    }
   });
 }
 
