@@ -1290,6 +1290,49 @@ a { color: inherit; text-decoration: none; }
 
 .future-text:last-child { margin-bottom: 0; }
 
+/* --- Sources and Links --- */
+.sources-links-box {
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.sources-links-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.sources-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sources-links-list li {
+  margin-bottom: 0.75rem;
+  font-size: 14px;
+}
+
+.sources-links-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sources-links-list a {
+  color: var(--page-accent, #e05050);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.sources-links-list a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
 /* =========================================================
    Buttons
    ========================================================= */
