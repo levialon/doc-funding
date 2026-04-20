@@ -4,7 +4,7 @@
 
 /* --- Custom Properties --- */
 :root {
-  --font-heading: 'Rubik', sans-serif;
+  --font-heading: 'Assistant', sans-serif;
   --font-body: 'Heebo', sans-serif;
 
   --bg-primary: #111318;
@@ -1706,21 +1706,22 @@ details[open] .tldr-summary::before { transform: rotate(90deg); }
   .nav-brand {
     flex-basis: 100%;
     text-align: center;
-    padding: 0.75rem;
+    padding: 0.5rem 0.25rem;
     margin-left: 0;
     position: sticky;
     top: 0;
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     z-index: 101;
+    font-size: 14px;
   }
 
   .nav-link {
     flex: 1;
     text-align: center;
-    padding: 0.5rem;
+    padding: 0.5rem 0.25rem;
     border-radius: 0;
-    font-size: 12px;
+    font-size: 11px;
     border-right: 1px solid var(--border-color);
   }
 
