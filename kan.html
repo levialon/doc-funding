@@ -57,7 +57,7 @@
 
 <details class="tldr-box" open>
   <summary class="tldr-summary">באמלק</summary>
-  <div class="tldr-content">כאן הוא המממן הציבורי הגדול ביותר של דוקו בישראל, עם השקעה שנתית של כ-45 מיליון ₪ המעוגנת בחוק תאגיד השידור. ההשקעה יציבה יחסית לאורך השנים, אך חלק ניכר ממנה מוקדש לתוכניות עובדתיות שאינן דוקומנטרי קלאסי — סדרות ריאליטי ועיתונאות תחקירית נספרות גם הן תחת אותו סעיף תקציבי. המשמעות: הנתון הגלמי מנפח את התמונה.</div>
+  <div class="tldr-content">כאן הוא המממן הציבורי הגדול ביותר של דוקו בישראל, עם השקעה שנתית של כ-45 מיליון ₪ המעוגנת בחוק תאגיד השידור. ההשקעה יציבה יחסית לאורך השנים, אך חלק ממנה מוקדש לתוכניות עובדתיות שאינן דוקומנטרי קלאסי — סדרות עיתונאות ותחקיר נספרות גם הן תחת אותו סעיף תקציבי. המשמעות: הנתון הגלמי מנפח את התמונה.</div>
 </details>
 
 <!-- Big Number + Year Selector -->
@@ -96,25 +96,32 @@
   <div class="stacked-bar" id="kanStackedBar">
     
     
+    
+    
+    
     <div class="stacked-segment cat-1"
          data-index="0"
-         style="flex-basis: 55%;">
+         style="flex-basis: 54%;">
       <span class="segment-label">סדרות תיעודיות</span>
-      <span class="segment-pct">55%</span>
+      <span class="segment-pct">53 שעות</span>
     </div>
+    
+    
     
     <div class="stacked-segment cat-2"
          data-index="1"
-         style="flex-basis: 30%;">
+         style="flex-basis: 27%;">
       <span class="segment-label">סרטים בודדים</span>
-      <span class="segment-pct">30%</span>
+      <span class="segment-pct">26 שעות</span>
     </div>
+    
+    
     
     <div class="stacked-segment cat-3"
          data-index="2"
-         style="flex-basis: 15%;">
+         style="flex-basis: 19%;">
       <span class="segment-label">תוכניות עובדתיות</span>
-      <span class="segment-pct">15%</span>
+      <span class="segment-pct">19 שעות</span>
     </div>
     
   </div>
@@ -216,7 +223,7 @@
   
 <script>
 (function () {
-  var chartData = {"2023": [52, 32, 16], "2024": [54, 31, 15], "2025": [55, 30, 15]};
+  var chartData = {"2023": [35, 17, 18], "2024": [36, 21, 30], "2025": [53, 26, 19]};
   var topContents = {"2023": [{"minutes": 520, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 390, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 310, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 240, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 180, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}], "2024": [{"minutes": 560, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 420, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 350, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 260, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 195, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "2025": [{"minutes": 600, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 440, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 380, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 270, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 210, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}]};
 
   var selector = document.getElementById('kanYearSelector');
@@ -235,10 +242,13 @@
 
       // Update stacked bar segments
       var values = chartData[year];
+      var totalHours = values.reduce(function (acc, val) { return acc + val; }, 0);
       document.querySelectorAll('#kanStackedBar .stacked-segment').forEach(function (seg) {
         var i = parseInt(seg.dataset.index);
-        seg.style.flexBasis = values[i] + '%';
-        seg.querySelector('.segment-pct').textContent = values[i] + '%';
+        var hours = values[i];
+        var pct = Math.round((hours / totalHours) * 100);
+        seg.style.flexBasis = pct + '%';
+        seg.querySelector('.segment-pct').textContent = hours + ' שעות';
       });
 
       // Update top-5 table
