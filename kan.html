@@ -14,8 +14,8 @@
 <body class="page-kan">
 
   <nav class="nav">
-    <span class="nav-brand">הכסף של הדוקו</span>
-    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-brand" href="index.html">הכסף של הדוקו</a>
+    <a class="nav-link" data-page="overview" href="overview.html">מבט על</a>
     <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
     <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
     <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
@@ -62,6 +62,7 @@
 
 <!-- Big Number + Year Selector -->
 <div class="total-box" style="margin-bottom: 1.75rem;">
+  <span class="total-box-info" data-info="השקעה של כאן בתוכן תיעודי לשנת 2025">ℹ</span>
   <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 1rem;">
     <span id="kanBigNumber" class="big-number page-accent-text" style="font-size: 64px;">46.7</span>
     <span class="big-number-unit">מיליון ₪</span>
@@ -78,12 +79,6 @@
             data-year="2025" data-amount="46.7">2025</button>
     
   </div>
-</div>
-
-<!-- Regulation Box -->
-<div class="regulation-box">
-  <div class="regulation-box-title">הרגולציה</div>
-  [טקסט על חוק תאגיד השידור הציבורי וסעיפי ההשקעה בתוכן תיעודי — מקום שמור]
 </div>
 
 <!-- Budget By Type — Stacked Bar -->
@@ -204,6 +199,12 @@
   </div>
 </div>
 
+<!-- Regulation Box -->
+<div class="regulation-box">
+  <div class="regulation-box-title">הרגולציה</div>
+  [טקסט על חוק תאגיד השידור הציבורי וסעיפי ההשקעה בתוכן תיעודי — מקום שמור]
+</div>
+
 <!-- Future Box -->
 <div class="future-box">
   <div class="future-title">
@@ -218,6 +219,15 @@
   <footer class="footer">
     עודכן לאחרונה: אפריל 2026
   </footer>
+
+  <!-- Info Popup Modal -->
+  <div id="infoModal" class="info-modal">
+    <div class="info-modal-overlay"></div>
+    <div class="info-modal-box">
+      <button class="info-modal-close">×</button>
+      <div class="info-modal-content"></div>
+    </div>
+  </div>
 
   <script src="js/dashboard.js"></script>
   

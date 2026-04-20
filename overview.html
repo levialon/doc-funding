@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הכסף של הדוקו — מבט על</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+  
+</head>
+<body class="page-overview">
+
+  <nav class="nav">
+    <a class="nav-brand" href="index.html">הכסף של הדוקו</a>
+    <a class="nav-link" data-page="overview" href="overview.html">מבט על</a>
+    <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
+    <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
+    <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
+    <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
+  </nav>
+
+  <main class="main">
+    
+
+<!-- Hero Strip -->
+<div class="hero-strip">
+  
+  <img src="images/hero.jpg" alt="" class="hero-strip-img">
+  
+</div>
+
+<!-- TLDR (open by default) -->
+<details class="tldr-box" open>
+  <summary class="tldr-summary">באמלק</summary>
+  <div class="tldr-content">ארבעה גורמי מימון — כאן, קרנות הקולנוע, כבלים ולוויין, והרשות השנייה — אמורים לספק ביחד כ-104 מיליון ₪ בשנה לקולנוע תיעודי בישראל. בפועל מגיעים כ-65 מיליון ₪ בלבד. הפער של כמעט 40% נובע מרגולציה שאינה נאכפת, מדיווחים חלקיים, ומהגדרות רחבות של ״תוכן תיעודי״ שמאפשרות לשדרים לעמוד בחובה מבלי לממן דוקומנטרי של ממש.</div>
+</details>
+
+<!-- Calculate budget totals from all sources -->
+
+
+  
+    
+  
+  
+
+  
+    
+  
+  
+
+  
+    
+    
+    
+    
+  
+  
+
+  
+    
+    
+    
+  
+  
+
+
+
+<!-- Budget Summary -->
+<div class="budget-summary-box">
+  <div class="budget-summary-text">
+    תקציב דוקו 2025 —
+    <strong class="budget-actual">67.9 מיליון ₪</strong>
+    צריך להיות
+    <strong class="budget-theoretical">104.5 מיליון ₪</strong>
+  </div>
+  <div class="budget-summary-track">
+    <div class="budget-summary-fill" style="width: 65%;"></div>
+    <div class="budget-summary-label">65% מהתקציב הנדרש</div>
+  </div>
+</div>
+
+<!-- Source Cards -->
+<div class="section-title">מקורות המימון</div>
+<div class="cards-grid">
+  
+  
+    
+    
+  
+  <a class="source-card" href="kan.html">
+    <div class="source-card-top">
+      <div class="source-card-left">
+        <div class="source-card-name">כאן11</div>
+        <div class="source-card-trend">
+          
+          <svg width="16" height="10" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="16,2 21,6 16,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          
+          <span class="source-card-trend-label">יציב</span>
+        </div>
+      </div>
+      <div class="source-card-right seg-kan">
+        <div class="source-card-amount">46.7 <span class="source-card-unit">מיליון ש"ח</span></div>
+        <div class="source-card-theoretical">(40)</div>
+      </div>
+    </div>
+    
+    <div class="source-card-gap-track">
+      <div class="source-card-gap-fill seg-kan" style="width: 117%;"></div>
+      <div class="source-card-gap-pct">117% מהחובה</div>
+    </div>
+  </a>
+  
+  
+    
+    
+  
+  <a class="source-card" href="funds.html">
+    <div class="source-card-top">
+      <div class="source-card-left">
+        <div class="source-card-name">קרנות הקולנוע</div>
+        <div class="source-card-trend">
+          
+          <svg width="16" height="10" viewBox="0 0 22 12" fill="none">
+            <polyline points="1,9 7,3 13,9 21,2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          
+          <span class="source-card-trend-label">משתנה</span>
+        </div>
+      </div>
+      <div class="source-card-right seg-funds">
+        <div class="source-card-amount">14.9 <span class="source-card-unit">מיליון ש"ח</span></div>
+        <div class="source-card-theoretical">(12.5)</div>
+      </div>
+    </div>
+    
+    <div class="source-card-gap-track">
+      <div class="source-card-gap-fill seg-funds" style="width: 119%;"></div>
+      <div class="source-card-gap-pct">119% מהחובה</div>
+    </div>
+  </a>
+  
+  
+    
+    
+    
+    
+    
+  
+  <a class="source-card" href="cable.html">
+    <div class="source-card-top">
+      <div class="source-card-left">
+        <div class="source-card-name">כבלים ולוויין</div>
+        <div class="source-card-trend">
+          
+          <svg width="16" height="10" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="2" x2="21" y2="10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <polyline points="14,10 21,10 21,4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          
+          <span class="source-card-trend-label">בירידה</span>
+        </div>
+      </div>
+      <div class="source-card-right seg-cable">
+        <div class="source-card-amount">3.3 <span class="source-card-unit">מיליון ש"ח</span></div>
+        <div class="source-card-theoretical">(16)</div>
+      </div>
+    </div>
+    
+    <div class="source-card-gap-track">
+      <div class="source-card-gap-fill seg-cable" style="width: 21%;"></div>
+      <div class="source-card-gap-pct">21% מהחובה</div>
+    </div>
+  </a>
+  
+  
+    
+    
+    
+    
+  
+  <a class="source-card" href="reshut.html">
+    <div class="source-card-top">
+      <div class="source-card-left">
+        <div class="source-card-name">הרשות השנייה</div>
+        <div class="source-card-trend">
+          
+          <svg width="16" height="10" viewBox="0 0 22 12" fill="none">
+            <line x1="1" y1="1" x2="21" y2="11" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <polyline points="13,11 21,11 21,4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          
+          <span class="source-card-trend-label">מתרסק</span>
+        </div>
+      </div>
+      <div class="source-card-right seg-reshut">
+        <div class="source-card-amount">3 <span class="source-card-unit">מיליון ש"ח</span></div>
+        <div class="source-card-theoretical">(36)</div>
+      </div>
+    </div>
+    
+    <div class="source-card-gap-track">
+      <div class="source-card-gap-fill seg-reshut" style="width: 8%;"></div>
+      <div class="source-card-gap-pct">8% מהחובה</div>
+    </div>
+  </a>
+  
+</div>
+
+<!-- Sources Stacked Bar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-title" style="margin-top: 1.5rem;">חלוקת מקורות המימון</div>
+<div class="bar-mode-toggle" id="barToggle">
+  <button class="bar-mode-btn active" data-mode="actual">מאיפה מגיע הכסף בפועל</button>
+  <button class="bar-mode-btn" data-mode="theoretical">מאיפה אמור להגיע הכסף</button>
+</div>
+<div class="stacked-bar" id="overviewBar" style="margin-bottom: 2rem;">
+  
+  
+  
+  
+  
+  
+  <div class="stacked-segment seg-kan"
+       data-actual="69"
+       data-theoretical="38"
+       style="flex-basis: 69%;">
+    <span class="segment-label">כאן11</span>
+    <span class="segment-pct">69%</span>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="stacked-segment seg-funds"
+       data-actual="22"
+       data-theoretical="12"
+       style="flex-basis: 22%;">
+    <span class="segment-label">קרנות הקולנוע</span>
+    <span class="segment-pct">22%</span>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="stacked-segment seg-cable"
+       data-actual="5"
+       data-theoretical="15"
+       style="flex-basis: 5%;">
+    <span class="segment-label">כבלים ולוויין</span>
+    <span class="segment-pct">5%</span>
+  </div>
+  
+  
+  
+  
+  
+  
+  <div class="stacked-segment seg-reshut"
+       data-actual="4"
+       data-theoretical="34"
+       style="flex-basis: 4%;">
+    <span class="segment-label">הרשות השנייה</span>
+    <span class="segment-pct">4%</span>
+  </div>
+  
+</div>
+
+<!-- Disclaimer -->
+<div class="overview-disclaimer">הנתונים מבוססים על דיווחים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו..</div>
+
+  </main>
+
+  <footer class="footer">
+    עודכן לאחרונה: אפריל 2026
+  </footer>
+
+  <!-- Info Popup Modal -->
+  <div id="infoModal" class="info-modal">
+    <div class="info-modal-overlay"></div>
+    <div class="info-modal-box">
+      <button class="info-modal-close">×</button>
+      <div class="info-modal-content"></div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  
+<script>
+(function () {
+  var toggle = document.getElementById('barToggle');
+  var bar = document.getElementById('overviewBar');
+  if (!toggle || !bar) return;
+  toggle.querySelectorAll('.bar-mode-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      toggle.querySelectorAll('.bar-mode-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var mode = btn.dataset.mode;
+      bar.querySelectorAll('.stacked-segment').forEach(function (seg) {
+        var pct = seg.dataset[mode];
+        seg.style.flexBasis = pct + '%';
+        seg.querySelector('.segment-pct').textContent = pct + '%';
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

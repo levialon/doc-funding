@@ -69,9 +69,39 @@ function highlightNav() {
   });
 }
 
+/* --- Info Modal --- */
+function initInfoModal() {
+  const modal = document.getElementById('infoModal');
+  const overlay = document.querySelector('.info-modal-overlay');
+  const closeBtn = document.querySelector('.info-modal-close');
+  const content = document.querySelector('.info-modal-content');
+
+  if (!modal) return;
+
+  document.querySelectorAll('.total-box-info').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = icon.dataset.info;
+      content.textContent = text;
+      modal.classList.add('active');
+    });
+  });
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', () => {
   highlightNav();
   initKanChart();
   initFundsBars();
+  initInfoModal();
 });

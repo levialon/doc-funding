@@ -14,8 +14,8 @@
 <body class="page-funds">
 
   <nav class="nav">
-    <span class="nav-brand">הכסף של הדוקו</span>
-    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-brand" href="index.html">הכסף של הדוקו</a>
+    <a class="nav-link" data-page="overview" href="overview.html">מבט על</a>
     <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
     <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
     <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
@@ -64,6 +64,7 @@
 
 
 <div class="total-box">
+  <span class="total-box-info" data-info="סכום המשלובים משלוש קרנות לאומיות לשנת 2025">ℹ</span>
   <div class="total-box-amount page-accent-text"><span id="nationalTotalAmount">14.3</span> מיליון ₪</div>
   <div class="total-box-label">סה״כ תקציב קרנות לקולנוע תיעודי</div>
   <div class="total-box-note">קרנות לאומיות בלבד — הערכה 2025</div>
@@ -180,6 +181,7 @@
 
 
 <div class="total-box">
+  <span class="total-box-info" data-info="סכום המשלובים מארבע קרנות אזוריות לשנת 2025">ℹ</span>
   <div class="total-box-amount page-accent-text"><span id="regionalTotalAmount">17.6</span> מיליון ₪</div>
   <div class="total-box-label">סה״כ תקציב קרנות אזוריות לקולנוע תיעודי</div>
   <div class="total-box-note">קרנות אזוריות בלבד — הערכה 2025</div>
@@ -445,6 +447,15 @@
   <footer class="footer">
     עודכן לאחרונה: אפריל 2026
   </footer>
+
+  <!-- Info Popup Modal -->
+  <div id="infoModal" class="info-modal">
+    <div class="info-modal-overlay"></div>
+    <div class="info-modal-box">
+      <button class="info-modal-close">×</button>
+      <div class="info-modal-content"></div>
+    </div>
+  </div>
 
   <script src="js/dashboard.js"></script>
   

@@ -14,8 +14,8 @@
 <body class="page-reshut">
 
   <nav class="nav">
-    <span class="nav-brand">הכסף של הדוקו</span>
-    <a class="nav-link" data-page="overview" href="index.html">מבט על</a>
+    <a class="nav-brand" href="index.html">הכסף של הדוקו</a>
+    <a class="nav-link" data-page="overview" href="overview.html">מבט על</a>
     <a class="nav-link" data-page="kan" href="kan.html">כאן</a>
     <a class="nav-link" data-page="funds" href="funds.html">קרנות</a>
     <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
@@ -112,6 +112,7 @@
 
 
 <div class="total-box" style="margin-bottom: 1.75rem;">
+  <span class="total-box-info" data-info="סכום החובות של קשת 12 ורשת 13 בתוכן תיעודי">ℹ</span>
   <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem;">
     <span class="big-number page-accent-text" style="font-size: 64px;">36.6</span>
     <span class="big-number-unit">מיליון ₪</span>
@@ -249,6 +250,15 @@
   <footer class="footer">
     עודכן לאחרונה: אפריל 2026
   </footer>
+
+  <!-- Info Popup Modal -->
+  <div id="infoModal" class="info-modal">
+    <div class="info-modal-overlay"></div>
+    <div class="info-modal-box">
+      <button class="info-modal-close">×</button>
+      <div class="info-modal-content"></div>
+    </div>
+  </div>
 
   <script src="js/dashboard.js"></script>
   
