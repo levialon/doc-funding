@@ -117,10 +117,69 @@ function initInfoModal() {
   });
 }
 
+/* --- Swipe Navigation (Mobile) --- */
+function initSwipeNavigation() {
+  const pageMap = {
+    'index': 'overview',      // landing → overview
+    'overview': 'kan',        // overview → kan
+    'kan': 'funds',           // kan → funds
+    'funds': 'cable',         // funds → cable
+    'cable': 'reshut',        // cable → reshut
+    'reshut': null            // reshut → (last page)
+  };
+
+  const pageMapReverse = {
+    'overview': 'index',      // overview → landing
+    'kan': 'overview',        // kan → overview
+    'funds': 'kan',           // funds → kan
+    'cable': 'funds',         // cable → funds
+    'reshut': 'cable'         // reshut → cable
+  };
+
+  const bodyClass = document.body.className;
+  const pageMatch = bodyClass.match(/page-(\w+)/);
+  if (!pageMatch) return;
+
+  const currentPage = pageMatch[1];
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe(currentPage, touchStartX, touchEndX, pageMap, pageMapReverse);
+  });
+}
+
+function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
+  const threshold = 50; // minimum swipe distance in pixels
+  const diff = startX - endX;
+
+  // Swipe left (diff > 0) = next page
+  if (diff > threshold) {
+    const nextPage = pageMap[currentPage];
+    if (nextPage) {
+      window.location.href = nextPage + '.html';
+    }
+  }
+  // Swipe right (diff < 0) = previous page
+  else if (diff < -threshold) {
+    const prevPage = pageMapReverse[currentPage];
+    if (prevPage) {
+      window.location.href = prevPage + '.html';
+    }
+  }
+}
+
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', () => {
   highlightNav();
   initKanChart();
   initFundsBars();
   initInfoModal();
+  initSwipeNavigation();
 });
