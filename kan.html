@@ -145,10 +145,12 @@
   </div>
 </div>
 
-<!-- Top 5 Contents -->
+<!-- Top Contents -->
 <div class="shows-table-wrap" style="margin-bottom: 1.5rem;">
   <div class="shows-table-header">
-    <div class="section-title" style="margin-bottom: 0.25rem;">5 התכנים המובילים</div>
+    <div class="section-title" style="margin-bottom: 0.25rem;">
+      <span id="kanTopCount">2</span> תכנים מובילים (לפי דקות מסך)
+    </div>
   </div>
   <div class="table-scroll">
     <table class="shows-table" id="kanTopContents">
@@ -171,30 +173,9 @@
         
         <tr>
           <td style="color: var(--text-muted); font-size: 13px;">2</td>
-          <td>[שם תוכנית — מקום שמור]</td>
-          <td><span style="font-size: 12px; color: var(--text-secondary);">סרט בודד</span></td>
-          <td><strong>440</strong></td>
-        </tr>
-        
-        <tr>
-          <td style="color: var(--text-muted); font-size: 13px;">3</td>
-          <td>[שם תוכנית — מקום שמור]</td>
+          <td>אויבים</td>
           <td><span style="font-size: 12px; color: var(--text-secondary);">סדרה תיעודית</span></td>
-          <td><strong>380</strong></td>
-        </tr>
-        
-        <tr>
-          <td style="color: var(--text-muted); font-size: 13px;">4</td>
-          <td>[שם תוכנית — מקום שמור]</td>
-          <td><span style="font-size: 12px; color: var(--text-secondary);">תוכנית עובדתית</span></td>
-          <td><strong>270</strong></td>
-        </tr>
-        
-        <tr>
-          <td style="color: var(--text-muted); font-size: 13px;">5</td>
-          <td>[שם תוכנית — מקום שמור]</td>
-          <td><span style="font-size: 12px; color: var(--text-secondary);">סדרה תיעודית</span></td>
-          <td><strong>210</strong></td>
+          <td><strong>213</strong></td>
         </tr>
         
       </tbody>
@@ -251,7 +232,7 @@
 <script>
 (function () {
   var chartData = {"2023": [35, 17, 18], "2024": [36, 21, 30], "2025": [53, 26, 19]};
-  var topContents = {"2023": [{"minutes": 547, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 310, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 240, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 180, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}], "2024": [{"minutes": 773, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 448, "name": "\u05d3\u05d5\u05d7 \u05e8\u05d5\u05dc\u05e0\u05d9\u05e7", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 420, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 350, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 260, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 195, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "2025": [{"minutes": 510, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 440, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05e8\u05d8 \u05d1\u05d5\u05d3\u05d3"}, {"minutes": 380, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 270, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9\u05ea"}, {"minutes": 210, "name": "[\u05e9\u05dd \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u2014 \u05de\u05e7\u05d5\u05dd \u05e9\u05de\u05d5\u05e8]", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "title": "5 \u05d4\u05ea\u05db\u05e0\u05d9\u05dd \u05d4\u05de\u05d5\u05d1\u05d9\u05dc\u05d9\u05dd"};
+  var topContents = {"2023": [{"minutes": 438, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 285, "name": "\u05de\u05d3\u05d5\u05e8\u05ea \u05d4\u05e9\u05d1\u05d8\u05d9\u05dd ", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 214, "name": "\u05d8\u05d1\u05e8\u05d9\u05d4 \u05de\u05ea\u05d7\u05ea \u05dc\u05e7\u05d5 \u05d4\u05d0\u05d3\u05d5\u05dd", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 273, "name": "\u05d7\u05d9\u05dc\u05d5\u05e0\u05d9\u05d5\u05ea", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "2024": [{"minutes": 773, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 448, "name": "\u05d3\u05d5\u05d7 \u05e8\u05d5\u05dc\u05e0\u05d9\u05e7", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 326, "name": "\u05e9\u05d1\u05d5\u05d9\u05d9\u05dd", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}, {"minutes": 277, "name": "\u05d4\u05de\u05d5\u05dc\u05d9\u05dd", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "2025": [{"minutes": 510, "name": "\u05d6\u05de\u05df \u05d0\u05de\u05ea", "type": "\u05ea\u05db\u05e0\u05d9\u05ea \u05ea\u05d7\u05e7\u05d9\u05e8\u05d9\u05dd"}, {"minutes": 213, "name": "\u05d0\u05d5\u05d9\u05d1\u05d9\u05dd", "type": "\u05e1\u05d3\u05e8\u05d4 \u05ea\u05d9\u05e2\u05d5\u05d3\u05d9\u05ea"}], "title": "\u05ea\u05db\u05e0\u05d9\u05dd \u05de\u05d5\u05d1\u05d9\u05dc\u05d9\u05dd (\u05dc\u05e4\u05d9 \u05d3\u05e7\u05d5\u05ea \u05de\u05e1\u05da)"};
 
   var selector = document.getElementById('kanYearSelector');
   if (!selector) return;
@@ -278,9 +259,11 @@
         seg.querySelector('.segment-pct').textContent = hours + ' שעות';
       });
 
-      // Update top-5 table
+      // Update top contents count + table
       var tbody = document.querySelector('#kanTopContents tbody');
       if (tbody && topContents[year]) {
+        var countEl = document.getElementById('kanTopCount');
+        if (countEl) countEl.textContent = topContents[year].length;
         tbody.innerHTML = topContents[year].map(function (show, i) {
           return '<tr>' +
             '<td style="color:var(--text-muted);font-size:13px;">' + (i + 1) + '</td>' +
