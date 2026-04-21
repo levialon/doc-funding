@@ -28,38 +28,30 @@
   <h1>כאן 11 - השידור הציבורי</h1>
 </div>
 
-<!-- Context bar -->
+<!-- Compute actual budgets for context bar -->
+
+
+
+
+
+
+
+
+
 
 
 
 <div class="stacked-bar context-bar">
+  <div class="context-bar-label">64 אחוז מכלל ההשקעה בדוקו</div>
   
   
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  <div class="context-bar-label">69 אחוז מכלל ההשקעה בדוקו</div>
-  
-  
-  <div class="stacked-segment seg-kan" style="flex-basis: 69%;"></div>
-  
-  
-  <div class="stacked-segment seg-funds" style="flex-basis: 19%;"></div>
-  
-  
-  <div class="stacked-segment seg-cable" style="flex-basis: 9%;"></div>
-  
-  
-  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;"></div>
-  
+  <div class="stacked-segment seg-kan" style="flex-basis: 64%;"></div>
+  <div class="stacked-segment seg-funds" style="flex-basis: 25%;"></div>
+  <div class="stacked-segment seg-cable" style="flex-basis: 6%;"></div>
+  <div class="stacked-segment seg-reshut" style="flex-basis: 5%;"></div>
 </div>
 
 <details class="tldr-box" open>
@@ -68,10 +60,15 @@
 </details>
 
 <!-- Big Number + Year Selector -->
+<!-- Big Number + Year Selector -->
 <div class="total-box" style="margin-bottom: 1.75rem;">
-  <span class="total-box-info" data-info="השקעה של כאן בתוכן תיעודי לשנת 2025">ℹ</span>
-  <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 1rem;">
-    <span id="kanBigNumber" class="big-number page-accent-text" style="font-size: 64px;">46.7</span>
+  <span class="total-box-info" data-info="חישוב ההשקעה של כאן בדוקו חושבו כחלק היחסי שלה מהתקציב המדווח של מחלקת הדוקו לחלק היחסי של תכניות עובדתיות (תחקירים, אולפן) ">ℹ</span>
+  <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.25rem; margin-bottom: 1rem;">
+    
+<span id="kanBigNumber" class="big-number page-accent-text" style="font-size: 48px; opacity: 0.35;">46.7</span>
+    <span class="big-number page-accent-text" style="font-size: 48px; opacity: 0.35;">/</span>
+<span id="kanActualNumber" class="big-number page-accent-text" style="font-size: 64px;">37.6</span>
+   
     <span class="big-number-unit">מיליון ₪</span>
   </div>
   <div class="year-selector" id="kanYearSelector" style="justify-content: center; margin-bottom: 0;">
@@ -148,9 +145,7 @@
 <!-- Top Contents -->
 <div class="shows-table-wrap" style="margin-bottom: 1.5rem;">
   <div class="shows-table-header">
-    <div class="section-title" style="margin-bottom: 0.25rem;">
-      <span id="kanTopCount">5</span> תכנים מובילים (לפי דקות מסך)
-    </div>
+    <div class="section-title" style="margin-bottom: 0.25rem;">תכנים מובילים (לפי דקות מסך)</div>
   </div>
   <div class="table-scroll">
     <table class="shows-table" id="kanTopContents">
@@ -266,12 +261,14 @@
       selector.querySelectorAll('.year-btn').forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
-      // Update big number
+      // Update big numbers
+      var values = chartData[year];
+      var totalHours = values.reduce(function (acc, val) { return acc + val; }, 0);
+      var docActual = Math.round(parseFloat(btn.dataset.amount) * (values[0] + values[1]) / totalHours * 10) / 10;
+      document.getElementById('kanActualNumber').textContent = docActual;
       document.getElementById('kanBigNumber').textContent = btn.dataset.amount;
 
       // Update stacked bar segments
-      var values = chartData[year];
-      var totalHours = values.reduce(function (acc, val) { return acc + val; }, 0);
       document.querySelectorAll('#kanStackedBar .stacked-segment').forEach(function (seg) {
         var i = parseInt(seg.dataset.index);
         var hours = values[i];
@@ -283,8 +280,6 @@
       // Update top contents count + table
       var tbody = document.querySelector('#kanTopContents tbody');
       if (tbody && topContents[year]) {
-        var countEl = document.getElementById('kanTopCount');
-        if (countEl) countEl.textContent = topContents[year].length;
         tbody.innerHTML = topContents[year].map(function (show, i) {
           return '<tr>' +
             '<td style="color:var(--text-muted);font-size:13px;">' + (i + 1) + '</td>' +
