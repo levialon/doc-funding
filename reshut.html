@@ -31,27 +31,34 @@
 <!-- Context bar -->
 
 
+
 <div class="stacked-bar context-bar">
   
   
-  <div class="stacked-segment seg-kan" style="flex-basis: 69%;">
-    
-  </div>
   
   
-  <div class="stacked-segment seg-funds" style="flex-basis: 19%;">
-    
-  </div>
   
   
-  <div class="stacked-segment seg-cable" style="flex-basis: 9%;">
-    
-  </div>
   
   
-  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;">
-    <span class="segment-pct">3%</span>
-  </div>
+  
+  
+  
+  
+  
+  <div class="context-bar-label">3 אחוז מכלל ההשקעה בדוקו</div>
+  
+  
+  <div class="stacked-segment seg-kan" style="flex-basis: 69%;"></div>
+  
+  
+  <div class="stacked-segment seg-funds" style="flex-basis: 19%;"></div>
+  
+  
+  <div class="stacked-segment seg-cable" style="flex-basis: 9%;"></div>
+  
+  
+  <div class="stacked-segment seg-reshut" style="flex-basis: 3%;"></div>
   
 </div>
 
@@ -108,17 +115,30 @@
   
 </div>
 
-<!-- Big Number — auto sum of obligations -->
+<!-- Big Numbers — obligations and actual -->
 
 
-<div class="total-box" style="margin-bottom: 1.75rem;">
-  <span class="total-box-info" data-info="סכום החובות של קשת 12 ורשת 13 בתוכן תיעודי">ℹ</span>
-  <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem;">
-    <span class="big-number page-accent-text" style="font-size: 64px;">36.6</span>
-    <span class="big-number-unit">מיליון ₪</span>
+
+<div class="budget-grid" style="margin-bottom: 1.75rem;">
+  <div class="total-box">
+    <span class="total-box-info" data-info="סכום החובות של קשת 12 ורשת 13 בתוכן תיעודי">ℹ</span>
+    <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem;">
+      <span class="big-number page-accent-text" style="font-size: 64px;">36.6</span>
+      <span class="big-number-unit">מיליון ₪</span>
+    </div>
+    <div style="text-align: center; font-size: 14px; color: var(--text-secondary);">
+      השקעה תיאורטית לפי החובה
+    </div>
   </div>
-  <div style="text-align: center; font-size: 14px; color: var(--text-secondary);">
-    השקעה תיאורטית לפי החובה
+  <div class="total-box">
+    <span class="total-box-info" data-info="הערכה של ההשקעה בפועל בתוכן תיעודי מבוססת על דיווחי הזכיינים וחקר עצמאי">ℹ</span>
+    <div style="display: flex; align-items: baseline; justify-content: center; gap: 0.4rem; margin-bottom: 0.5rem;">
+      <span class="big-number page-accent-text" style="font-size: 64px;">3</span>
+      <span class="big-number-unit">מיליון ₪</span>
+    </div>
+    <div style="text-align: center; font-size: 14px; color: var(--text-secondary);">
+      הערכת השקעה בדוקו
+    </div>
   </div>
 </div>
 

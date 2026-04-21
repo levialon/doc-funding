@@ -169,6 +169,21 @@ a { color: inherit; text-decoration: none; }
   background: var(--bg-secondary);
 }
 
+/* --- Context Bar Label --- */
+.context-bar-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  text-shadow: 0 0 3px rgba(0,0,0,0.6);
+}
+
 /* --- Main Container --- */
 .main {
   max-width: 960px;
@@ -216,6 +231,7 @@ a { color: inherit; text-decoration: none; }
    Budget Summary Box (Overview Page)
    ========================================================= */
 .budget-summary-box {
+  position: relative;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
@@ -650,6 +666,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .context-bar {
+  position: relative;
   height: 32px;
   /*margin-top: 0.75rem;*/
   margin-bottom: 1.5rem;
@@ -1669,6 +1686,47 @@ details[open] .tldr-summary::before { transform: rotate(90deg); }
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
+.landing-about-link {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.75rem 0;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.landing-about-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* --- About Page --- */
+.about-content {
+  margin-top: 2rem;
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-headline {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.about-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin: 0;
+}
+
 /* =========================================================
    Responsive — 768px breakpoint
    ========================================================= */
@@ -1702,29 +1760,33 @@ details[open] .tldr-summary::before { transform: rotate(90deg); }
     flex-wrap: wrap;
     height: auto;
     gap: 0;
-    padding: 0;
+    padding: 0.5rem;
   }
 
   .nav-brand {
     flex-basis: 100%;
     text-align: center;
-    padding: 0.5rem 0.25rem;
+    padding: 0.75rem 0.5rem;
     margin-left: 0;
     position: sticky;
     top: 0;
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     z-index: 101;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .nav-link {
     flex: 1;
     text-align: center;
-    padding: 0.5rem 0.25rem;
+    padding: 0.75rem 0.5rem;
     border-radius: 0;
-    font-size: 11px;
+    font-size: 13px;
     border-right: 1px solid var(--border-color);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-link:last-child {
