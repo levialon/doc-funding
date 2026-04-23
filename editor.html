@@ -246,8 +246,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">כללי</div>
     <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_overview_title" value="הכסף של הדוקו" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">באמלק (TLDR)</label><textarea id="f_overview_tldr" rows="4" dir="rtl">ארבעה גורמי מימון — כאן, קרנות הקולנוע, כבלים ולוויין, והרשות השנייה — אמורים לספק ביחד כ-104 מיליון ₪ בשנה לקולנוע תיעודי בישראל. בפועל מגיעים כ-65 מיליון ₪ בלבד. הפער של כמעט 40% נובע מרגולציה שאינה נאכפת, מדיווחים חלקיים, ומהגדרות רחבות של ״תוכן תיעודי״ שמאפשרות לשדרים לעמוד בחובה מבלי לממן דוקומנטרי של ממש.</textarea></div>
-    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_overview_info" value="סך ההשקעה בפועל בתוכן תיעודי בישראל, המחושבת מנתוני 2025 של כל מקורות המימון הראשיים." dir="rtl"></div>
+    <div class="field-row"><label class="field-label">באמלק (TLDR)</label><textarea id="f_overview_tldr" rows="4" dir="rtl">מבט העל על גורמי המימון של הדוקו בישראל נותן תמונה מדאיגה. ארבעת מוקדי המימון אמורים לספק ביחד את התשתית ליצירה תיעודית עניפה ומגוונת אך בפועל מבטאים השקעה חלקית בלבד.  ההשקעה החלקית נובעת הן מרגולציה לא מעודכנת של הגופים המסחריים שמשדרים תחת מועצת הכבלים והלווין, אי אכיפה מוחלטת של הרגולציה הקיימת על גופי השידור המסחריים תחת הרשות השנייה ושינויים תכופים ומסובכים בחלוקת הכספים בקרנות הקולנוע. זה מבלי להתחשב בעלויות העולות של ייצור התוכן התיעודי בישראל ובעולם ובקפאון בתקציבים הראלים ב20 שנה האחרונות.</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_overview_info" value="הסכום הכולל מחושב במצב שבו הייתה מתקיימת במלואה  הרגולציה הקיימת לעומת הסכום בפועל המייצג הערכה של המצב הנוכחי" dir="rtl"></div>
     <div class="field-row"><label class="field-label">כתב ויתור</label><textarea id="f_overview_disclaimer" rows="2" dir="rtl">הנתונים מבוססים על דיווחים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו..</textarea></div>
     <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_overview_hero_image" value="images/hero.jpg" dir="ltr"></div>
   </div>
@@ -281,7 +281,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <label>שם<input type="text" data-src-field="name" data-src-idx="1" value="קרנות הקולנוע" dir="rtl"></label>
         <label>אייקון<input type="text" data-src-field="icon" data-src-idx="1" value="" style="width:3.5em"></label>
         <label>לינק<input type="text" data-src-field="link" data-src-idx="1" value="funds.html" dir="ltr" style="width:100px"></label>
-        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="1" value="12.5"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="1" value="14.9"></label>
         <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="1" value="12.5"></label>
         <label>מגמה
           <select data-src-field="trend" data-src-idx="1">
@@ -301,7 +301,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <label>שם<input type="text" data-src-field="name" data-src-idx="2" value="כבלים ולוויין" dir="rtl"></label>
         <label>אייקון<input type="text" data-src-field="icon" data-src-idx="2" value="" style="width:3.5em"></label>
         <label>לינק<input type="text" data-src-field="link" data-src-idx="2" value="cable.html" dir="ltr" style="width:100px"></label>
-        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="2" value="6"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="2" value="3.3"></label>
         <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="2" value="16"></label>
         <label>מגמה
           <select data-src-field="trend" data-src-idx="2">
@@ -321,7 +321,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <label>שם<input type="text" data-src-field="name" data-src-idx="3" value="הרשות השנייה" dir="rtl"></label>
         <label>אייקון<input type="text" data-src-field="icon" data-src-idx="3" value="" style="width:3.5em"></label>
         <label>לינק<input type="text" data-src-field="link" data-src-idx="3" value="reshut.html" dir="ltr" style="width:100px"></label>
-        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="3" value="2"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="3" value="3"></label>
         <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="3" value="36"></label>
         <label>מגמה
           <select data-src-field="trend" data-src-idx="3">
@@ -353,8 +353,9 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">כללי</div>
     <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_title" value="כאן 11 - השידור הציבורי" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_kan_tldr" rows="4" dir="rtl">כאן הוא המממן הציבורי הגדול ביותר של דוקו בישראל, עם השקעה שנתית של כ-45 מיליון ₪ המעוגנת בחוק תאגיד השידור. ההשקעה יציבה יחסית לאורך השנים, אך חלק ממנה מוקדש לתוכניות עובדתיות שאינן דוקומנטרי קלאסי — סדרות עיתונאות ותחקיר נספרות גם הן תחת אותו סעיף תקציבי. המשמעות: הנתון הגלמי מנפח את התמונה.</textarea></div>
-    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_info" value="חישוב ההשקעה של כאן בדוקו חושבו כחלק היחסי שלה מהתקציב המדווח של מחלקת הדוקו לחלק היחסי של תכניות עובדתיות (תחקירים, אולפן) " dir="rtl"></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_kan_tldr" rows="4" dir="rtl">תאגיד השידור הציבורי הוא מקור המימון המרכזי לדוקו בישראל מאז הקמתו בשנת 2016. הוא מהווה עוגן מרכזי ויציב יחסית ביצירה התיעודית עם השקעת מינימום המעוגנת בחוק תאגיד השידור. תקציב המחלקה התיעודית מפורסם בדוחות שנתיים המוגשים לשר התקשורת וזמינים לציבור - חלק מהסכום הולך למימון תכניות תחקיר ותכניות עובדתיות שנמצאות על הגבול בין דוקו לבין עיתונאות. 
+בגלל חולשת הרגולציה בתחומים האחרים הפך התאגיד דה-פקטו לכמעט מונופול בתחום שידור והפקת סרטי וסדרות דוקו, עם כל הבעיות הנלוות לכך. הממשלה הנוכחית  ובעיקר שר התקשורת שלמה קרעי הכריז על רצונו להפריט או לסגור את התאגיד, אם כי בנתיים ללא הצלחה.</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_info" value="ההשקעה של מחלקת הדוקו של התאגיד מפורסמת שנתית. הסכום הכתוב כאן הוא החלק היחסי המחושב לפי כמות השעות המוקדשות לסרטים+סדרות תעודה ביחס לכלל שעות השידור. " dir="rtl"></div>
     <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_kan_regulation_text" rows="4" dir="rtl">[טקסט על חוק תאגיד השידור הציבורי וסעיפי ההשקעה בתוכן תיעודי — מקום שמור]</textarea></div>
   </div>
 
@@ -697,7 +698,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">כללי</div>
     <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_funds_title" value="קרנות הקולנוע" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_funds_tldr" rows="4" dir="rtl">קרנות הקולנוע — לאומיות ואזוריות — הן המנגנון העיקרי למימון פרויקטי דוקו עצמאיים בישראל. סך ההשקעה הכולל עומד על כ-11 מיליון ₪ בשנה, עם שיעור אישור של כ-15–20% בלבד. הקרנות פועלות ללא תיאום מרכזי, התקציבים קפואים זה שנים, והתחרות על כל שקל גבוהה מאי פעם — מה שמקשה מאוד על ייצור פרויקטים ארוכי טווח.</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_funds_tldr" rows="4" dir="rtl">קרנות הקולנוע בישראל - הארציות והאיזוריות - משקיעות בקולנוע תיעודי במסגרת חוק הקולנוע ותחת משרד התרבות והספורט. התחום סובל מרגולציה משתנה תכופות ושינוי תדיר של התקנות הקובעות את מבחני החלוקה של הכסף כאשר עד לשנת 2025 הייתה חובת מינימום לתכני דוקו. השנים האחרונות מסמנת מספר מגמות בעייתיות - התמקדות בסרטים שיש להם גופי שידור (ובכך הקרנות הופכות לתלויות בגופי השידור ולהיפך), התמקדות בסרטים עם הצלחה בקופות (פחות רלוונטי לדוקו) והעברת כספים רבים לקרנות איזוריות שהפיקוח בחלקן חלשי יותר. </textarea></div>
     <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_funds_regulation_text" rows="4" dir="rtl">[טקסט על מבנה קרנות הקולנוע, מקורות מימונן, וחוקי הפעלתן — מקום שמור]</textarea></div>
   </div>
 
@@ -1661,7 +1662,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
           <option value="severe" selected>חמור (אדום)</option>
         </select>
       </label></div>
-      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_reshut_disc_text" rows="3" dir="rtl">הדוח האחרון של הרשות השנייה פורסם ב-2021. הנתונים לשנים 2022–2025 הם הערכות בלבד המבוססות על מידע חלקי ומקורות משניים.</textarea></div>
+      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_reshut_disc_text" rows="3" dir="rtl">הדוח האחרון של הרשות השנייה פורסם ב-2021. הנתונים על התכניות שהוכרו כתעודה מתייחסות לשנה זאת. יש להניח שהתמונה היום לא שונה באופן מהותי.</textarea></div>
     </div>
   </div>
 
