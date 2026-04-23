@@ -169,7 +169,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     <div class="section-head">מטא-נתונים</div>
     <div class="field-grid-2">
       <div class="field-row"><label class="field-label">כותרת האתר</label><input type="text" id="f_meta_site_title" value="הכסף של הדוקו" dir="rtl"></div>
-      <div class="field-row"><label class="field-label">תאריך עדכון אחרון</label><input type="text" id="f_meta_last_updated" value="אפריל 2026" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תאריך עדכון אחרון</label><input type="text" id="f_meta_last_updated" value="מאי 2026" dir="rtl"></div>
     </div>
   </div>
 
@@ -177,10 +177,10 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     <div class="section-head">דף פתיחה</div>
     <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_landing_title" value="מאיפה הכסף?" dir="rtl"></div>
     <div class="field-row"><label class="field-label">תת-כותרת</label><input type="text" id="f_landing_subtitle" value="הדשבורד של הקולנוע התיעודי בישראל" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_landing_description" rows="4" dir="rtl">הקולנוע התיעודי בישראל הוא הצלחה מסחררת. אבל ההצלחה הזאת תלויה כמעט לחלוטין במימון ציבורי. מאיפה מגיע הכסף? האם כל מה שצריך באמת קורה? ומה העתיד של התחום החשוב הזה... הכנו לכם דשבורד.</textarea></div>
+    <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_landing_description" rows="4" dir="rtl">הקולנוע התיעודי בישראל הוא הצלחה מסחררת. אבל ההצלחה הזאת תלויה כמעט לחלוטין במימון ציבורי ובהשקעות של גופי שידור, חלקם פרטיים. מאיפה מגיע הכסף? האם כל מה שצריך באמת קורה? ומה העתיד של התחום החשוב הזה... הכנו לכם דשבורד.</textarea></div>
     <div class="field-grid-2">
-      <div class="field-row"><label class="field-label">טקסט כפתור</label><input type="text" id="f_landing_button_text" value="הצג את הדשבורד" dir="rtl"></div>
-      <div class="field-row"><label class="field-label">טקסט לינק אודות</label><input type="text" id="f_landing_about_link_text" value="קרא עוד אודות הפרויקט" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">טקסט כפתור</label><input type="text" id="f_landing_button_text" value="אל הדשבורד" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">טקסט לינק אודות</label><input type="text" id="f_landing_about_link_text" value="על אודות הפרויקט" dir="rtl"></div>
     </div>
     <div class="field-row"><label class="field-label">תמונת רקע (נתיב)</label><input type="text" id="f_landing_hero_image" value="images/hero.jpg" dir="ltr"></div>
   </div>
@@ -205,7 +205,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       <div class="ar">
         <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
           <label style="width:100%">כותרת<input type="text" data-f="headline" value="מהו הפרויקט?" dir="rtl" style="width:100%"></label>
-          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">[טקסט על מטרת הפרויקט, מה הוא עוקב אחריו, ומדוע הוא חשוב — מקום שמור]</textarea></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">האתר בוחן את מקורות המימון של הקולנוע התיעודי בישראל, הן ציבוריים והן מצד גופי שידור, ומציג נתונים על היקפי השקעה, סוגי התכנים הנתמכים והמסגרת הרגולטורית. הנתונים מבוססים על מקורות מאומתים, בהם דוחות של גופי שידור וקרנות קולנוע. דרך המיפוי הזה, האתר מציע מבט בהיר על האופן שבו הכסף מעצב את התעשייה ועל ההשלכות לכך על ההווה והעתיד שלה.
+</textarea></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
@@ -213,15 +214,25 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       <div class="ar">
         <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
           <label style="width:100%">כותרת<input type="text" data-f="headline" value="מי עומד מאחורי זה?" dir="rtl" style="width:100%"></label>
-          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">[טקסט על יוצרי הפרויקט, הקהל למטרה, וכיצד זה נוצר — מקום שמור]</textarea></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">הדשבורד נוצר על ידי אלון לוי, יוצר דוקומנטרי וחובב נתונים, בשיתוף הפורום הדוקומנטרי בישראל, הגוף המקצועי המאגד את יוצרי הקולנוע התיעודי ופועל לקידום התחום, חופש היצירה והייצוג מול גופי השידור והממשלה.
+האתר נבנה מתוך צורך לייצר תמונה בהירה, מבוססת נתונים ונגישה של מבנה המימון בענף, והוא מיועד ליוצרות ויוצרי דוקו, חוקרות וחוקרים, עיתונאים.ות ולכל מי שמתעניין בתעשיית הקולנוע התיעודי בישראל ובהתפתחותה.</textarea></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
       
       <div class="ar">
         <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
-          <label style="width:100%">כותרת<input type="text" data-f="headline" value="מאיפה הנתונים ושיטת עבודה" dir="rtl" style="width:100%"></label>
-          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">[הוראות שימוש, הסברים על הנתונים, וטיפים לניווט — מקום שמור]</textarea></label>
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="מאיפה המקורות ומה המתודולוגיה?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">כדי ליצור את הנתונים ואת החיתוכים שלהם עשינו שימוש בדוחות רשמיים של קרנות הקולנוע, משרד התקשורת, תאגיד השידור, מועצת הקולנוע והלווין, הרשות השנייה לטלוויזיה ורדיו ועוד. עשינו גם שימוש בדוחות לא ציבוריים של תל&#34;י המפרטים את שעות השידור של התכנים השונים ובדוחות ציבוריים של YES, הוט וגופי שידור נוספים. חלק מהנתונים עברו ריכוז, התאמה ועיבוד. ככל שזה רלוונטי ציינו את זה במפורש באופן בהיר ככל שניתן.  בהעדר נתונים מספיקים לעתים עשינו &#34;הערכה מושכלת&#34; שנובעת מהנתונים שכן ישנם בידנו או הנתונים החלקיים וציינו זאת.</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="כיצד להשתמש באתר?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">האתר מחולק לטאבים: קרנות הקולנוע מרוכזות יחדיו, וגופי השידור מחולקים לשלושה: תאגיד השידור, כבלים ולווין, והרשות השנייה. בכל לשונית יש מידע על תקציב הדוקו באותם הגופים נכון לשנים מסוימות, כמו גם הסבר על הרגולציה, פירוט על ההשקעות הגבוהות ביותר, ומבט לעתיד. 
+</textarea></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
@@ -229,7 +240,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       <div class="ar">
         <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
           <label style="width:100%">כותרת<input type="text" data-f="headline" value="טעות לעתים חוזרת" dir="rtl" style="width:100%"></label>
-          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">[מעודדים משוב, ערוצי יצירת קשר, וכיצד להציע שיפורים — מקום שמור]</textarea></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">מצאתםן טעות? רוצות.ים לומר משהו, להציע הצעה, להוסיף ולשפר? דברו איתנו </textarea></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
@@ -246,9 +257,10 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">כללי</div>
     <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_overview_title" value="הכסף של הדוקו" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">באמלק (TLDR)</label><textarea id="f_overview_tldr" rows="4" dir="rtl">מבט העל על גורמי המימון של הדוקו בישראל נותן תמונה מדאיגה. ארבעת מוקדי המימון אמורים לספק ביחד את התשתית ליצירה תיעודית עניפה ומגוונת אך בפועל מבטאים השקעה חלקית בלבד.  ההשקעה החלקית נובעת הן מרגולציה לא מעודכנת של הגופים המסחריים שמשדרים תחת מועצת הכבלים והלווין, אי אכיפה מוחלטת של הרגולציה הקיימת על גופי השידור המסחריים תחת הרשות השנייה ושינויים תכופים ומסובכים בחלוקת הכספים בקרנות הקולנוע. זה מבלי להתחשב בעלויות העולות של ייצור התוכן התיעודי בישראל ובעולם ובקפאון בתקציבים הראלים ב20 שנה האחרונות.</textarea></div>
-    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_overview_info" value="הסכום הכולל מחושב במצב שבו הייתה מתקיימת במלואה  הרגולציה הקיימת לעומת הסכום בפועל המייצג הערכה של המצב הנוכחי" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">כתב ויתור</label><textarea id="f_overview_disclaimer" rows="2" dir="rtl">הנתונים מבוססים על דיווחים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו..</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק (TLDR)</label><textarea id="f_overview_tldr" rows="4" dir="rtl">העמוד מציג מבט כולל על מימון הקולנוע התיעודי בישראל: מהו היקף התקציב שאמור להיות לפי הרגולציה, מהו התקציב בפועל, כיצד מתחלקת ההשקעה בין מקורות המימון השונים, וכמה מתוך חובות ההשקעה אכן ממומשות. לצד זאת, מוצגת השוואה בין מקורות המימון כפי שהם אמורים להיות לפי הרגולציה לבין המצב בפועל, כדי לאפשר הבנה ברורה של הפערים במערכת. 
+התמונה שעולה מהנתונים מדאיגה. ארבעת מוקדי המימון המרכזיים אמורים להוות תשתית יציבה ליצירה תיעודית רחבה ומגוונת, אך בפועל הם מייצרים השקעה חלקית בלבד. פער זה נובע משילוב של רגולציה שאינה מעודכנת עבור גופי שידור מסחריים, היעדר אכיפה של חובות השקעה קיימות, ושינויים תכופים במנגנוני התמיכה של קרנות הקולנוע. כל זאת מתרחש לצד עלייה מתמשכת בעלויות ההפקה וקיפאון ריאלי בתקציבים לאורך שני העשורים האחרונים.</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_overview_info" value="הסכום הכולל מחושב במצב שבו הייתה מתקיימת במלואה הרגולציה הקיימת לעומת הסכום בפועל המייצג הערכה של המצב הנוכחי  ראו הסברים אודות הרגולציה של כל גוף בעמוד המתאים." dir="rtl"></div>
+    <div class="field-row"><label class="field-label">כתב ויתור</label><textarea id="f_overview_disclaimer" rows="2" dir="rtl">הנתונים מבוססים על דיווחים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו.</textarea></div>
     <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_overview_hero_image" value="images/hero.jpg" dir="ltr"></div>
   </div>
 
@@ -352,11 +364,12 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
 
   <div class="section">
     <div class="section-head">כללי</div>
-    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_title" value="כאן 11 - השידור הציבורי" dir="rtl"></div>
-    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_kan_tldr" rows="4" dir="rtl">תאגיד השידור הציבורי הוא מקור המימון המרכזי לדוקו בישראל מאז הקמתו בשנת 2016. הוא מהווה עוגן מרכזי ויציב יחסית ביצירה התיעודית עם השקעת מינימום המעוגנת בחוק תאגיד השידור. תקציב המחלקה התיעודית מפורסם בדוחות שנתיים המוגשים לשר התקשורת וזמינים לציבור - חלק מהסכום הולך למימון תכניות תחקיר ותכניות עובדתיות שנמצאות על הגבול בין דוקו לבין עיתונאות. 
-בגלל חולשת הרגולציה בתחומים האחרים הפך התאגיד דה-פקטו לכמעט מונופול בתחום שידור והפקת סרטי וסדרות דוקו, עם כל הבעיות הנלוות לכך. הממשלה הנוכחית  ובעיקר שר התקשורת שלמה קרעי הכריז על רצונו להפריט או לסגור את התאגיד, אם כי בנתיים ללא הצלחה.</textarea></div>
-    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_info" value="ההשקעה של מחלקת הדוקו של התאגיד מפורסמת שנתית. הסכום הכתוב כאן הוא החלק היחסי המחושב לפי כמות השעות המוקדשות לסרטים+סדרות תעודה ביחס לכלל שעות השידור. " dir="rtl"></div>
-    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_kan_regulation_text" rows="4" dir="rtl">[טקסט על חוק תאגיד השידור הציבורי וסעיפי ההשקעה בתוכן תיעודי — מקום שמור]</textarea></div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_title" value="תאגיד השידור הציבורי כאן 11" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_kan_tldr" rows="4" dir="rtl">תאגיד השידור הציבורי הוא מקור המימון המרכזי לדוקו בישראל מאז הקמתו בשנת 2016, ומהווה עוגן יציב יחסית ליצירה התיעודית. חובת ההשקעה שלו מעוגנת בחוק תאגיד השידור (ראו במקורות), ותקציב המחלקה התיעודית מפורסם בדוחות שנתיים הזמינים לציבור באתר התאגיד (ראו במקורות). התקציב כולל לא רק סרטים וסדרות תיעודיות, אלא גם תכניות תחקיר ותכניות עובדתיות. תכניות התחקיר נכללו בחישוב התקציב התיעודי, בעוד שהתכניות העובדתיות לא נספרו תחתיו. חשוב לומר כי בתוספת הסדרות העובדתיות, התאגיד ממלא אחר חובת ההשקעה.
+בשל חולשת הרגולציה בתחומים אחרים, הפך התאגיד למממן המרכזי של תחום הדוקו בישראל. כיום הוא מצוי תחת איום, על רקע כוונת הממשלה לקדם מהלכים של סגירה או הכפפת תקציבו, בהובלת שר התקשורת שלמה קרעי. מידע נוסף בנושא זמין בלינקים המצורפים בעמוד המקורות.
+</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_info" value="ההשקעה של מחלקת הדוקו בתאגיד מפורסמת מדי שנה בדוחות הרשמיים (ראו במקורות). הסכום המוצג כאן הוא החלק היחסי המחושב לפי היקף השעות המוקדשות לסרטים ולסדרות תיעודיות, כולל סדרות תחקיר, מתוך כלל שעות השידור." dir="rtl"></div>
+    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_kan_regulation_text" rows="4" dir="rtl">חוק תאגיד השידור הציבורי מגדיר את תפקיד התאגיד כספק תוכן ציבורי מגוון ועצמאי, ומחייב אותו להשקיע בהפקות מקור ישראליות. לפי החוק, התאגיד חייב להוציא לפחות 200 מיליון ש״ח בשנה על תוכן לערוץ המרכזי, מתוכם לפחות 90 מיליון ש״ח ל״סוגה עילית״, הכוללת דרמה ותעודה, ולפחות 40 מיליון ש״ח מתוכם מוקצים לתכניות תעודה. כמו כן, נקבעים תקציבים נפרדים לתוכן נוסף, בהם לפחות 160 מיליון ש״ח לחדשות ותכניות אקטואליה ו־40 מיליון ש״ח לתוכן לילדים ונוער, כך שההשקעה בדוקו היא חלק ממסגרת רחבה של חובת השקעה בתוכן מקורי ישראלי.</textarea></div>
   </div>
 
   <div class="section">
@@ -655,7 +668,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       </label></div>
       <div class="field-row"><label class="field-label">טקסט תג</label><input type="text" id="f_kan_future_badge" value="יציב — מעוגן בחוק" dir="rtl"></div>
     </div>
-    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_kan_future_text" rows="3" dir="rtl">[טקסט על עתיד ההשקעה של כאן בתוכן תיעודי, חוק התאגיד, ומגמות עתידיות — מקום שמור]</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_kan_future_text" rows="3" dir="rtl">למרות שתאגיד השידור הציבורי מעוגן בחוק ומחויב להשקעה בתוכן מקורי, עתידו אינו יציב. בשנים האחרונות מקודמות יוזמות פוליטיות לשנות את מבנהו, לצמצם את עצמאותו או אף להפריט או לסגור אותו. מהלכים אלה, שמובלים בעיקר על ידי שר התקשורת, כוללים הצעות להכפיף את תקציב התאגיד לממשלה או לשנות את מנגנוני הפיקוח עליו. הדיון הציבורי והפוליטי סביב עתיד התאגיד נמשך, וטרם הוכרע, אך עצם קיומו של המאבק יוצר אי ודאות משמעותית לגבי המשך פעילותו במתכונתו הנוכחית והיכולת שלו להמשיך לשמש מקור מרכזי ויציב למימון הקולנוע התיעודי בישראל.</textarea></div>
   </div>
 
   <div class="section">
@@ -672,7 +685,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       
       <div class="ar">
         <div class="ar-fields">
-          <label>טקסט<input type="text" data-f="text" value="דיווחים שנתיים של כאן" dir="rtl" class="wide"></label>
+          <label>טקסט<input type="text" data-f="text" value="דיווחים שנתיים של כאן 11" dir="rtl" class="wide"></label>
           <label>כתובת URL<input type="url" data-f="url" value="#"></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
@@ -680,7 +693,15 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       
       <div class="ar">
         <div class="ar-fields">
-          <label>טקסט<input type="text" data-f="text" value="סדר יום של וועדת הקולנוע בכאן" dir="rtl" class="wide"></label>
+          <label>טקסט<input type="text" data-f="text" value="לינקים על מאבק התאגיד מהשנים האחרונות" dir="rtl" class="wide"></label>
+          <label>כתובת URL<input type="url" data-f="url" value="#"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="לינקים מהכנסת" dir="rtl" class="wide"></label>
           <label>כתובת URL<input type="url" data-f="url" value="#"></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
