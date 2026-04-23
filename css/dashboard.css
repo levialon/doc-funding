@@ -174,7 +174,6 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 0rem;
   position: relative;
   height: 28px;
 }
@@ -187,16 +186,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 .context-bar-label {
-//  position: absolute;
-//  right: 50%;
-//  transform: translateX(50%);
   font-size: 13px;
   color: var(--text-secondary);
   font-weight: 500;
   white-space: nowrap;
-
   margin-top: -0.5em;
-margin-bottom:1em;
+  margin-bottom: 1em;
 }
 
 .context-bar-empty {
@@ -225,8 +220,7 @@ margin-bottom:1em;
 
 /* --- Page Header --- */
 .page-header {
-//  padding-bottom: 1.25rem;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .page-header h1 {

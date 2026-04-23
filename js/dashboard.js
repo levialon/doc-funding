@@ -175,14 +175,6 @@ function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
   }
 }
 
-/* --- TLDR Box (Collapsible with 2-line preview) --- */
-function initTldrBoxes() {
-  // Just ensure all TLDR boxes start in collapsed state
-  document.querySelectorAll('.tldr-box').forEach(box => {
-    box.removeAttribute('open');
-  });
-}
-
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', () => {
   highlightNav();
@@ -190,5 +182,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initFundsBars();
   initInfoModal();
   initSwipeNavigation();
-  initTldrBoxes();
 });
