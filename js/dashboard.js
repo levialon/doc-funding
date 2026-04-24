@@ -75,7 +75,9 @@ function highlightNav() {
     'kan': 'kan',
     'funds': 'funds',
     'cable': 'cable',
-    'reshut': 'reshut'
+    'reshut': 'reshut',
+    'sources': 'sources',
+    'about': 'about'
   };
 
   const navPage = pageMap[currentPage];
@@ -125,7 +127,8 @@ function initSwipeNavigation() {
     'kan': 'funds',           // kan → funds
     'funds': 'cable',         // funds → cable
     'cable': 'reshut',        // cable → reshut
-    'reshut': null            // reshut → (last page)
+    'reshut': 'sources',      // reshut → sources
+    'sources': 'about'        // sources → about
   };
 
   const pageMapReverse = {
@@ -133,7 +136,9 @@ function initSwipeNavigation() {
     'kan': 'overview',        // kan → overview
     'funds': 'kan',           // funds → kan
     'cable': 'funds',         // cable → funds
-    'reshut': 'cable'         // reshut → cable
+    'reshut': 'cable',        // reshut → cable
+    'sources': 'reshut',      // sources → reshut
+    'about': 'sources'        // about → sources
   };
 
   const bodyClass = document.body.className;
@@ -175,6 +180,26 @@ function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
   }
 }
 
+/* --- Mobile Nav Toggle --- */
+function initMobileNav() {
+  const nav = document.querySelector('.nav');
+  const toggle = document.querySelector('.nav-toggle');
+  if (!nav || !toggle) return;
+
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    toggle.textContent = nav.classList.contains('open') ? '✕' : '☰';
+  });
+
+  // Collapse on link click
+  nav.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.textContent = '☰';
+    });
+  });
+}
+
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', () => {
   highlightNav();
@@ -182,4 +207,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initFundsBars();
   initInfoModal();
   initSwipeNavigation();
+  initMobileNav();
 });
