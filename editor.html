@@ -794,7 +794,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     <div class="section-head">קרנות אזוריות</div>
     <div class="field-grid-3">
       <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_funds_regional_title" value="קרנות אזוריות" dir="rtl"></div>
-      <div class="field-row"><label class="field-label">ערך מקסימום (לסרגל)</label><input type="number" step="0.1" id="f_funds_regional_max" value="6"></div>
+      <div class="field-row"><label class="field-label">ערך מקסימום (לסרגל)</label><input type="number" step="0.1" id="f_funds_regional_max" value="3"></div>
       <div class="field-row"><label class="field-label">טקסט אינפו</label><input type="text" id="f_funds_regional_info" value="סכום המשלובים מארבע קרנות אזוריות לשנת 2025" dir="rtl"></div>
     </div>
     <div class="array-container" id="a_funds_regional">
@@ -802,11 +802,11 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       <div class="ar">
         <div class="ar-fields">
           <label>שם<input type="text" data-f="name" value="קרן השומרון" dir="rtl" class="wide"></label>
-          <label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label>
-          <label>2024<input type="number" step="0.1" data-f="d2024" value="4.5"></label>
-          <label>2025<input type="number" step="0.1" data-f="d2025" value="5.9"></label>
-          <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
-          <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0.95"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="1.18"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="1.74"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="107"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="29"></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
@@ -815,8 +815,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <div class="ar-fields">
           <label>שם<input type="text" data-f="name" value="הקרן הדרומית (מאוחד)" dir="rtl" class="wide"></label>
           <label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label>
-          <label>2024<input type="number" step="0.1" data-f="d2024" value="4.5"></label>
-          <label>2025<input type="number" step="0.1" data-f="d2025" value="5.9"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="0"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="0"></label>
           <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
           <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
         </div>
@@ -827,8 +827,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <div class="ar-fields">
           <label>שם<input type="text" data-f="name" value="קרן הקולנוע גליל" dir="rtl" class="wide"></label>
           <label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label>
-          <label>2024<input type="number" step="0.1" data-f="d2024" value="2"></label>
-          <label>2025<input type="number" step="0.1" data-f="d2025" value="2.6"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="1.05"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="0"></label>
           <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
           <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
         </div>
@@ -837,12 +837,12 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       
       <div class="ar">
         <div class="ar-fields">
-          <label>שם<input type="text" data-f="name" value="מרכז תרבות נוף הגליל" dir="rtl" class="wide"></label>
-          <label>2023<input type="number" step="0.1" data-f="d2023" value="2.5"></label>
-          <label>2024<input type="number" step="0.1" data-f="d2024" value="2.5"></label>
-          <label>2025<input type="number" step="0.1" data-f="d2025" value="3.2"></label>
-          <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
-          <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
+          <label>שם<input type="text" data-f="name" value="פרויקט הקולנוע הגלילי" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0.57"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="0.15"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="1.39"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="160"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="51"></label>
         </div>
         <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
@@ -854,343 +854,151 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <!-- Top Projects: National -->
   <div class="section">
     <div class="section-head">פרויקטים מובילים — לאומי</div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2023</div>
-      <div class="array-container" id="a_funds_nat_proj_2023">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="480"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+    <label>כמות<input type="number" step="1" id="f_funds_nat_proj_count" value="7" style="width:80px;"></label>
+    <div class="array-container" id="a_funds_nat_proj">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="סרטי מלחמה " dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2023" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="1850"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="390"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="320"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן מקור" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="250"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="190"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_nat_proj_2023', TMPL.proj_row)">+ הוסף פרויקט</button>
-    </div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2024</div>
-      <div class="array-container" id="a_funds_nat_proj_2024">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="510"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="נפגעות 7 אוקטובר" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="1431"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="420"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="360"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן מקור" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="270"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="210"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_nat_proj_2024', TMPL.proj_row)">+ הוסף פרויקט</button>
-    </div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2025</div>
-      <div class="array-container" id="a_funds_nat_proj_2025">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="550"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="השבעה באוקטובר/גלעד טוקטלי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ&#39;" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="748"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="450"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="380"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן מקור" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="290"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן החדשה" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="220"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_nat_proj_2025', TMPL.proj_row)">+ הוסף פרויקט</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="שמעון רוטשילד" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="600"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="עדות" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="586"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="יהודי האיסלם" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ&#39;" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="500"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="סיכוי להינצל/דורון צברי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="400"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
     </div>
-    
+    <button class="add-row-btn" onclick="addRow('a_funds_nat_proj', TMPL.proj_row_with_year)">+ הוסף פרויקט</button>
   </div>
 
   <!-- Top Projects: Regional -->
   <div class="section">
     <div class="section-head">פרויקטים מובילים — אזורי</div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2023</div>
-      <div class="array-container" id="a_funds_reg_proj_2023">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="310"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+    <label>כמות<input type="number" step="1" id="f_funds_reg_proj_count" value="6" style="width:80px;"></label>
+    <div class="array-container" id="a_funds_reg_proj">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="נולדו לחיות" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="פרויקט הקולנוע הגלילי" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="350"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן הדרומית" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="240"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="פרויקט הקולנוע הגלילי" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="190"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="160"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="מרכז תרבות נוף הגליל" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="130"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_reg_proj_2023', TMPL.proj_row)">+ הוסף פרויקט</button>
-    </div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2024</div>
-      <div class="array-container" id="a_funds_reg_proj_2024">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="330"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="לפני המחנה" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="250"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן הדרומית" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="260"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="מרכז תרבות נוף הגליל" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="210"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="פרויקט הקולנוע הגלילי" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="175"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="140"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_reg_proj_2024', TMPL.proj_row)">+ הוסף פרויקט</button>
-    </div>
-    
-    <div style="margin-bottom:1rem;">
-      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color:var(--text);">2025</div>
-      <div class="array-container" id="a_funds_reg_proj_2025">
-        
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="360"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="שבי אחריו" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="250"></label>
         </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן הדרומית" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="280"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="פרויקט הקולנוע הגלילי" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="220"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="מרכז תרבות נוף הגליל" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="185"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        <div class="ar">
-          <div class="ar-fields">
-            <label>שם<input type="text" data-f="name" value="[שם פרויקט — מקום שמור]" dir="rtl" class="wide"></label>
-            <label>קרן<input type="text" data-f="fund" value="הקרן הדרומית" dir="rtl"></label>
-            <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="150"></label>
-          </div>
-          <button class="del-btn" onclick="delRow(this)">✕</button>
-        </div>
-        
-        
+        <button class="del-btn" onclick="delRow(this)">✕</button>
       </div>
-      <button class="add-row-btn" onclick="addRow('a_funds_reg_proj_2025', TMPL.proj_row)">+ הוסף פרויקט</button>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="האדם השלישי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="פרויקט קולנוע גליל" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="גבריאל- אהבה תחת אש" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="דרוש כופר" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
     </div>
-    
+    <button class="add-row-btn" onclick="addRow('a_funds_reg_proj', TMPL.proj_row_with_year)">+ הוסף פרויקט</button>
   </div>
 
   <div class="section">
@@ -1900,6 +1708,7 @@ var TMPL = {
   kan_top: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>סוג<input type="text" data-f="type" value="" dir="rtl"></label><label>דקות<input type="number" step="1" data-f="minutes" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   fund_row: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label><label>2024<input type="number" step="0.1" data-f="d2024" value="0"></label><label>2025<input type="number" step="0.1" data-f="d2025" value="0"></label><label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label><label>אושרו<input type="number" step="1" data-f="approved" value="0"></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   proj_row: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>קרן<input type="text" data-f="fund" value="" dir="rtl"></label><label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  proj_row_with_year: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>קרן<input type="text" data-f="fund" value="" dir="rtl"></label><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   cable_bc: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl"></label><label>תת-כותרת<input type="text" data-f="subtitle" value="" dir="rtl"></label><label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label><label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="no_regulation"> ללא רגולציה</label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="partial"> חלקי</label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="theoretical_only"> תיאורטי בלבד</label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   reshut_bc: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl"></label><label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label><label>בפועל<input type="number" step="0.1" data-f="actual" value="0"></label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="theoretical_only"> תיאורטי בלבד</label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   reshut_show: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>ערוץ<input type="text" data-f="channel" value="" dir="rtl"></label><label>שעות<input type="number" step="1" data-f="hours" value=""></label><label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
@@ -1995,9 +1804,9 @@ function collectData() {
     return result;
   }
 
-  function readProjRows(yr, containerId) {
+  function readProjRows(containerId) {
     return readArray(containerId, [
-      {key:'name'}, {key:'fund'}, {key:'amount', type:'int'}
+      {key:'name'}, {key:'fund'}, {key:'year', type:'int'}, {key:'amount', type:'int'}
     ]);
   }
 
@@ -2122,16 +1931,10 @@ function collectData() {
         info: v('f_funds_regional_info'),
         funds: readFundRows('a_funds_regional')
       },
-      national_top_projects: {
-        '2023': readProjRows('2023', 'a_funds_nat_proj_2023'),
-        '2024': readProjRows('2024', 'a_funds_nat_proj_2024'),
-        '2025': readProjRows('2025', 'a_funds_nat_proj_2025')
-      },
-      regional_top_projects: {
-        '2023': readProjRows('2023', 'a_funds_reg_proj_2023'),
-        '2024': readProjRows('2024', 'a_funds_reg_proj_2024'),
-        '2025': readProjRows('2025', 'a_funds_reg_proj_2025')
-      },
+      national_top_projects_count: vf('f_funds_nat_proj_count'),
+      national_top_projects: readProjRows('a_funds_nat_proj'),
+      regional_top_projects_count: vf('f_funds_reg_proj_count'),
+      regional_top_projects: readProjRows('a_funds_reg_proj'),
       future: {
         status: v('f_funds_future_status'),
         badge_text: v('f_funds_future_badge'),
@@ -2373,13 +2176,13 @@ function populateForm(d) {
         row.querySelector('[data-f="approved"]').value = item.approved || 0;
       });
     }
-    ['2023','2024','2025'].forEach(function(yr) {
-      rebuildArray('a_funds_nat_proj_' + yr, d.funds.national_top_projects && d.funds.national_top_projects[yr], TMPL.proj_row, function(row, item) {
-        fillRow(row, item, [{key:'name'},{key:'fund'},{key:'amount'}]);
-      });
-      rebuildArray('a_funds_reg_proj_' + yr, d.funds.regional_top_projects && d.funds.regional_top_projects[yr], TMPL.proj_row, function(row, item) {
-        fillRow(row, item, [{key:'name'},{key:'fund'},{key:'amount'}]);
-      });
+    setVal('f_funds_nat_proj_count', d.funds.national_top_projects_count || 10);
+    rebuildArray('a_funds_nat_proj', d.funds.national_top_projects, TMPL.proj_row_with_year, function(row, item) {
+      fillRow(row, item, [{key:'name'},{key:'fund'},{key:'year'},{key:'amount'}]);
+    });
+    setVal('f_funds_reg_proj_count', d.funds.regional_top_projects_count || 10);
+    rebuildArray('a_funds_reg_proj', d.funds.regional_top_projects, TMPL.proj_row_with_year, function(row, item) {
+      fillRow(row, item, [{key:'name'},{key:'fund'},{key:'year'},{key:'amount'}]);
     });
     if (d.funds.future) {
       setVal('f_funds_future_status', d.funds.future.status);

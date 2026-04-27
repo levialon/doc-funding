@@ -101,6 +101,7 @@
 .dot-reg-1, .fill-reg-1 { background-color: var(--color-reg-1); }
 .dot-reg-2, .fill-reg-2 { background-color: var(--color-reg-2); }
 .dot-reg-3, .fill-reg-3 { background-color: var(--color-reg-3); }
+.dot-reg-4, .fill-reg-4 { background-color: var(--color-reg-4); }
 
 /* --- Content category colors (kan page) --- */
 .cat-1 { background-color: var(--color-cat-1); }
