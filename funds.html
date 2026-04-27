@@ -199,7 +199,7 @@
 
 <div class="total-box">
   <span class="total-box-info" data-info="סכום המשלובים מארבע קרנות אזוריות לשנת 2025">ℹ</span>
-  <div class="total-box-amount page-accent-text"><span id="regionalTotalAmount">3.1</span><span class="big-number-unit">מיליון ₪</span></div>
+  <div class="total-box-amount page-accent-text"><span id="regionalTotalAmount">4.2</span><span class="big-number-unit">מיליון ₪</span></div>
   <div class="total-box-label">סה״כ תקציב קרנות אזוריות לקולנוע תיעודי</div>
 </div>
 
@@ -233,11 +233,11 @@
     <div class="bar-track">
       <div class="bar-fill reg-2"
         data-group="regional"
-        data-y2023="0"
-        data-y2024="0"
-        data-y2025="0"
-        style="width: 0%;">
-        <span class="bar-value">0 מ׳ ₪</span>
+        data-y2023="0.46"
+        data-y2024="0.77"
+        data-y2025="1.11"
+        style="width: 37%;">
+        <span class="bar-value">1.11 מ׳ ₪</span>
       </div>
     </div>
   </div>
@@ -514,7 +514,7 @@
   
 <script>
 var nationalFundData = [{"2023": 3.9, "2024": 3.8, "2025": 5}, {"2023": 4.05, "2024": 3.7, "2025": 4.8}, {"2023": 3.1, "2024": 3.5, "2025": 4.5}];
-var regionalFundData = [{"2023": 0.95, "2024": 1.18, "2025": 1.74}, {"2023": 0, "2024": 0, "2025": 0}, {"2023": 0, "2024": 1.05, "2025": 0}, {"2023": 0.57, "2024": 0.15, "2025": 1.39}];
+var regionalFundData = [{"2023": 0.95, "2024": 1.18, "2025": 1.74}, {"2023": 0.46, "2024": 0.77, "2025": 1.11}, {"2023": 0, "2024": 1.05, "2025": 0}, {"2023": 0.57, "2024": 0.15, "2025": 1.39}];
 
 function sumYear(fundsData, year) {
   return Math.round(fundsData.reduce(function (acc, d) { return acc + (d[year] || 0); }, 0) * 10) / 10;
