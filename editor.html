@@ -160,6 +160,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <button class="tab-btn" data-tab="tab-funds">קרנות</button>
   <button class="tab-btn" data-tab="tab-cable">כבלים ולוויין</button>
   <button class="tab-btn" data-tab="tab-reshut">הרשות השנייה</button>
+  <button class="tab-btn" data-tab="tab-future">עתיד הדוקו</button>
 </div>
 
 <!-- ═══════════════ TAB: הגדרות ═══════════════ -->
@@ -251,6 +252,51 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
 
 </div>
 
+<!-- ═══════════════ TAB: עתיד הדוקו ═══════════════ -->
+<div class="tab-panel" id="tab-future">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת הדף</label><input type="text" id="f_future_title" value="עתיד הדוקו - אז מה אתם מציעים?" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_future_hero_image" value="images/doco-future.jpg" dir="ltr"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">חלקי תוכן</div>
+    <div class="array-container" id="a_future_sections">
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="נדרש שינוי" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="כל הדרכים מוובילות לדוקו" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="על השינויים הדרושים" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_future_sections', TMPL.future_section)">+ הוסף חלק</button>
+  </div>
+
+</div>
+
 <!-- ═══════════════ TAB: מבט על ═══════════════ -->
 <div class="tab-panel" id="tab-overview">
 
@@ -273,7 +319,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
         <label>שם<input type="text" data-src-field="name" data-src-idx="0" value="קרנות הקולנוע" dir="rtl"></label>
         <label>אייקון<input type="text" data-src-field="icon" data-src-idx="0" value="" style="width:3.5em"></label>
         <label>לינק<input type="text" data-src-field="link" data-src-idx="0" value="funds.html" dir="ltr" style="width:100px"></label>
-        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="0" value="14.9"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="0" value="21.54"></label>
         <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="0" value="12.5"></label>
         <label>מגמה
           <select data-src-field="trend" data-src-idx="0">
@@ -355,6 +401,107 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
       <div class="field-row"><label class="field-label">כותרת — תקציב תיאורטי</label><input type="text" id="f_overview_theoretical_title" value="תקציב תיאורטי לדוקו 2025" dir="rtl"></div>
       <div class="field-row"><label class="field-label">כותרת — תקציב בפועל</label><input type="text" id="f_overview_actual_title" value="תקציב בפועל (הערכה) 2025" dir="rtl"></div>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">גרף ההשקעה בתוכן מקורי</div>
+    <div class="field-row"><label class="field-label">כותרת הגרף</label><input type="text" id="f_overview_tci_title" value="כלל ההשקעה בתוכן מקורי בישראל" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><textarea id="f_overview_tci_info" rows="2" dir="rtl">הנתונים המייצגים את כלל ההשקעה בתוכן מקורי בישראל בערוצי טלוויזיה והגופים המממנים, משקף את הנטיות לאורך זמן בתחום</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">נתוני ההשקעה (לפי שנה)</div>
+    <div class="array-container" id="a_overview_tci_data">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2016"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="413"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2017"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="413"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2018"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="322"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2019"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="291"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2020"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="272"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2021"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="294"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2022"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="267"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2023"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="255"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2024"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="240"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2025"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="235"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_overview_tci_data', TMPL.tci_data)">+ הוסף שנה</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">קריאה לפעולה (CTA)</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_overview_cta_title" value="אז מה אתם מציעים?" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תת-כותרת</label><input type="text" id="f_overview_cta_subtitle" value="על העתיד האפשרי של הדוקו בישראל" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תמונה (נתיב)</label><input type="text" id="f_overview_cta_image" value="images/doco-future.jpg" dir="ltr"></div>
   </div>
 
 </div>
@@ -727,7 +874,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">תקציב כולל — לאומי</div>
     <div class="field-grid-3">
-      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_total_amount" value="11"></div>
+      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_total_amount" value="17.3"></div>
       <div class="field-row"><label class="field-label">תווית</label><input type="text" id="f_funds_total_label" value="סה״כ תקציב קרנות לקולנוע תיעודי" dir="rtl"></div>
       <div class="field-row"><label class="field-label">הערה</label><input type="text" id="f_funds_total_note" value="קרנות לאומיות בלבד — הערכה 2025" dir="rtl"></div>
     </div>
@@ -797,7 +944,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
   <div class="section">
     <div class="section-head">תקציב כולל — אזורי</div>
     <div class="field-grid-3">
-      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_regional_total_amount" value="3.9"></div>
+      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_regional_total_amount" value="4.24"></div>
       <div class="field-row"><label class="field-label">תווית</label><input type="text" id="f_funds_regional_total_label" value="סה״כ תקציב קרנות אזוריות לקולנוע תיעודי" dir="rtl"></div>
       <div class="field-row"><label class="field-label">הערה</label><input type="text" id="f_funds_regional_total_note" value="קרנות אזוריות בלבד — הערכה 2025" dir="rtl"></div>
     </div>
@@ -1092,7 +1239,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
           <option value="severe" >חמור (אדום)</option>
         </select>
       </label></div>
-      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_cable_disc_text" rows="3" dir="rtl">הדוח האחרון של המועצה לכבלים ולוויין פורסם ב-2022. הנתונים לשנים 2023–2025 הם הערכות המבוססות על מגמות קודמות ומידע חלקי.</textarea></div>
+      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_cable_disc_text" rows="3" dir="rtl">הדוח האחרון של המועצה לכבלים ולוויין פורסם ב-2022 והמספרים המתייחסים להשקעה בפועל מגיעים משם. </textarea></div>
     </div>
   </div>
 
@@ -1100,16 +1247,16 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     <div class="section-head">טאבים ומשדרים</div>
     <div class="cable-sub-tabs">
       
-      <button class="cable-sub-tab-btn active" data-ctab="0">מצב 2022</button>
+      <button class="cable-sub-tab-btn active" data-ctab="0">השקעה בפועל 2022</button>
       
-      <button class="cable-sub-tab-btn " data-ctab="1">מצב נוכחי</button>
+      <button class="cable-sub-tab-btn " data-ctab="1">חובה רגולטורית 2025</button>
       
       <button class="cable-sub-tab-btn " data-ctab="2">מצב תיאורטי</button>
       
     </div>
     
     <div class="cable-tab-panel active" id="cable-tab-panel-0">
-      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab0_label" value="מצב 2022" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab0_label" value="השקעה בפועל 2022" dir="rtl"></div>
       <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab0_desc" rows="2" dir="rtl">השקעה בתוכן מקורי לפי הדוח האחרון שפורסם ב-2022</textarea></div>
       <div class="array-container" id="a_cable_tab0_bcs">
         
@@ -1213,8 +1360,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     </div>
     
     <div class="cable-tab-panel " id="cable-tab-panel-1">
-      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab1_label" value="מצב נוכחי" dir="rtl"></div>
-      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab1_desc" rows="2" dir="rtl">הערכת המצב הנוכחי — 2025 לפי דיווח ש80% מהלקוחות יצאו מהרגולציה</textarea></div>
+      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab1_label" value="חובה רגולטורית 2025" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab1_desc" rows="2" dir="rtl">בדו&#34;ח משרד התקשורת דווח כי כ-80% מהלקוחות של YES וHOT. חישוב החובה הרגולטורית הנוכחית (2025) מחושב לפי 20% מהחובה על כלל המנויים.</textarea></div>
       <div class="array-container" id="a_cable_tab1_bcs">
         
         <div class="ar">
@@ -1318,7 +1465,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
     
     <div class="cable-tab-panel " id="cable-tab-panel-2">
       <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab2_label" value="מצב תיאורטי" dir="rtl"></div>
-      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab2_desc" rows="2" dir="rtl"> אם תחול רגולציה כמו שהיום על כל גופי השידור</textarea></div>
+      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab2_desc" rows="2" dir="rtl">חישוב כלל ההכנסות לתחום במצב תיאורטי בו כלל הגופים המשדרים היו מחויבים ברגולציה אחידה.</textarea></div>
       <div class="array-container" id="a_cable_tab2_bcs">
         
         <div class="ar">
@@ -1401,7 +1548,7 @@ body { background: var(--bg); color: var(--text); font-family: var(--font-b); fo
           <div class="ar-fields">
             <label>שם<input type="text" data-f="name" value="Netflix / Disney+" dir="rtl"></label>
             <label>תת-כותרת<input type="text" data-f="subtitle" value="פלטפורמות סטרימינג" dir="rtl"></label>
-            <label>סכום<input type="number" step="0.1" data-f="amount" value="14"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="6"></label>
             <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
             <label style="flex-direction:row; align-items:center; gap:0.4rem;">
               <input type="checkbox" data-f="no_regulation" > ללא רגולציה
@@ -1716,6 +1863,8 @@ document.querySelectorAll('.cable-sub-tab-btn').forEach(function(btn) {
 // ── ROW TEMPLATES ──────────────────────────────────────────────
 var TMPL = {
   about_section: '<div class="ar"><div class="ar-fields" style="flex-direction:column;gap:0.4rem;width:100%;"><label style="width:100%">כותרת<input type="text" data-f="headline" value="" dir="rtl" style="width:100%"></label><label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl"></textarea></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  future_section: '<div class="ar"><div class="ar-fields" style="flex-direction:column;gap:0.4rem;width:100%;"><label style="width:100%">כותרת<input type="text" data-f="headline" value="" dir="rtl" style="width:100%"></label><label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl"></textarea></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  tci_data: '<div class="ar"><div class="ar-fields"><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   kan_bn: '<div class="ar"><div class="ar-fields"><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   kan_cat: '<div class="ar"><div class="ar-fields"><label>תווית<input type="text" data-f="label" value="" dir="rtl" class="wide"></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
   kan_top: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>סוג<input type="text" data-f="type" value="" dir="rtl"></label><label>דקות<input type="number" step="1" data-f="minutes" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
@@ -1883,6 +2032,11 @@ function collectData() {
       hero_image: v('f_about_hero_image') || null,
       sections: readArray('a_about_sections', [{key:'headline'}, {key:'content'}])
     },
+    future: {
+      title: v('f_future_title'),
+      hero_image: v('f_future_hero_image') || null,
+      sections: readArray('a_future_sections', [{key:'headline'}, {key:'content'}])
+    },
     overview: {
       title: v('f_overview_title'),
       hero_image: v('f_overview_hero_image') || null,
@@ -1891,7 +2045,17 @@ function collectData() {
       sources: srcs,
       theoretical_budget: { title: v('f_overview_theoretical_title') },
       actual_budget: { title: v('f_overview_actual_title') },
-      disclaimer: v('f_overview_disclaimer')
+      disclaimer: v('f_overview_disclaimer'),
+      total_content_investment: {
+        title: v('f_overview_tci_title'),
+        info: v('f_overview_tci_info'),
+        data: readArray('a_overview_tci_data', [{key:'year',type:'int'},{key:'amount',type:'float'}])
+      },
+      call_to_action: {
+        title: v('f_overview_cta_title'),
+        subtitle: v('f_overview_cta_subtitle'),
+        image: v('f_overview_cta_image') || null
+      }
     },
     kan: {
       title: v('f_kan_title'),
@@ -2087,6 +2251,14 @@ function populateForm(d) {
       fillRow(row, item, [{key:'headline'},{key:'content'}]);
     });
   }
+  // future
+  if (d.future) {
+    setVal('f_future_title', d.future.title);
+    setVal('f_future_hero_image', d.future.hero_image);
+    rebuildArray('a_future_sections', d.future.sections, TMPL.future_section, function(row, item) {
+      fillRow(row, item, [{key:'headline'},{key:'content'}]);
+    });
+  }
   // overview
   if (d.overview) {
     setVal('f_overview_title', d.overview.title);
@@ -2096,6 +2268,16 @@ function populateForm(d) {
     setVal('f_overview_hero_image', d.overview.hero_image);
     setVal('f_overview_theoretical_title', d.overview.theoretical_budget && d.overview.theoretical_budget.title);
     setVal('f_overview_actual_title', d.overview.actual_budget && d.overview.actual_budget.title);
+    setVal('f_overview_tci_title', d.overview.total_content_investment && d.overview.total_content_investment.title);
+    setVal('f_overview_tci_info', d.overview.total_content_investment && d.overview.total_content_investment.info);
+    if (d.overview.total_content_investment && d.overview.total_content_investment.data) {
+      rebuildArray('a_overview_tci_data', d.overview.total_content_investment.data, TMPL.tci_data, function(row, item) {
+        fillRow(row, item, [{key:'year'},{key:'amount'}]);
+      });
+    }
+    setVal('f_overview_cta_title', d.overview.call_to_action && d.overview.call_to_action.title);
+    setVal('f_overview_cta_subtitle', d.overview.call_to_action && d.overview.call_to_action.subtitle);
+    setVal('f_overview_cta_image', d.overview.call_to_action && d.overview.call_to_action.image);
     // sources
     if (d.overview.sources) {
       d.overview.sources.forEach(function(src, idx) {

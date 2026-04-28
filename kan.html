@@ -23,8 +23,9 @@
       <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
       <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
       <span class="nav-divider"></span>
-      <a class="nav-link" data-page="sources" href="sources.html">מקורות ולינקים</a>
       <a class="nav-link" data-page="about" href="about.html">אודות הפרויקט</a>
+      <a class="nav-link" data-page="future" href="future.html">מה העתיד?</a>
+      <a class="nav-link" data-page="sources" href="sources.html">מקורות ולינקים</a>
     </div>
   </nav>
 
@@ -46,11 +47,11 @@
 
 
 
-<div class="context-bar-row" style="--bar-pct: 64%;">
-  <div class="context-bar-fill seg-kan" style="flex-basis: 64%;"></div>
+<div class="context-bar-row" style="--bar-pct: 57%;">
+  <div class="context-bar-fill seg-kan" style="flex-basis: 57%;"></div>
   <div class="context-bar-empty"></div>
 </div>
-<div class="context-bar-label">64% מכלל ההשקעה בדוקו</div>
+<div class="context-bar-label">57% מכלל ההשקעה בדוקו</div>
 
 
 
@@ -92,7 +93,7 @@
 
 <!-- Budget By Type — Stacked Bar -->
 <div class="chart-section">
-  <div class="section-title">חלוקת סוגי התוכן לפי שעות מסך</div>
+  <div class="section-title"><span id="budgetTypeYear">2025</span> : חלוקת סוגי התוכן לפי שעות מסך</div>
 
   <div class="stacked-bar" id="kanStackedBar">
     
@@ -150,7 +151,7 @@
 <!-- Top Contents -->
 <div class="shows-table-wrap" style="margin-bottom: 1.5rem;">
   <div class="shows-table-header">
-    <div class="section-title" style="margin-bottom: 0.25rem;">תכנים מובילים (לפי דקות מסך)</div>
+    <div class="section-title" style="margin-bottom: 0.25rem;"><span id="topContentsYear">2025</span> : תכנים מובילים (לפי דקות מסך)</div>
   </div>
   <div class="table-scroll">
     <table class="shows-table" id="kanTopContents">
@@ -283,6 +284,10 @@
       document.getElementById('kanActualNumber').textContent = docActual;
       document.getElementById('kanBigNumber').textContent = btn.dataset.amount;
 
+      // Update budget type year
+      var budgetTypeYear = document.getElementById('budgetTypeYear');
+      if (budgetTypeYear) budgetTypeYear.textContent = year;
+
       // Update stacked bar segments
       document.querySelectorAll('#kanStackedBar .stacked-segment').forEach(function (seg) {
         var i = parseInt(seg.dataset.index);
@@ -292,7 +297,10 @@
         seg.querySelector('.segment-pct').textContent = hours + ' שעות';
       });
 
-      // Update top contents count + table
+      // Update top contents year and table
+      var yearSpan = document.getElementById('topContentsYear');
+      if (yearSpan) yearSpan.textContent = year;
+
       var tbody = document.querySelector('#kanTopContents tbody');
       if (tbody && topContents[year]) {
         tbody.innerHTML = topContents[year].map(function (show, i) {

@@ -23,8 +23,9 @@
       <a class="nav-link" data-page="cable" href="cable.html">כבלים ולוויין</a>
       <a class="nav-link" data-page="reshut" href="reshut.html">הרשות השנייה</a>
       <span class="nav-divider"></span>
-      <a class="nav-link" data-page="sources" href="sources.html">מקורות ולינקים</a>
       <a class="nav-link" data-page="about" href="about.html">אודות הפרויקט</a>
+      <a class="nav-link" data-page="future" href="future.html">מה העתיד?</a>
+      <a class="nav-link" data-page="sources" href="sources.html">מקורות ולינקים</a>
     </div>
   </nav>
 
@@ -85,16 +86,8 @@
 <!-- Budget Summary -->
 <div class="budget-summary-box">
   <span class="total-box-info" data-info="הסכום הכולל מחושב במצב שבו הייתה מתקיימת במלואה הרגולציה הקיימת לעומת הסכום בפועל המייצג הערכה של המצב הנוכחי  ראו הסברים אודות הרגולציה של כל גוף בעמוד המתאים.">ℹ</span>
-  <div class="budget-summary-text">
-    תקציב דוקו 2025 —
-    <strong class="budget-actual">58.8 מיליון ₪</strong>
-    צריך להיות
-    <strong class="budget-theoretical">104.5 מיליון ₪</strong>
-  </div>
-  <div class="budget-summary-track">
-    <div class="budget-summary-fill" style="width: 56%;"></div>
-    <div class="budget-summary-label">56% מהתקציב הנדרש</div>
-  </div>
+  <div class="budget-summary-text">תקציב הדוקו לשנת 2025</div>
+  <div class="budget-summary-amount">65.4 מיליון ₪</div>
 </div>
 
 <!-- Source Cards -->
@@ -120,7 +113,7 @@
         </div>
       </div>
       <div class="source-card-right seg-funds">
-        <div class="source-card-amount">14.9 <span class="source-card-unit">מיליון ש"ח</span></div>
+        <div class="source-card-amount">21.5 <span class="source-card-unit">מיליון ש"ח</span></div>
         
       </div>
     </div>
@@ -242,10 +235,6 @@
 
 
 <div class="section-title" style="margin-top: 1.5rem;">חלוקת מקורות המימון</div>
-<div class="bar-mode-toggle" id="barToggle">
-  <button class="bar-mode-btn active" data-mode="actual">מאיפה מגיע הכסף בפועל</button>
-  <button class="bar-mode-btn" data-mode="theoretical">מאיפה אמור להגיע הכסף</button>
-</div>
 <div class="stacked-bar" id="overviewBar" style="margin-bottom: 2rem;">
   
   
@@ -254,11 +243,11 @@
   
   
   <div class="stacked-segment seg-funds"
-       data-actual="25"
+       data-actual="33"
        data-theoretical="12"
-       style="flex-basis: 25%;">
+       style="flex-basis: 33%;">
     <span class="segment-label">קרנות הקולנוע</span>
-    <span class="segment-pct">25%</span>
+    <span class="segment-pct">33%</span>
   </div>
   
   
@@ -267,11 +256,11 @@
   
   
   <div class="stacked-segment seg-kan"
-       data-actual="64"
+       data-actual="57"
        data-theoretical="38"
-       style="flex-basis: 64%;">
+       style="flex-basis: 57%;">
     <span class="segment-label">כאן11</span>
-    <span class="segment-pct">64%</span>
+    <span class="segment-pct">57%</span>
   </div>
   
   
@@ -280,11 +269,11 @@
   
   
   <div class="stacked-segment seg-cable"
-       data-actual="6"
+       data-actual="5"
        data-theoretical="15"
-       style="flex-basis: 6%;">
+       style="flex-basis: 5%;">
     <span class="segment-label">כבלים ולוויין</span>
-    <span class="segment-pct">6%</span>
+    <span class="segment-pct">5%</span>
   </div>
   
   
@@ -301,6 +290,26 @@
   </div>
   
 </div>
+
+<!-- Total Content Investment Chart -->
+<div style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: var(--radius); position: relative;">
+  <div class="section-title" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+    <span class="total-box-info" data-info="הנתונים המייצגים את כלל ההשקעה בתוכן מקורי בישראל בערוצי טלוויזיה והגופים המממנים, משקף את הנטיות לאורך זמן בתחום">ℹ</span>
+    כלל ההשקעה בתוכן מקורי בישראל (במליוני ש"ח)
+  </div>
+  <canvas id="totalInvestmentChart" style="max-height: 300px;"></canvas>
+</div>
+
+<!-- Call to Action Section -->
+<a href="future.html" class="cta-section">
+  
+  <img src="images/doco-future.jpg" alt="" class="cta-image">
+  
+  <div class="cta-overlay">
+    <h2 class="cta-title">אז מה אתם מציעים?</h2>
+    <p class="cta-subtitle">על העתיד האפשרי של הדוקו בישראל</p>
+  </div>
+</a>
 
 <!-- Disclaimer -->
 <div class="overview-disclaimer">הנתונים מבוססים על דיווחים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו.</div>
@@ -330,22 +339,99 @@
 
   <script src="js/dashboard.js"></script>
   
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 <script>
 (function () {
-  var toggle = document.getElementById('barToggle');
-  var bar = document.getElementById('overviewBar');
-  if (!toggle || !bar) return;
-  toggle.querySelectorAll('.bar-mode-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      toggle.querySelectorAll('.bar-mode-btn').forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var mode = btn.dataset.mode;
-      bar.querySelectorAll('.stacked-segment').forEach(function (seg) {
-        var pct = seg.dataset[mode];
-        seg.style.flexBasis = pct + '%';
-        seg.querySelector('.segment-pct').textContent = pct + '%';
-      });
-    });
+  var chartData = [{"amount": 413, "year": 2016}, {"amount": 413, "year": 2017}, {"amount": 322, "year": 2018}, {"amount": 291, "year": 2019}, {"amount": 272, "year": 2020}, {"amount": 294, "year": 2021}, {"amount": 267, "year": 2022}, {"amount": 255, "year": 2023}, {"amount": 240, "year": 2024}, {"amount": 235, "year": 2025}];
+  var canvas = document.getElementById('totalInvestmentChart');
+  if (!canvas) return;
+
+  var ctx = canvas.getContext('2d');
+  var years = chartData.map(function (d) { return d.year; });
+  var amounts = chartData.map(function (d) { return d.amount; });
+
+  // Create gradient from blue to red (transition from 2017 to 2023)
+  var gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  gradient.addColorStop(0, '#375678');
+  gradient.addColorStop(0.125, '#375678');  // 2017
+  gradient.addColorStop(0.75, '#e05050');   // 2023
+  gradient.addColorStop(1, '#e05050');
+
+  // Create fill gradient (blue to red with transparency)
+  var fillGradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+  fillGradient.addColorStop(0, 'rgba(55, 86, 120, 0.2)');
+  fillGradient.addColorStop(0.125, 'rgba(55, 86, 120, 0.2)');  // 2017
+  fillGradient.addColorStop(0.75, 'rgba(224, 80, 80, 0.2)');   // 2023
+  fillGradient.addColorStop(1, 'rgba(224, 80, 80, 0.2)');
+
+  Chart.register(ChartDataLabels);
+
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'השקעה במיליוני ₪',
+        data: amounts,
+        borderColor: gradient,
+        backgroundColor: fillGradient,
+        tension: 0.4,
+        fill: true,
+        pointRadius: 5,
+        pointBackgroundColor: gradient,
+        pointBorderColor: 'var(--bg-primary)',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      layout: {
+        padding: { top: 40 }
+      },
+      plugins: {
+        legend: {
+          display: false
+        },
+        datalabels: {
+          color: '#ffffff',
+          font: { size: 11, weight: 'bold', family: 'Heebo, sans-serif' },
+          anchor: 'end',
+          align: 'top',
+          offset: 8,
+          formatter: function (value, context) {
+            var dataIndex = context.dataIndex;
+            if (dataIndex === 1 || dataIndex === 8) {  // 2017 and 2025
+              return value;
+            }
+            return '';
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { color: '#aaaaaa', font: { size: 12 } },
+          grid: { color: 'var(--border-color)' },
+          title: { display: false }
+        },
+        x: {
+          ticks: {
+            color: '#aaaaaa',
+            font: { size: 12 },
+            callback: function(value) {
+              var year = years[value];
+              if (year === years[0] || year === years[years.length - 1]) {
+                return year;
+              }
+              return '';
+            }
+          },
+          grid: { color: 'var(--border-color)' }
+        }
+      }
+    }
   });
 })();
 </script>
