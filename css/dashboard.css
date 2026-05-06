@@ -97,14 +97,18 @@
 .reg-4 { background-color: var(--color-reg-4); }
 
 /* Stat dot and fill colors */
-.dot-nat-1, .fill-nat-1 { background-color: var(--color-nat-1); }
-.dot-nat-2, .fill-nat-2 { background-color: var(--color-nat-2); }
-.dot-nat-3, .fill-nat-3 { background-color: var(--color-nat-3); }
-.dot-nat-4, .fill-nat-4 { background-color: var(--color-nat-4); }
-.dot-reg-1, .fill-reg-1 { background-color: var(--color-reg-1); }
-.dot-reg-2, .fill-reg-2 { background-color: var(--color-reg-2); }
-.dot-reg-3, .fill-reg-3 { background-color: var(--color-reg-3); }
-.dot-reg-4, .fill-reg-4 { background-color: var(--color-reg-4); }
+.dot-nat-1 { background-color: var(--color-nat-1); }
+.dot-nat-2 { background-color: var(--color-nat-2); }
+.dot-nat-3 { background-color: var(--color-nat-3); }
+.dot-nat-4 { background-color: var(--color-nat-4); }
+.dot-reg-1 { background-color: var(--color-reg-1); }
+.dot-reg-2 { background-color: var(--color-reg-2); }
+.dot-reg-3 { background-color: var(--color-reg-3); }
+.dot-reg-4 { background-color: var(--color-reg-4); }
+
+/* Stat bar fill color — unified for all national and regional funds */
+.fill-nat-1, .fill-nat-2, .fill-nat-3, .fill-nat-4,
+.fill-reg-1, .fill-reg-2, .fill-reg-3, .fill-reg-4 { background-color: #e05050; }
 
 /* --- Content category colors (kan page) --- */
 .cat-1 { background-color: var(--color-cat-1); }
@@ -1650,14 +1654,14 @@ a { color: inherit; text-decoration: none; }
 
 .tldr-summary::-webkit-details-marker { display: none; }
 
-.tldr-summary::before {
-  content: '▶';
+.tldr-summary::after {
+  content: '◀';
   font-size: 9px;
   transition: transform 0.2s;
   display: inline-block;
 }
 
-.tldr-box[open] .tldr-summary::before { transform: rotate(90deg); }
+.tldr-box[open] .tldr-summary::after { transform: rotate(-90deg); }
 
 .tldr-content {
   padding: 0.75rem 1rem 1rem;
@@ -1907,6 +1911,41 @@ a { color: inherit; text-decoration: none; }
   .stat-cards              { grid-template-columns: 1fr; }
   .table-scroll            { overflow-x: auto; }
   .hero-strip              { height: 150px; }
+
+  /* Funds page: leading projects table — make money column narrower, fund name wider */
+  .shows-table th:last-child,
+  .shows-table td:last-child {
+    min-width: 70px;
+    width: 70px;
+  }
+  .shows-table th:nth-child(2),
+  .shows-table td:nth-child(2) {
+    width: 35%;
+  }
+
+  /* Funds page: statistics — wrap counts to second line on mobile */
+  .stat-list-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .stat-list-bar-wrap {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+  }
+  .stat-list-counts {
+    order: 3;
+    width: 100%;
+    text-align: left;
+    margin-top: 0.25rem;
+  }
+
+  /* Funds page: bars section — wider bar area, name stays single line */
+  .bar-name {
+    width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   .landing-hero-wrapper {
     height: 300px;

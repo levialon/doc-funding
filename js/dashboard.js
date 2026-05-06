@@ -123,22 +123,24 @@ function initInfoModal() {
 function initSwipeNavigation() {
   const pageMap = {
     'index': 'overview',      // landing → overview
-    'overview': 'kan',        // overview → kan
-    'kan': 'funds',           // kan → funds
-    'funds': 'cable',         // funds → cable
+    'overview': 'funds',      // overview → funds
+    'funds': 'kan',           // funds → kan
+    'kan': 'cable',           // kan → cable
     'cable': 'reshut',        // cable → reshut
-    'reshut': 'sources',      // reshut → sources
-    'sources': 'about'        // sources → about
+    'reshut': 'about',        // reshut → about
+    'about': 'future',        // about → future
+    'future': 'sources'       // future → sources
   };
 
   const pageMapReverse = {
     'overview': 'index',      // overview → landing
-    'kan': 'overview',        // kan → overview
-    'funds': 'kan',           // funds → kan
-    'cable': 'funds',         // cable → funds
+    'funds': 'overview',      // funds → overview
+    'kan': 'funds',           // kan → funds
+    'cable': 'kan',           // cable → kan
     'reshut': 'cable',        // reshut → cable
-    'sources': 'reshut',      // sources → reshut
-    'about': 'sources'        // about → sources
+    'about': 'reshut',        // about → reshut
+    'future': 'about',        // future → about
+    'sources': 'future'       // sources → future
   };
 
   const bodyClass = document.body.className;
