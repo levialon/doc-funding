@@ -52,7 +52,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
   
 </head>
-<body class="page-landing_desktop">
+<body class="page-landing">
 
   <nav class="nav">
     <a class="nav-brand" href="index.html">הכסף של הדוקו</a>
@@ -73,31 +73,30 @@
   <main class="main">
     
 
-<div class="lpd-screen">
+<!-- Hero Image with Overlay (image is clickable) -->
+<a href="overview.html" class="landing-hero-wrapper">
+  
+  <img src="images/hero.jpg" alt="" class="landing-hero-img">
+  
 
-  <!-- Image column — right side in RTL (first in DOM) -->
-  <div class="lpd-image">
-    <img id="lpd-bg-img" src="" alt="" class="lpd-bg">
-    <div class="lpd-overlay"></div>
+  <!-- Overlay Content -->
+  <div class="landing-hero-overlay">
+    <h1 class="landing-title">הכסף של הדוקו</h1>
+    <h2 class="landing-subtitle">כל המספרים מאחורי היצירה התיעודית בישראל </h2>
   </div>
+</a>
 
-  <!-- Content column — left side in RTL (second in DOM) -->
-  <div class="lpd-content">
-    <div class="lpd-top">
-      <img src="images/logo.png" alt="הכסף של הדוקו" class="lpd-logo">
-    </div>
-    <div class="lpd-bottom">
-      <p class="lpd-description">כמה כסף מושקע בישראל ביצירה תיעודית? למה מחויבים גופי השידור, קרנות הקולנוע ושאר הגופים הפועלים בארץ? מה מצב הרגולציה? האם יש עתיד לדוקו הישראלי הנמצא תחת התקפה בשנים האחרונות? <br> <br>מטרת "הדשבורד" לאפשר בסיס לשיח מושכל ומבוסס נתונים במטרה לתקן את ההווה והעתיד של הדוקו בישראל. </p>
-      <div class="lpd-actions">
-        <a href="overview.html" class="lp2-btn-primary">כניסה לדשבורד</a>
-        <div class="lpd-actions-secondary">
-          <a href="about.html" class="lp2-btn-secondary">על אודות הפרויקט</a>
-          <a href="future.html" class="lp2-btn-secondary">אז מה העתיד?</a>
-        </div>
-      </div>
-    </div>
+<!-- Description Text Below -->
+<div class="landing-description">
+  <p>כמה כסף מושקע בישראל ביצירה תיעודית? למה מחויבים גופי השידור, קרנות הקולנוע ושאר הגופים הפועלים בארץ? מה מצב הרגולציה? האם יש עתיד לדוקו הישראלי הנמצא תחת התקפה בשנים האחרונות? 
+ 
+מטרת &#34;הדשבורד&#34; לאפשר בסיס לשיח מושכל ומבוסס נתונים במטרה לתקן את ההווה והעתיד של הדוקו בישראל. </p>
+  <a href="overview.html" class="landing-btn">אל הדשבורד</a>
+  <div class="landing-footer-links">
+    <a href="about.html" class="landing-about-link">על אודות הפרויקט</a>
+    <span class="landing-link-separator">|</span>
+    <a href="future.html" class="landing-about-link">אז מה העתיד?</a>
   </div>
-
 </div>
 
 
@@ -120,13 +119,5 @@
 
   <script src="js/dashboard.js"></script>
   
-<script>
-(function () {
-  var count = 9;
-  var n = Math.floor(Math.random() * count) + 1;
-  document.getElementById('lpd-bg-img').src = 'images/bg-' + n + '.jpg';
-})();
-</script>
-
 </body>
 </html>

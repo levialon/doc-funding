@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עורך נתונים — הכסף של הדוקו</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1117;
+  --bg2: #1a1d27;
+  --bg3: #232638;
+  --border: #2e3248;
+  --text: #e2e4ef;
+  --text2: #8b91a8;
+  --accent: #4f6ef7;
+  --accent-hover: #6b83f8;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --font-h: 'Assistant', sans-serif;
+  --font-b: 'Heebo', sans-serif;
+  --radius: 8px;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 14px; min-height: 100vh; }
+
+/* TOP BAR */
+.topbar { position: sticky; top: 0; z-index: 100; background: var(--bg2); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1.5rem; gap: 1rem; }
+.topbar-title { font-family: var(--font-h); font-size: 18px; font-weight: 700; color: var(--text); }
+.topbar-actions { display: flex; gap: 0.5rem; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 1rem; border-radius: var(--radius);
+  border: none; cursor: pointer; font-family: var(--font-b); font-size: 13px; font-weight: 600; transition: background 0.15s; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--border); }
+.btn-success { background: #166534; color: #bbf7d0; border: 1px solid #15803d; }
+.btn-success:hover { background: #15803d; }
+
+/* TABS */
+.tabs-bar { display: flex; gap: 0; background: var(--bg2); border-bottom: 1px solid var(--border);
+  overflow-x: auto; padding: 0 1.5rem; }
+.tab-btn { padding: 0.75rem 1.1rem; font-family: var(--font-b); font-size: 13px; font-weight: 500;
+  color: var(--text2); background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; white-space: nowrap; transition: color 0.15s, border-color 0.15s; }
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* TAB PANELS */
+.tab-panel { display: none; padding: 1.5rem; max-width: 900px; }
+.tab-panel.active { display: block; }
+
+/* SECTIONS */
+.section { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.25rem; margin-bottom: 1.25rem; }
+.section-head { font-family: var(--font-h); font-size: 15px; font-weight: 700; color: var(--text);
+  margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+
+/* FIELD ROWS */
+.field-row { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.85rem; }
+.field-row:last-child { margin-bottom: 0; }
+.field-label { font-size: 12px; color: var(--text2); font-weight: 500; }
+.field-row input[type="text"],
+.field-row input[type="number"],
+.field-row input[type="url"],
+.field-row select,
+.field-row textarea {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); font-family: var(--font-b); font-size: 13px;
+  padding: 0.4rem 0.6rem; width: 100%; outline: none;
+  transition: border-color 0.15s; }
+.field-row input:focus, .field-row select:focus, .field-row textarea:focus { border-color: var(--accent); }
+.field-row textarea { resize: vertical; }
+.field-row input[type="number"] { direction: ltr; text-align: left; }
+.field-row input[type="url"] { direction: ltr; text-align: left; }
+
+/* FIELD GRID (2-col, 3-col) */
+.field-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem; }
+.field-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 0.85rem; }
+.field-grid-2 .field-row, .field-grid-3 .field-row { margin-bottom: 0; }
+
+/* ARRAY SECTIONS */
+.array-container { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.ar { display: flex; align-items: flex-start; gap: 0.5rem; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 6px; padding: 0.6rem 0.75rem; }
+.ar-fields { flex: 1; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.ar-fields label { font-size: 11px; color: var(--text2); display: flex; flex-direction: column; gap: 0.2rem; }
+.ar-fields input[type="text"],
+.ar-fields input[type="number"],
+.ar-fields input[type="url"],
+.ar-fields select,
+.ar-fields textarea {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  color: var(--text); font-family: var(--font-b); font-size: 12px;
+  padding: 0.3rem 0.5rem; outline: none; transition: border-color 0.15s; }
+.ar-fields input:focus, .ar-fields select:focus, .ar-fields textarea:focus { border-color: var(--accent); }
+.ar-fields input[type="text"] { width: 160px; }
+.ar-fields input[type="number"] { width: 80px; direction: ltr; text-align: left; }
+.ar-fields input[type="url"] { width: 200px; direction: ltr; text-align: left; }
+.ar-fields textarea { width: 100%; direction: rtl; resize: vertical; }
+.ar-fields .wide { width: 240px; }
+.ar-fields input[type="checkbox"] { width: auto; margin-top: 2px; }
+.del-btn { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 14px;
+  padding: 0.2rem 0.3rem; border-radius: 4px; line-height: 1; align-self: center; flex-shrink: 0;
+  transition: color 0.15s, background 0.15s; }
+.del-btn:hover { color: var(--danger); background: rgba(239,68,68,0.1); }
+.add-row-btn { background: none; border: 1px dashed var(--border); border-radius: 6px;
+  color: var(--text2); cursor: pointer; font-family: var(--font-b); font-size: 12px;
+  padding: 0.4rem 0.75rem; width: 100%; text-align: center; transition: color 0.15s, border-color 0.15s; }
+.add-row-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* GRID ARRAY (for budget_by_type.data) */
+.bbt-grid { display: grid; gap: 0.4rem; margin-bottom: 0.75rem; }
+.bbt-grid-row { display: flex; gap: 0.5rem; align-items: center; }
+.bbt-year-label { font-size: 12px; color: var(--text2); width: 40px; flex-shrink: 0; }
+.bbt-grid-row input { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px;
+  color: var(--text); font-family: var(--font-b); font-size: 12px; padding: 0.3rem 0.4rem;
+  width: 70px; direction: ltr; text-align: left; outline: none; }
+.bbt-grid-row input:focus { border-color: var(--accent); }
+
+/* CABLE TABS */
+.cable-sub-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+.cable-sub-tab-btn { padding: 0.35rem 0.8rem; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text2); font-family: var(--font-b); font-size: 12px;
+  cursor: pointer; transition: all 0.15s; }
+.cable-sub-tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cable-tab-panel { display: none; }
+.cable-tab-panel.active { display: block; }
+
+/* STATUS BAR */
+#status-bar { position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
+  background: #1e3a2f; border: 1px solid var(--success); color: #bbf7d0;
+  padding: 0.5rem 1.25rem; border-radius: 999px; font-size: 13px;
+  opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 200; }
+#status-bar.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-title">✏️ עורך נתונים — הכסף של הדוקו</div>
+  <div class="topbar-actions">
+    <input type="file" id="import-file" accept=".yaml,.yml" style="display:none">
+    <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">📂 טען YAML</button>
+    <button class="btn btn-success" onclick="exportYAML()">⬇ ייצוא YAML</button>
+  </div>
+</div>
+
+<!-- TABS BAR -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="tab-meta">הגדרות ודף פתיחה</button>
+  <button class="tab-btn" data-tab="tab-about">אודות</button>
+  <button class="tab-btn" data-tab="tab-overview">מבט על</button>
+  <button class="tab-btn" data-tab="tab-kan">כאן</button>
+  <button class="tab-btn" data-tab="tab-funds">קרנות</button>
+  <button class="tab-btn" data-tab="tab-cable">כבלים ולוויין</button>
+  <button class="tab-btn" data-tab="tab-reshut">הרשות השנייה</button>
+  <button class="tab-btn" data-tab="tab-future">עתיד הדוקו</button>
+</div>
+
+<!-- ═══════════════ TAB: הגדרות ═══════════════ -->
+<div class="tab-panel active" id="tab-meta">
+
+  <div class="section">
+    <div class="section-head">מטא-נתונים</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת האתר</label><input type="text" id="f_meta_site_title" value="הכסף של הדוקו" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תאריך עדכון אחרון</label><input type="text" id="f_meta_last_updated" value="מאי 2026" dir="rtl"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">SEO — נתוני חיפוש</div>
+    <div class="field-row"><label class="field-label">שם יוצר/ת (author)</label><input type="text" id="f_meta_author" value="אלון לוי בשיתוף הפורום הדוקומנטרי בישראל" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור כללי לאתר (meta description)</label><textarea id="f_meta_description" rows="2" dir="rtl">נתונים על מימון הקולנוע התיעודי בישראל — קרנות הקולנוע, תאגיד השידור כאן 11, כבלים ולוויין והרשות השנייה</textarea></div>
+    <div class="field-row"><label class="field-label">מילות מפתח (keywords, מופרדות בפסיק)</label><input type="text" id="f_meta_keywords" value="קולנוע תיעודי, דוקומנטרי, מימון, קרנות קולנוע, כאן 11, HOT, YES, הרשות השנייה, ישראל, דוקו, חוק התקשורת, מיקי זוהר, שלמה קרעי" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תמונת שיתוף (og:image, נתיב)</label><input type="text" id="f_meta_og_image" value="images/bg-1.jpg" dir="ltr"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO — דף פתיחה</label><textarea id="f_landing_seo_description" rows="2" dir="rtl">דשבורד הנתונים של הקולנוע התיעודי בישראל — מאיפה מגיע הכסף לתעשייה התיעודית בישראל? </textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">דף פתיחה</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_landing_title" value="הכסף של הדוקו" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תת-כותרת</label><input type="text" id="f_landing_subtitle" value="כל המספרים מאחורי היצירה התיעודית בישראל " dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_landing_description" rows="4" dir="rtl">כמה כסף מושקע בישראל ביצירה תיעודית? למה מחויבים גופי השידור, קרנות הקולנוע ושאר הגופים הפועלים בארץ? מה מצב הרגולציה? האם יש עתיד לדוקו הישראלי הנמצא תחת התקפה בשנים האחרונות? 
+ 
+מטרת &#34;הדשבורד&#34; לאפשר בסיס לשיח מושכל ומבוסס נתונים במטרה לתקן את ההווה והעתיד של הדוקו בישראל. </textarea></div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">טקסט כפתור</label><input type="text" id="f_landing_button_text" value="אל הדשבורד" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">טקסט לינק אודות</label><input type="text" id="f_landing_about_link_text" value="על אודות הפרויקט" dir="rtl"></div>
+    </div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">תמונת רקע (נתיב)</label><input type="text" id="f_landing_hero_image" value="images/hero.jpg" dir="ltr"></div>
+      <div class="field-row"><label class="field-label">מספר תמונות רקע (bg_count)</label><input type="number" id="f_landing_bg_count" value="9" min="1"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: אודות ═══════════════ -->
+<div class="tab-panel" id="tab-about">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת הדף</label><input type="text" id="f_about_title" value="אודות הפרויקט" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_about_hero_image" value="images/about_us.jpg" dir="ltr"></div>
+    </div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_about_seo_description" rows="2" dir="rtl">על הפרויקט — דשבורד הכסף של הדוקו נוצר על ידי אלון לוי והפורום הדוקומנטרי בישראל למיפוי מימון הקולנוע התיעודי</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">חלקי תוכן</div>
+    <div class="array-container" id="a_about_sections">
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="מהו הפרויקט?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">האתר בוחן את מקורות המימון של הקולנוע התיעודי בישראל, הן ציבוריים והן מצד גופי שידור, ומציג נתונים על היקפי השקעה, סוגי התכנים הנתמכים והמסגרת הרגולטורית. הנתונים מבוססים על מקורות מאומתים, בהם דוחות של גופי שידור וקרנות קולנוע. דרך המיפוי הזה, האתר מציע מבט בהיר על האופן שבו הכסף מעצב את התעשייה ועל ההשלכות לכך על ההווה והעתיד שלה.
+</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="מי עומד מאחורי זה?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">הדשבורד נוצר על ידי אלון לוי, יוצר דוקומנטרי וחובב נתונים, בשיתוף הפורום הדוקומנטרי בישראל, הגוף המקצועי המאגד את יוצרי הקולנוע התיעודי ופועל לקידום התחום, חופש היצירה והייצוג מול גופי השידור והממשלה.
+האתר נבנה מתוך צורך לייצר תמונה בהירה, מבוססת נתונים ונגישה של מבנה המימון בענף, והוא מיועד ליוצרות ויוצרי דוקו, חוקרות וחוקרים, עיתונאים.ות ולכל מי שמתעניין בתעשיית הקולנוע התיעודי בישראל ובהתפתחותה.</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="מאיפה המקורות ומה המתודולוגיה?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">כדי ליצור את הנתונים ואת החיתוכים שלהם עשינו שימוש בדוחות רשמיים של קרנות הקולנוע, משרד התקשורת, תאגיד השידור, מועצת הקולנוע והלווין, הרשות השנייה לטלוויזיה ורדיו ועוד. עשינו גם שימוש בדוחות לא ציבוריים של תל&#34;י המפרטים את שעות השידור של התכנים השונים ובדוחות ציבוריים של YES, הוט וגופי שידור נוספים. חלק מהנתונים עברו ריכוז, התאמה ועיבוד. ככל שזה רלוונטי ציינו את זה במפורש באופן בהיר ככל שניתן.  בהעדר נתונים מספיקים לעתים עשינו &#34;הערכה מושכלת&#34; שנובעת מהנתונים שכן ישנם בידנו או הנתונים החלקיים וציינו זאת.</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="כיצד להשתמש באתר?" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">האתר מחולק לטאבים: קרנות הקולנוע מרוכזות יחדיו, וגופי השידור מחולקים לשלושה: תאגיד השידור, כבלים ולווין, והרשות השנייה. בכל לשונית יש מידע על תקציב הדוקו באותם הגופים נכון לשנים מסוימות, כמו גם הסבר על הרגולציה, פירוט על ההשקעות הגבוהות ביותר, ומבט לעתיד. 
+</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="טעות לעתים חוזרת" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">מצאתםן טעות? רוצות.ים לומר משהו, להציע הצעה, להוסיף ולשפר? דברו איתנו </textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_about_sections', TMPL.about_section)">+ הוסף חלק</button>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: עתיד הדוקו ═══════════════ -->
+<div class="tab-panel" id="tab-future">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת הדף</label><input type="text" id="f_future_title" value="עתיד הדוקו - אז מה אתם מציעים?" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_future_hero_image" value="images/doco-future.jpg" dir="ltr"></div>
+    </div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_future_seo_description" rows="2" dir="rtl">עתיד הקולנוע התיעודי בישראל — מגמות, אתגרים ומה צפוי לתחום הדוקו תחת הרגולציה המשתנה</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">חלקי תוכן</div>
+    <div class="array-container" id="a_future_sections">
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="נדרש שינוי" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="כל הדרכים מוובילות לדוקו" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields" style="flex-direction:column; gap:0.4rem; width:100%;">
+          <label style="width:100%">כותרת<input type="text" data-f="headline" value="על השינויים הדרושים" dir="rtl" style="width:100%"></label>
+          <label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl">&#39;[טקסט — מקום שמור]&#39;</textarea></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_future_sections', TMPL.future_section)">+ הוסף חלק</button>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: מבט על ═══════════════ -->
+<div class="tab-panel" id="tab-overview">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_overview_title" value="הכסף של הדוקו" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_overview_seo_description" rows="2" dir="rtl">מבט כולל על מימון הדוקו בישראל 2025 — קרנות, כאן 11, כבלים ולוויין והרשות השנייה: היקפים, פערים רגולטוריים ומגמות</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק (TLDR)</label><textarea id="f_overview_tldr" rows="4" dir="rtl">העמוד מציג הערכת כלל התקציב המושקע **ביצירה תיעודית בארץ**. ההשקעה הזאת מחולקת לארבעת מקורות מימון מרכזיים: השידור הציבורי, קרנות הקולנוע  והערוצים המסחריים. התמונה שעולה מהנתונים מדאיגה. ארבעת מוקדי המימון המרכזיים אמורים להוות תשתית יציבה ליצירה תיעודית רחבה ומגוונת, אך בפועל הם מייצרים השקעה חלקית בלבד. פער זה נובע משילוב של רגולציה שאינה מעודכנת עבור גופי שידור מסחריים, היעדר אכיפה של חובות השקעה קיימות, ושינויים תכופים במנגנוני התמיכה של קרנות הקולנוע. כל זאת מתרחש לצד עלייה מתמשכת בעלויות ההפקה וקיפאון ריאלי בתקציבים לאורך שני העשורים האחרונים.</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_overview_info" value="הערכת כלל ההשקעה ביצירה תיעודית בישראל. הסכום הינו הערכה המבוססת על דוחות ציבוריים וחובות רגולטוריים. תתכן השקעה נוספת שאינה מדווחת ו/או מגופים פרטיים, אם כי היא ככל הנראה זניחה." dir="rtl"></div>
+    <div class="field-row"><label class="field-label">כתב ויתור</label><textarea id="f_overview_disclaimer" rows="2" dir="rtl">הדשבורד מבוסס על ניתוח נתונים ציבוריים, דוחות רגולטוריים ומחקר עצמאי. חלק מהנתונים הם הערכות בשל היעדר דיווח מלא. גיליתם טעות? ספרו לנו.</textarea></div>
+    <div class="field-row"><label class="field-label">תמונת גיבור (נתיב)</label><input type="text" id="f_overview_hero_image" value="images/hero.jpg" dir="ltr"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מקורות מימון (4 קבועים)</div>
+    
+    <div class="ar" style="margin-bottom:0.5rem;">
+      <div class="ar-fields">
+        <label>מזהה<input type="text" data-src-field="id" data-src-idx="0" value="funds" style="width:80px"></label>
+        <label>שם<input type="text" data-src-field="name" data-src-idx="0" value="קרנות הקולנוע" dir="rtl"></label>
+        <label>אייקון<input type="text" data-src-field="icon" data-src-idx="0" value="" style="width:3.5em"></label>
+        <label>לינק<input type="text" data-src-field="link" data-src-idx="0" value="funds.html" dir="ltr" style="width:100px"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="0" value="21.54"></label>
+        <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="0" value="12.5"></label>
+        <label>מגמה
+          <select data-src-field="trend" data-src-idx="0">
+            <option value="stable" >יציב</option>
+            <option value="changing" selected>משתנה</option>
+            <option value="declining" >בירידה</option>
+            <option value="crashing" >מתרסק</option>
+          </select>
+        </label>
+        <label>תווית מגמה<input type="text" data-src-field="trend_label" data-src-idx="0" value="משתנה" dir="rtl" style="width:80px"></label>
+      </div>
+    </div>
+    
+    <div class="ar" style="margin-bottom:0.5rem;">
+      <div class="ar-fields">
+        <label>מזהה<input type="text" data-src-field="id" data-src-idx="1" value="kan" style="width:80px"></label>
+        <label>שם<input type="text" data-src-field="name" data-src-idx="1" value="כאן11" dir="rtl"></label>
+        <label>אייקון<input type="text" data-src-field="icon" data-src-idx="1" value="" style="width:3.5em"></label>
+        <label>לינק<input type="text" data-src-field="link" data-src-idx="1" value="kan.html" dir="ltr" style="width:100px"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="1" value="45"></label>
+        <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="1" value="40"></label>
+        <label>מגמה
+          <select data-src-field="trend" data-src-idx="1">
+            <option value="stable" selected>יציב</option>
+            <option value="changing" >משתנה</option>
+            <option value="declining" >בירידה</option>
+            <option value="crashing" >מתרסק</option>
+          </select>
+        </label>
+        <label>תווית מגמה<input type="text" data-src-field="trend_label" data-src-idx="1" value="יציב" dir="rtl" style="width:80px"></label>
+      </div>
+    </div>
+    
+    <div class="ar" style="margin-bottom:0.5rem;">
+      <div class="ar-fields">
+        <label>מזהה<input type="text" data-src-field="id" data-src-idx="2" value="cable" style="width:80px"></label>
+        <label>שם<input type="text" data-src-field="name" data-src-idx="2" value="כבלים ולוויין" dir="rtl"></label>
+        <label>אייקון<input type="text" data-src-field="icon" data-src-idx="2" value="" style="width:3.5em"></label>
+        <label>לינק<input type="text" data-src-field="link" data-src-idx="2" value="cable.html" dir="ltr" style="width:100px"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="2" value="3.3"></label>
+        <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="2" value="16"></label>
+        <label>מגמה
+          <select data-src-field="trend" data-src-idx="2">
+            <option value="stable" >יציב</option>
+            <option value="changing" >משתנה</option>
+            <option value="declining" selected>בירידה</option>
+            <option value="crashing" >מתרסק</option>
+          </select>
+        </label>
+        <label>תווית מגמה<input type="text" data-src-field="trend_label" data-src-idx="2" value="בירידה" dir="rtl" style="width:80px"></label>
+      </div>
+    </div>
+    
+    <div class="ar" style="margin-bottom:0.5rem;">
+      <div class="ar-fields">
+        <label>מזהה<input type="text" data-src-field="id" data-src-idx="3" value="reshut" style="width:80px"></label>
+        <label>שם<input type="text" data-src-field="name" data-src-idx="3" value="הרשות השנייה" dir="rtl"></label>
+        <label>אייקון<input type="text" data-src-field="icon" data-src-idx="3" value="" style="width:3.5em"></label>
+        <label>לינק<input type="text" data-src-field="link" data-src-idx="3" value="reshut.html" dir="ltr" style="width:100px"></label>
+        <label>סכום בפועל<input type="number" step="0.1" data-src-field="amount" data-src-idx="3" value="3"></label>
+        <label>תיאורטי<input type="number" step="0.1" data-src-field="theoretical" data-src-idx="3" value="36"></label>
+        <label>מגמה
+          <select data-src-field="trend" data-src-idx="3">
+            <option value="stable" >יציב</option>
+            <option value="changing" >משתנה</option>
+            <option value="declining" >בירידה</option>
+            <option value="crashing" selected>מתרסק</option>
+          </select>
+        </label>
+        <label>תווית מגמה<input type="text" data-src-field="trend_label" data-src-idx="3" value="מתרסק" dir="rtl" style="width:80px"></label>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="section">
+    <div class="section-head">כותרות תיבות תקציב</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת — תקציב תיאורטי</label><input type="text" id="f_overview_theoretical_title" value="תקציב תיאורטי לדוקו 2025" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">כותרת — תקציב בפועל</label><input type="text" id="f_overview_actual_title" value="תקציב בפועל (הערכה) 2025" dir="rtl"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">גרף ההשקעה בתוכן מקורי</div>
+    <div class="field-row"><label class="field-label">כותרת הגרף</label><input type="text" id="f_overview_tci_title" value="השקעה בתוכן מקורי לאורך השנים (מליוני ש&#34;ח)" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><textarea id="f_overview_tci_info" rows="2" dir="rtl">הגרף מציג את הירידה בהשקעה בכלל היצירה המקורית בישראל (לא רק דוקו) בעשור האחרון. הגרף מציג מספרים נומריים ולא חישוב ראלי הכולל אינפלציה ועלייה בעלויות ההפקה והשכר.  מקור הנתונים מדו&#34;חות משרד התקשורת.</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">נתוני ההשקעה (לפי שנה)</div>
+    <div class="array-container" id="a_overview_tci_data">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2016"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="413"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2017"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="413"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2018"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="322"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2019"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="291"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2020"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="272"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2021"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="294"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2022"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="267"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2023"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="255"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2024"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="240"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2025"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="235"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_overview_tci_data', TMPL.tci_data)">+ הוסף שנה</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">קריאה לפעולה (CTA)</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_overview_cta_title" value="אז מה אתם מציעים?" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תת-כותרת</label><input type="text" id="f_overview_cta_subtitle" value="על העתיד האפשרי של הדוקו בישראל" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תמונה (נתיב)</label><input type="text" id="f_overview_cta_image" value="images/doco-future.jpg" dir="ltr"></div>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: כאן ═══════════════ -->
+<div class="tab-panel" id="tab-kan">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_title" value="תאגיד השידור כאן 11" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_kan_seo_description" rows="2" dir="rtl">כאן 11 — תאגיד השידור הציבורי הוא המממן המרכזי לדוקו בישראל. נתונים על תקציב המחלקה התיעודית לשנים 2023–2025</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_kan_tldr" rows="4" dir="rtl">תאגיד השידור הציבורי הוא **מקור המימון המרכזי לדוקו בישראל** מאז הקמתו בשנת 2016, ומהווה עוגן יציב יחסית ליצירה התיעודית. חובת ההשקעה שלו מעוגנת בחוק תאגיד השידור ותקציב המחלקה התיעודית מפורסם בדוחות שנתיים הזמינים לציבור באתר התאגיד. התקציב כולל לא רק סרטים וסדרות תיעודיות, אלא גם תכניות תחקיר ותכניות עובדתיות (החישוב פה מראה את החלק היחסי של הסרטים והסדרות מכלל התקציב). 
+בשל חולשת הרגולציה בתחומים אחרים, הפך התאגיד למממן המרכזי של תחום הדוקו בישראל. כיום הוא מצוי תחת איום, על רקע כוונת הממשלה לקדם מהלכים של סגירה או הכפפת תקציבו, בהובלת שר התקשורת שלמה קרעי.
+</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_info" value="כמות ההשקעה ביצירה תיעודית של התאגיד. המספר הבולט מייצג את  ההשקעה בסדרות וסרטים ביחס לכלל התקציב הכולל גם תכניות תחקיר ואחרות (החישוב נעשה לפי חישוב שעות המסך לסוגות השונות)." dir="rtl"></div>
+    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_kan_regulation_text" rows="4" dir="rtl">חוק תאגיד השידור הציבורי מגדיר את תפקיד התאגיד כספק תוכן ציבורי מגוון ועצמאי, ומחייב אותו להשקיע בהפקות מקור ישראליות. לפי החוק, התאגיד חייב להוציא לפחות 200 מיליון ש״ח בשנה על תוכן לערוץ המרכזי, מתוכם לפחות 90 מיליון ש״ח ל״סוגה עילית״, הכוללת דרמה ותעודה, ולפחות 40 מיליון ש״ח מתוכם מוקצים לתכניות תעודה. כמו כן, נקבעים תקציבים נפרדים לתוכן נוסף, בהם לפחות 160 מיליון ש״ח לחדשות ותכניות אקטואליה ו־40 מיליון ש״ח לתוכן לילדים ונוער, כך שההשקעה בדוקו היא חלק ממסגרת רחבה של חובת השקעה בתוכן מקורי ישראלי.</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מספרים גדולים (לפי שנה)</div>
+    <div class="array-container" id="a_kan_big_numbers">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2023"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="43.6"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2024"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="45.4"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שנה<input type="number" step="1" data-f="year" value="2025"></label>
+          <label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value="46.7"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_kan_big_numbers', TMPL.kan_bn)">+ הוסף שנה</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">חלוקת סוגי תוכן — קטגוריות</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_bbt_title" value="חלוקת סוגי התוכן לפי שעות מסך" dir="rtl"></div>
+    <div class="array-container" id="a_kan_bbt_cats">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>תווית<input type="text" data-f="label" value="סדרות תיעודיות" dir="rtl" class="wide"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>תווית<input type="text" data-f="label" value="סרטים בודדים" dir="rtl" class="wide"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>תווית<input type="text" data-f="label" value="תוכניות עובדתיות" dir="rtl" class="wide"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_kan_bbt_cats', TMPL.kan_cat)">+ הוסף קטגוריה</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">חלוקת סוגי תוכן — נתונים (לפי שנה)</div>
+    
+    <div style="margin-bottom:0.75rem;">
+      <div class="field-label" style="margin-bottom:0.4rem;">שנה 2023</div>
+      <div class="bbt-grid-row" id="a_kan_bbt_2023">
+        
+          
+          <input type="number" step="0.1" value="35" data-bbt-yr="2023" data-bbt-i="0">
+          
+          <input type="number" step="0.1" value="17" data-bbt-yr="2023" data-bbt-i="1">
+          
+          <input type="number" step="0.1" value="18" data-bbt-yr="2023" data-bbt-i="2">
+          
+        
+      </div>
+    </div>
+    
+    <div style="margin-bottom:0.75rem;">
+      <div class="field-label" style="margin-bottom:0.4rem;">שנה 2024</div>
+      <div class="bbt-grid-row" id="a_kan_bbt_2024">
+        
+          
+          <input type="number" step="0.1" value="36" data-bbt-yr="2024" data-bbt-i="0">
+          
+          <input type="number" step="0.1" value="21" data-bbt-yr="2024" data-bbt-i="1">
+          
+          <input type="number" step="0.1" value="30" data-bbt-yr="2024" data-bbt-i="2">
+          
+        
+      </div>
+    </div>
+    
+    <div style="margin-bottom:0.75rem;">
+      <div class="field-label" style="margin-bottom:0.4rem;">שנה 2025</div>
+      <div class="bbt-grid-row" id="a_kan_bbt_2025">
+        
+          
+          <input type="number" step="0.1" value="53" data-bbt-yr="2025" data-bbt-i="0">
+          
+          <input type="number" step="0.1" value="26" data-bbt-yr="2025" data-bbt-i="1">
+          
+          <input type="number" step="0.1" value="19" data-bbt-yr="2025" data-bbt-i="2">
+          
+        
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="section">
+    <div class="section-head">תכנים מובילים</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_kan_top_title" value="תכנים מובילים (לפי דקות מסך)" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">טקסט אינפו (ℹ)</label><input type="text" id="f_kan_top_info" value="רשימת התכנים התיעודיים עם הכי הרבה דקות שידור בכאן 11, לפי שנה" dir="rtl"></div>
+    </div>
+    
+    <div style="margin-bottom:1rem;">
+      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color: var(--text);">2023</div>
+      <div class="array-container" id="a_kan_top_2023">
+        
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="זמן אמת" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="תכנית תחקירים" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="438"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="מדורת השבטים " dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="285"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="חילוניות" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="278"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="האחת טייסת 201 " dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="256"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="מכונת המיתוסים" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="217"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_kan_top_2023', TMPL.kan_top)">+ הוסף תוכן</button>
+    </div>
+    
+    <div style="margin-bottom:1rem;">
+      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color: var(--text);">2024</div>
+      <div class="array-container" id="a_kan_top_2024">
+        
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="זמן אמת" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="תכנית תחקירים" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="773"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="דוח רולניק" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="תכנית תחקירים" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="448"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="שבויים" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="326"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="אויביים" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="277"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="המסע הארוך הביתה" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="274"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_kan_top_2024', TMPL.kan_top)">+ הוסף תוכן</button>
+    </div>
+    
+    <div style="margin-bottom:1rem;">
+      <div class="field-label" style="margin-bottom:0.5rem; font-size:13px; color: var(--text);">2025</div>
+      <div class="array-container" id="a_kan_top_2025">
+        
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="זמן אמת" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="תכנית תחקירים" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="510"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="אויבים" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="289"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="פרויקט משפחות" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="273"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="משי זהב" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="217"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="אינתיפאדה" dir="rtl" class="wide"></label>
+            <label>סוג<input type="text" data-f="type" value="סדרה תיעודית" dir="rtl"></label>
+            <label>דקות<input type="number" step="1" data-f="minutes" value="213"></label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_kan_top_2025', TMPL.kan_top)">+ הוסף תוכן</button>
+    </div>
+    
+  </div>
+
+  <div class="section">
+    <div class="section-head">עתיד</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">סטטוס
+        <select id="f_kan_future_status">
+          <option value="stable" selected>יציב</option>
+          <option value="changing" >משתנה</option>
+          <option value="declining" >בירידה</option>
+          <option value="crashing" >מתרסק</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט תג</label><input type="text" id="f_kan_future_badge" value="יציב — מעוגן בחוק" dir="rtl"></div>
+    </div>
+    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_kan_future_text" rows="3" dir="rtl">בשנים האחרונות מקודמות יוזמות פוליטיות לשנות את מבנהו, לצמצם את עצמאותו או אף להפריט או לסגור אותו. מהלכים אלה, שמובלים בעיקר על ידי שר התקשורת שלמה קרעי, כוללים הצעות להכפיף את תקציב התאגיד לממשלה או לשנות את מנגנוני הפיקוח עליו. הדיון הציבורי והפוליטי סביב עתיד התאגיד נמשך, וטרם הוכרע, אך עצם קיומו של המאבק יוצר אי ודאות משמעותית לגבי המשך פעילותו במתכונתו הנוכחית והיכולת שלו להמשיך לשמש מקור מרכזי ויציב למימון הקולנוע התיעודי בישראל.</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מקורות ולינקים</div>
+    <div class="array-container" id="a_kan_links">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="חוק תאגיד השידור הציבורי" dir="rtl" class="wide"></label>
+          <label>כתובת URL<input type="url" data-f="url" value="https://www.nevo.co.il/law_html/law01/501_075.htm"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="דיווחים שנתיים של כאן 11" dir="rtl" class="wide"></label>
+          <label>כתובת URL<input type="url" data-f="url" value="#https://www.kan.org.il/content-pages/foi/"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="הצעת חוק הפרטת כאן11" dir="rtl" class="wide"></label>
+          <label>כתובת URL<input type="url" data-f="url" value="https://main.knesset.gov.il/activity/legislation/laws/pages/lawbill.aspx?t=lawsuggestionssearch&amp;lawitemid=2224050"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_kan_links', TMPL.link)">+ הוסף לינק</button>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: קרנות ═══════════════ -->
+<div class="tab-panel" id="tab-funds">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_funds_title" value="קרנות הקולנוע" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_funds_seo_description" rows="2" dir="rtl">קרנות הקולנוע בישראל — נתוני תמיכה בדוקו: קרן רבינוביץ&#39;, הקרן החדשה, קרן מקור, קרן גשר וקרנות אזוריות לשנים 2023–2025</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_funds_tldr" rows="4" dir="rtl">בישראל פועלות תשע קרנות קולנוע מרכזיות הנתמכות בכספי ציבור, חמש ארציות וארבע אזוריות, המהוות את מנגנון המימון המרכזי לקולנוע התיעודי במסגרת חוק הקולנוע ותחת משרד התרבות והספורט. הקרנות מעניקות תמיכה לפרויקטים בשלבי פיתוח והפקה. התחום מתאפיין ברגולציה משתנה תכופות ושינוי מתמיד של מבחני התמיכה. בשנים האחרונות מסתמנות מגמות בעייתיות, בהן העדפה לסרטים המלווים בגופי שידור, דגש גובר על הצלחה קופתית בבתי הקולנוע (שאינה בהכרח רלוונטית לדוקו), וכן הסטת משאבים לקרנות אזוריות שבהן רמת הפיקוח לעיתים נמוכה יותר. עד שנת 2025 התקיימה חובת מינימום להשקעה בתכנים תיעודים. החל מהשנה (2026) שיטת החישוב השתנתה וטרם ברור כיצד היא תשפיע על התקציבים בפועל. הנטייה בשנים האחרונות לאשר סרטים רק עם גוף שידור צימצמו בפועל את מטרת החוק המקורי והפכו את הקרנות, דה פקטו, לכאלה שמסבסדות את גופי השידור.</textarea></div>
+    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_funds_regulation_text" rows="4" dir="rtl">הרגולציה של קרנות הקולנוע בישראל מבוססת על חוק הקולנוע ועל מבחני תמיכה הנקבעים על ידי משרד התרבות והספורט, אשר מגדירים את אופן חלוקת הכספים הציבוריים בין הקרנות ובתוכן בין תחומי היצירה השונים. בשנים האחרונות חלה תנודתיות משמעותית ברגולציה, המתבטאת בשינויים תכופים במבחני התמיכה ובהגדרות הקריטריונים לחלוקת הכספים. שינויים אלו יוצרים חוסר יציבות עבור יוצרים ויוצרות, ומחלישים את היכולת לתכנן ולהפיק יצירה תיעודית לאורך זמן. בנוסף, המעבר לדגש גובר על מדדים כמותיים כגון היקף הפצה או הצלחה קופתית, לצד היעדר מנגנוני אכיפה ברורים ליעדים אמנותיים, מביאים לשחיקה במעמדו של הדוקו בתוך מערכת המימון הציבורית ולתלות גוברת בגורמים חיצוניים כמו גופי שידור.</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">תקציב כולל — לאומי</div>
+    <div class="field-grid-3">
+      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_total_amount" value="17.3"></div>
+      <div class="field-row"><label class="field-label">תווית</label><input type="text" id="f_funds_total_label" value="סה״כ תקציב קרנות לקולנוע תיעודי" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">הערה</label><input type="text" id="f_funds_total_note" value="קרנות לאומיות בלבד — הערכה 2025" dir="rtl"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">קרנות לאומיות</div>
+    <div class="field-grid-3">
+      <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_funds_national_title" value="קרנות ארציות" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">ערך מקסימום (לסרגל)</label><input type="number" step="0.1" id="f_funds_national_max" value="6"></div>
+      <div class="field-row"><label class="field-label">טקסט אינפו</label><input type="text" id="f_funds_national_info" value="הסכום הכולל מכלל הקרנות הארציות" dir="rtl"></div>
+    </div>
+    <div class="array-container" id="a_funds_national">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קרן רבינוביץ&#39; - פרויקט הקולנוע" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="3.9"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="3.8"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="5"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="1248"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="73"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="4.05"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="3.7"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="4.8"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="740"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="87"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קרן מקור" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="3.1"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="3.5"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="4.5"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="169"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="5"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קרן גשר" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="1"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="0.1"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="2.5"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="356"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="93"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_funds_national', TMPL.fund_row)">+ הוסף קרן</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">תקציב כולל — אזורי</div>
+    <div class="field-grid-3">
+      <div class="field-row"><label class="field-label">סכום</label><input type="number" step="0.1" id="f_funds_regional_total_amount" value="4.24"></div>
+      <div class="field-row"><label class="field-label">תווית</label><input type="text" id="f_funds_regional_total_label" value="סה״כ תקציב קרנות אזוריות לקולנוע תיעודי" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">הערה</label><input type="text" id="f_funds_regional_total_note" value="הסכום המשולב מכלל הקרנות האיזוריות. קרן קולנוע גליל לא מסרה פירוט לפי סוגי סרטים ולכן המידע חלקי" dir="rtl"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">קרנות אזוריות</div>
+    <div class="field-grid-3">
+      <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_funds_regional_title" value="קרנות אזוריות" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">ערך מקסימום (לסרגל)</label><input type="number" step="0.1" id="f_funds_regional_max" value="3"></div>
+      <div class="field-row"><label class="field-label">טקסט אינפו</label><input type="text" id="f_funds_regional_info" value="סכום המשלובים מארבע קרנות אזוריות לשנת 2025" dir="rtl"></div>
+    </div>
+    <div class="array-container" id="a_funds_regional">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קרן השומרון" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0.95"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="1.18"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="1.74"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="107"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="29"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="הקרן הדרומית (מאוחד)" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0.46"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="0.77"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="1.11"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קרן הקולנוע גליל" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="1.05"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="0"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="0"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="פרויקט הקולנוע הגלילי" dir="rtl" class="wide"></label>
+          <label>2023<input type="number" step="0.1" data-f="d2023" value="0.57"></label>
+          <label>2024<input type="number" step="0.1" data-f="d2024" value="0.15"></label>
+          <label>2025<input type="number" step="0.1" data-f="d2025" value="1.39"></label>
+          <label>הגישו<input type="number" step="1" data-f="submitted" value="160"></label>
+          <label>אושרו<input type="number" step="1" data-f="approved" value="51"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_funds_regional', TMPL.fund_row)">+ הוסף קרן</button>
+  </div>
+
+  <!-- Top Projects: National -->
+  <div class="section">
+    <div class="section-head">פרויקטים מובילים — לאומי</div>
+    <label>כמות<input type="number" step="1" id="f_funds_nat_proj_count" value="7" style="width:80px;"></label>
+    <div class="array-container" id="a_funds_nat_proj">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="סרטי מלחמה " dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2023" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="1850"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="נפגעות 7 אוקטובר" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="1431"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="השבעה באוקטובר/גלעד טוקטלי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ&#39;" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="748"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="שמעון רוטשילד" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="600"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="עדות" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="586"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="יהודי האיסלם" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ&#39;" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="500"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="סיכוי להינצל/דורון צברי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן רבינוביץ׳" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="400"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_funds_nat_proj', TMPL.proj_row_with_year)">+ הוסף פרויקט</button>
+  </div>
+
+  <!-- Top Projects: Regional -->
+  <div class="section">
+    <div class="section-head">פרויקטים מובילים — אזורי</div>
+    <label>כמות<input type="number" step="1" id="f_funds_reg_proj_count" value="6" style="width:80px;"></label>
+    <div class="array-container" id="a_funds_reg_proj">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="נולדו לחיות" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="פרויקט הקולנוע הגלילי" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="350"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="לפני המחנה" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="250"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="שבי אחריו" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="250"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="גבריאל- אהבה תחת אש" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="האדם השלישי" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="פרויקט קולנוע גליל" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2025" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="דרוש כופר" dir="rtl" class="wide"></label>
+          <label>קרן<input type="text" data-f="fund" value="קרן השומרון" dir="rtl"></label>
+          <label>שנה<input type="number" step="1" data-f="year" value="2024" style="width:80px;"></label>
+          <label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value="200"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_funds_reg_proj', TMPL.proj_row_with_year)">+ הוסף פרויקט</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">עתיד</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">סטטוס
+        <select id="f_funds_future_status">
+          <option value="stable" >יציב</option>
+          <option value="changing" selected>משתנה</option>
+          <option value="declining" >בירידה</option>
+          <option value="crashing" >מתרסק</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט תג</label><input type="text" id="f_funds_future_badge" value="משתנה — רגולציה חדשה" dir="rtl"></div>
+    </div>
+    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_funds_future_text" rows="3" dir="rtl">מבט קדימה מצביע על חוסר ודאות משמעותי ביחס לעתיד המימון הציבורי לקולנוע התיעודי, כפי שעלה גם בהליך הערות הציבור על מבחני התמיכה. השינויים המוצעים מצמצמים את החובה לתמיכה בקולנוע תיעודי וכן מבטלים את התמיכה הייעודית בתחום השיווק וההפצה שלו. הרפורמה האחרונה שמבקשת לשים את הדגש על &#34;הצלחה מסחרית&#34; פוגעת במיוחד ביצירה התיעודית וכן דוחקת את הקרנות לאשר פחות סרטים בדידים אשר עוסקים בנושאים שאינם במרכז השיח התקשורתי היום-יומי ומייצרים אחידות בעייתית עם גופי השידור. </textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מקורות ולינקים</div>
+    <div class="array-container" id="a_funds_links">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="אתר קרן רבינוביץ&#39;" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.cinemaproject.org.il/"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="תמיכה - הקרן החדשה לקולנוע ולטלוויזיה" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://nfct.org.il/nfctsupport/"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="אתר קרן מקור" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://kerenmakor.org"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="מודלים לתמיכה משרד התרבות 2025" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.gov.il/he/pages/2025fundingculture"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="מודלים לתמיכה משרד התרבות 2024" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.gov.il/he/pages/_2024support"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_funds_links', TMPL.link)">+ הוסף לינק</button>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: כבלים ═══════════════ -->
+<div class="tab-panel" id="tab-cable">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_cable_title" value="כבלים ולוויין" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_cable_seo_description" rows="2" dir="rtl">HOT ו-YES — חובות ההשקעה בתוכן דוקומנטרי ישראלי ורמת העמידה בהן. נתונים מדוח המועצה לכבלים ולוויין</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_cable_tldr" rows="4" dir="rtl">בישראל פועלות שתי חברות כבלים ולוויין, HOT ו־yes, אשר מחויבות עד שנת 2026 להשקעה בתוכן מקומי לפי תנאי הרישיון שלהן. עם זאת, הדוח הרגולטורי האחרון בעניינן **פורסם בשנת 2022**, ומאז אין נתונים רשמיים על היקף ההשקעה בפועל, מעבר לעצם חובת ההשקעה הקבועה. מחויבות זו צפויה לפוג בשנת 2026. לצד חברות אלו פועלות פלטפורמות נוספות, בהן Partner TV, Cellcom TV ו־Netflix, **שאינן מחויבות כלל להשקעה בתוכן ישראלי, ואכן אינן משקיעות בו**. זאת אף שהן מחזיקות בנתח משמעותי משוק הצפייה בישראל ובניגוד למה שקורה במדינות אחרות. 
+</textarea></div>
+    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_cable_regulation_text" rows="4" dir="rtl">הרגולציה בישראל התבססה על הבחנה בין שחקנים: גופי שידור מסורתיים ופלטפורמות רב־ערוציות כמו HOT ו־yes חויבו בהשקעה בתוכן ישראלי בשיעור של כ־8% מההכנסות, מתוכם כ־4% ל״סוגה עילית״ הכוללת דרמה ותעודה. לעומת זאת, שירותי OTT (שידור ע&#34;ג רשת האיטנרנט) ופלטפורמות בינלאומיות פועלים ללא חובת השקעה כלל. התוצאה היא שוק לא מאוזן שבו חלק מהשחקנים מממנים את היצירה המקומית ואחרים נהנים ממנה ללא השתתפות במימון. 
+HOT ו-YES עברו בשנים האחרונות לשדר על גבי רשת האינטרנט ועל פי דו&#34;ח משרד התקשורת כ-80% מהמנויים שלהם כבר בתשתית כזאת. ההכנסה ממנויים בתשתית אינטרנטית אינה פועלת תחת רגולציה (ומכאן הצמצום בהשקעה).</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">כתב ויתור</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">חומרה
+        <select id="f_cable_disc_severity">
+          <option value="warning" selected>אזהרה (כתום)</option>
+          <option value="severe" >חמור (אדום)</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_cable_disc_text" rows="3" dir="rtl">הדוח האחרון של המועצה לכבלים ולוויין פורסם ב-2022 והמספרים המתייחסים להשקעה בפועל מגיעים משם. </textarea></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">טאבים ומשדרים</div>
+    <div class="cable-sub-tabs">
+      
+      <button class="cable-sub-tab-btn active" data-ctab="0">השקעה בפועל 2022</button>
+      
+      <button class="cable-sub-tab-btn " data-ctab="1">חובה רגולטורית 2025</button>
+      
+      <button class="cable-sub-tab-btn " data-ctab="2">מצב תיאורטי</button>
+      
+    </div>
+    
+    <div class="cable-tab-panel active" id="cable-tab-panel-0">
+      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab0_label" value="השקעה בפועל 2022" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab0_desc" rows="2" dir="rtl">ההשקעה בפועל וחובת ההשקעה בסרטי וסדרות דוקו כפי שבאו לידי ביטוי בדו&#34;ח המועצה לכבלים ולווין משנת 2022.</textarea></div>
+      <div class="array-container" id="a_cable_tab0_bcs">
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="YES" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="לוויין — בבעלות בזק" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="7.4"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="7.1"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="HOT" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="כבלים — בבעלות אלטיס" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="8.8"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="8.1"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="פרטנר TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות פרטנר" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="סלקום TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות סלקום" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="Netflix / Disney+" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="פלטפורמות סטרימינג" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_cable_tab0_bcs', TMPL.cable_bc)">+ הוסף משדר</button>
+    </div>
+    
+    <div class="cable-tab-panel " id="cable-tab-panel-1">
+      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab1_label" value="חובה רגולטורית 2025" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab1_desc" rows="2" dir="rtl">הערכת החובה הרגולטורית הנוכחית של גופי השידור שחוסים תחת מועצת הכבלים והלווין. החישוב הינו הערכה על בסיס הדיווח של משרד התקשורת שכ-80%  מהלקוחות של YES וHOT עברו לתשתית שאינה תחת רגולציה (שידור באינטרנט). </textarea></div>
+      <div class="array-container" id="a_cable_tab1_bcs">
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="YES" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="לוויין — בבעלות בזק" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="1.5"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="1.5"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" checked> חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="HOT" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="כבלים — בבעלות אלטיס" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="1.8"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="1.8"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" checked> חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="פרטנר TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות פרטנר" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="סלקום TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות סלקום" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="Netflix / Disney+" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="פלטפורמות סטרימינג" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" checked> ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_cable_tab1_bcs', TMPL.cable_bc)">+ הוסף משדר</button>
+    </div>
+    
+    <div class="cable-tab-panel " id="cable-tab-panel-2">
+      <div class="field-row"><label class="field-label">תווית הטאב</label><input type="text" id="f_cable_tab2_label" value="מצב תיאורטי" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תיאור</label><textarea id="f_cable_tab2_desc" rows="2" dir="rtl">חישוב תיאורטי של כלל ההשקעה של הגופים המשדרים תחת מועצת הכבלים והלווין לו כולם היו מחויבים בחובת הפקה כפי שמתקיימת כלפי YES וHOT.</textarea></div>
+      <div class="array-container" id="a_cable_tab2_bcs">
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="YES" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="לוויין — בבעלות בזק" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="8"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="HOT" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="כבלים — בבעלות אלטיס" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="9"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="פרטנר TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות פרטנר" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="2"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="סלקום TV" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="IPTV — בבעלות סלקום" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="2"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+        <div class="ar">
+          <div class="ar-fields">
+            <label>שם<input type="text" data-f="name" value="Netflix / Disney+" dir="rtl"></label>
+            <label>תת-כותרת<input type="text" data-f="subtitle" value="פלטפורמות סטרימינג" dir="rtl"></label>
+            <label>סכום<input type="number" step="0.1" data-f="amount" value="6"></label>
+            <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="no_regulation" > ללא רגולציה
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="partial" > חלקי
+            </label>
+            <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+              <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+            </label>
+          </div>
+          <button class="del-btn" onclick="delRow(this)">✕</button>
+        </div>
+        
+      </div>
+      <button class="add-row-btn" onclick="addRow('a_cable_tab2_bcs', TMPL.cable_bc)">+ הוסף משדר</button>
+    </div>
+    
+  </div>
+
+  <div class="section">
+    <div class="section-head">עתיד</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">סטטוס
+        <select id="f_cable_future_status">
+          <option value="stable" >יציב</option>
+          <option value="changing" >משתנה</option>
+          <option value="declining" selected>בירידה</option>
+          <option value="crashing" >מתרסק</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט תג</label><input type="text" id="f_cable_future_badge" value="בירידה — רגולציה כושלת" dir="rtl"></div>
+    </div>
+    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_cable_future_text" rows="3" dir="rtl">אין לדעת מתי יעבור חוק התקשורת החדש ומתי תחול רגולציה אחודה על כלל גופי השידור במשק.  לפי ההצעות הנוכחיות, חובת ההשקעה תיקבע סביב כ־6.5% מההכנסות גם עבור פלטפורמות OTT ובינלאומיות, בשאיפה להחזיר את כלל ההשקעה ביצירה הישראלית לאותו ערך מספרי של שנת 2018 - כ320 מיליון ש&#34;ח (נמוך מ415 מיליון ש&#34;ח של שנת 2016, וללא התאמה לעליית עלויות ההפקה והאינפלציה). 
+
+בהעדר חקיקה חדשה התחום יהיה, דה פקטו, ללא חובה רגולטורית כלל להפקת תכני מקור בכלל ודוקו בפרט החל משנת 2026/7. </textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מקורות ולינקים</div>
+    <div class="array-container" id="a_cable_links">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="דו&#34;ח מועצת הכבלים והלווין 2022" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.gov.il/he/pages/25012026"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="נייר עמדה של האיגודים המקצועיים" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="#"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="דיווחים של המועצה" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="#"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="הועדה להצעת חוק התקשורת (המון מסמכים באתר הכנסת)" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://main.knesset.gov.il/apps/committees/4584/sessions/2242277"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_cable_links', TMPL.link)">+ הוסף לינק</button>
+  </div>
+
+</div>
+
+<!-- ═══════════════ TAB: רשות שנייה ═══════════════ -->
+<div class="tab-panel" id="tab-reshut">
+
+  <div class="section">
+    <div class="section-head">כללי</div>
+    <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_reshut_title" value="הרשות השנייה" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">תיאור SEO</label><textarea id="f_reshut_seo_description" rows="2" dir="rtl">הרשות השנייה — ערוץ 12, ערוץ 13 ואחרים: נתוני השקעה בדוקו ישראלי מול חובות הרגולציה לשנת 2025</textarea></div>
+    <div class="field-row"><label class="field-label">באמלק</label><textarea id="f_reshut_tldr" rows="4" dir="rtl">הרשות השנייה לטלוויזיה ולרדיו היא הגוף הרגולטורי המרכזי האחראי על הפיקוח על שידורי הטלוויזיה המסחריים בישראל. הערוצים המרכזיים הנתונים לפיקוחה, בהם קשת 12 ורשת 13, מחויבים להשקיע חלק מהכנסותיהם בהפקה וברכישה של תכנים מסוגה עילית, הכוללים בין היתר סרטים ותכניות תעודה .
+עם זאת, בפועל מתגלה פער משמעותי בין מטרות האסדרה לבין יישומן. אף שהחוק מחייב השקעה משמעותית בתוכן איכותי ובתיעוד, מנגנוני הפיקוח והאכיפה אינם מספקים, והדיווח הציבורי האחרון של הרשות מתייחס לשנת 2021 בלבד. בתוך כך, נוצר דפוס עקבי שבו תכנים שאינם תיעודיים במהותם, כגון תכניות ריאליטי או תוכן עובדתי קל, מסווגים כתוכן תיעודי לצורך עמידה פורמלית בדרישות, באופן המרוקן מתוכן את מטרת הרגולציה ומוביל לשחיקה בהשקעה האמיתית בקולנוע וביצירה תיעודית.</textarea></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו — חובה</label><input type="text" id="f_reshut_info" value="סכום החובות של קשת 12 ורשת 13 בתוכן תיעודי" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">טקסט אינפו — בפועל</label><input type="text" id="f_reshut_info_actual" value="בשנת 2021 הכירה הרשות השנייה בחלק ניכר מההשקעה הנדרשת לפי החובה לסוגה עלית ובכללה דוקו. עם זאת, לעניות דעתנו, על חלק גדול מהתכנים אי אפשר לומר שהם, גם בגישה מתירנית, סרטי או סדרות דוקו ולכן לא ניתן לקבוע את הסכום המדויק" dir="rtl"></div>
+    <div class="field-row"><label class="field-label">רגולציה — טקסט</label><textarea id="f_reshut_regulation_text" rows="4" dir="rtl">הרגולציה של שידורי הטלוויזיה המסחריים בישראל, כפי שנקבעה בחוק הרשות השנייה, נועדה להבטיח איזון בין שוק מסחרי לבין מחויבות ציבורית לתוכן איכותי, ובכלל זה השקעה ביצירה ישראלית ובסוגה עילית הכוללת גם תעודה. במסגרת זו הוטלו על גופי השידור חובות השקעה משמעותיות, לרוב בשיעור של כ־15% מההכנסות בתוכן מסוגה עילית, לצד מכסות שידור והגדרות לתוכן מוכר. הדוחות שפורסמו עד 2021 מצביעים על מערכת פיקוח מסודרת, הכוללת מדידה של היקפי השקעה ושעות שידור, והכרה בתכניות תעודה ותחקיר כחלק מהמחויבות .
+עם זאת, בשנים האחרונות חלה שחיקה משמעותית ביישום הרגולציה. היעדר דוחות עדכניים והיחלשות האכיפה יצרו פער בין הדרישות לבין המציאות, כאשר גופי שידור עומדים לעיתים בדרישות באופן טכני בלבד באמצעות סיווג תכנים שאינם תיעודיים במהותם כתוכן תיעודי. במקביל, מתקיים חוסר איזון רגולטורי בין שחקנים: ערוצים מרכזיים כמו קשת ורשת מחויבים להשקעות גבוהות, בעוד ערוצים זעירים כמו ערוץ 14 נהנים מהקלות ואף מאכיפה רכה יותר, ולעיתים אינם עומדים במלוא חובות ההשקעה. מצב זה פוגע ביכולת של הרגולציה להשיג את מטרותיה, ובראשן תמיכה עקבית ומשמעותית ביצירה תיעודית ישראלית.</textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">כתב ויתור</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">חומרה
+        <select id="f_reshut_disc_severity">
+          <option value="warning" >אזהרה (כתום)</option>
+          <option value="severe" selected>חמור (אדום)</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_reshut_disc_text" rows="3" dir="rtl">הדוח האחרון של הרשות השנייה פורסם ב-2021. הנתונים על ההשקעה בפועל מתייחסים לשנה זאת. יש להניח שהתמונה היום לא שונה באופן מהותי.</textarea></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">משדרים</div>
+    <div class="array-container" id="a_reshut_bcs">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="קשת 12" dir="rtl"></label>
+          <label>חובה<input type="number" step="0.1" data-f="obligation" value="23.9"></label>
+          <label>בפועל<input type="number" step="0.1" data-f="actual" value="2"></label>
+          <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+            <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+          </label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="רשת 13" dir="rtl"></label>
+          <label>חובה<input type="number" step="0.1" data-f="obligation" value="12.7"></label>
+          <label>בפועל<input type="number" step="0.1" data-f="actual" value="1"></label>
+          <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+            <input type="checkbox" data-f="theoretical_only" > תיאורטי בלבד
+          </label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="ערוץ 14" dir="rtl"></label>
+          <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+          <label>בפועל<input type="number" step="0.1" data-f="actual" value="0"></label>
+          <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+            <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+          </label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="ערוץ i24" dir="rtl"></label>
+          <label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label>
+          <label>בפועל<input type="number" step="0.1" data-f="actual" value="0"></label>
+          <label style="flex-direction:row; align-items:center; gap:0.4rem;">
+            <input type="checkbox" data-f="theoretical_only" checked> תיאורטי בלבד
+          </label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_reshut_bcs', TMPL.reshut_bc)">+ הוסף משדר</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">תוכניות — כותרות</div>
+    <div class="field-grid-3">
+      <div class="field-row"><label class="field-label">כותרת</label><input type="text" id="f_reshut_shows_title" value="מה נחשב &#34;דוקו&#34;?" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">תת-כותרת</label><input type="text" id="f_reshut_shows_subtitle" value="תוכניות שדווחו תחת &#34;יצירה תיעודית&#34; בדוח 2021" dir="rtl"></div>
+      <div class="field-row"><label class="field-label">הערת שוליים</label><input type="text" id="f_reshut_shows_footnote" value="* הנתונים מבוססים על דיווחי הזכיינים לרשות השנייה" dir="rtl"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">תוכניות — שורות</div>
+    <div class="array-container" id="a_reshut_shows">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="תכנית חסכון" dir="rtl" class="wide"></label>
+          <label>ערוץ<input type="text" data-f="channel" value="קשת 12" dir="rtl"></label>
+          <label>שעות<input type="number" step="1" data-f="hours" value="192"></label>
+          <label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value="75"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="לפני החדשות" dir="rtl" class="wide"></label>
+          <label>ערוץ<input type="text" data-f="channel" value="רשת 13" dir="rtl"></label>
+          <label>שעות<input type="number" step="1" data-f="hours" value="40"></label>
+          <label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value="41"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="המקור" dir="rtl" class="wide"></label>
+          <label>ערוץ<input type="text" data-f="channel" value="רשת 13" dir="rtl"></label>
+          <label>שעות<input type="number" step="1" data-f="hours" value="23"></label>
+          <label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value="23"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="עובדה" dir="rtl" class="wide"></label>
+          <label>ערוץ<input type="text" data-f="channel" value="קשת 12" dir="rtl"></label>
+          <label>שעות<input type="number" step="1" data-f="hours" value="20"></label>
+          <label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value="8"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>שם<input type="text" data-f="name" value="חשיפה" dir="rtl" class="wide"></label>
+          <label>ערוץ<input type="text" data-f="channel" value="קשת 12" dir="rtl"></label>
+          <label>שעות<input type="number" step="1" data-f="hours" value="11"></label>
+          <label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value="4"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_reshut_shows', TMPL.reshut_show)">+ הוסף תוכנית</button>
+  </div>
+
+  <div class="section">
+    <div class="section-head">עתיד</div>
+    <div class="field-grid-2">
+      <div class="field-row"><label class="field-label">סטטוס
+        <select id="f_reshut_future_status">
+          <option value="stable" >יציב</option>
+          <option value="changing" >משתנה</option>
+          <option value="declining" >בירידה</option>
+          <option value="crashing" selected>מתרסק</option>
+        </select>
+      </label></div>
+      <div class="field-row"><label class="field-label">טקסט תג</label><input type="text" id="f_reshut_future_badge" value="מתרסק — ללא אכיפה" dir="rtl"></div>
+    </div>
+    <div class="field-row"><label class="field-label">טקסט</label><textarea id="f_reshut_future_text" rows="3" dir="rtl">למרות שהרגולציה הקיימת מבטיחה יצירה תיעודית בגופים המסחריים, בפועל היא אינה נאכפת וניתן לומר, בצער רב, שכרגע יש יצירה תיעודית מעטה מאוד, אם בכלל, בערוצים המסחריים המרכזיים וכמעט כלל-לא בערוצים הקטנים יותר. גם הצעות הרגולציה החדשות אינן מבטיחות תיקון, ולעיתים אף מצביעות על הפחתה של חובות ההשקעה הקיימות. </textarea></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">מקורות ולינקים</div>
+    <div class="array-container" id="a_reshut_links">
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="חוק הרשות השנייה" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.nevo.co.il/law_html/law01/p213m1_074.htm"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="דוחות הרשות השנייה " dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="https://www.rashut2.org.il/%D7%93%D7%95%D7%97%D7%95%D7%AA/%D7%93%D7%95%D7%97%D7%95%D7%AA-%D7%A8%D7%A9%D7%95%D7%AA"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+      <div class="ar">
+        <div class="ar-fields">
+          <label>טקסט<input type="text" data-f="text" value="נייד עמדה של איגודים היוצרים על חוק התקשורת 2026" dir="rtl" class="wide"></label>
+          <label>URL<input type="url" data-f="url" value="files/2026-igudim-papers.pdf"></label>
+        </div>
+        <button class="del-btn" onclick="delRow(this)">✕</button>
+      </div>
+      
+    </div>
+    <button class="add-row-btn" onclick="addRow('a_reshut_links', TMPL.link)">+ הוסף לינק</button>
+  </div>
+
+</div>
+
+<!-- STATUS BAR -->
+<div id="status-bar">✓ הקובץ יורד...</div>
+
+<script>
+// ── TAB SWITCHING ──────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ── CABLE SUB-TABS ─────────────────────────────────────────────
+document.querySelectorAll('.cable-sub-tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.cable-sub-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.cable-tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('cable-tab-panel-' + btn.dataset.ctab).classList.add('active');
+  });
+});
+
+// ── ROW TEMPLATES ──────────────────────────────────────────────
+var TMPL = {
+  about_section: '<div class="ar"><div class="ar-fields" style="flex-direction:column;gap:0.4rem;width:100%;"><label style="width:100%">כותרת<input type="text" data-f="headline" value="" dir="rtl" style="width:100%"></label><label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl"></textarea></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  future_section: '<div class="ar"><div class="ar-fields" style="flex-direction:column;gap:0.4rem;width:100%;"><label style="width:100%">כותרת<input type="text" data-f="headline" value="" dir="rtl" style="width:100%"></label><label style="width:100%">תוכן<textarea data-f="content" rows="3" dir="rtl"></textarea></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  tci_data: '<div class="ar"><div class="ar-fields"><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  kan_bn: '<div class="ar"><div class="ar-fields"><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (מיליון ₪)<input type="number" step="0.1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  kan_cat: '<div class="ar"><div class="ar-fields"><label>תווית<input type="text" data-f="label" value="" dir="rtl" class="wide"></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  kan_top: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>סוג<input type="text" data-f="type" value="" dir="rtl"></label><label>דקות<input type="number" step="1" data-f="minutes" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  fund_row: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>2023<input type="number" step="0.1" data-f="d2023" value="0"></label><label>2024<input type="number" step="0.1" data-f="d2024" value="0"></label><label>2025<input type="number" step="0.1" data-f="d2025" value="0"></label><label>הגישו<input type="number" step="1" data-f="submitted" value="0"></label><label>אושרו<input type="number" step="1" data-f="approved" value="0"></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  proj_row: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>קרן<input type="text" data-f="fund" value="" dir="rtl"></label><label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  proj_row_with_year: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>קרן<input type="text" data-f="fund" value="" dir="rtl"></label><label>שנה<input type="number" step="1" data-f="year" value=""></label><label>סכום (אלפי ₪)<input type="number" step="1" data-f="amount" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  cable_bc: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl"></label><label>תת-כותרת<input type="text" data-f="subtitle" value="" dir="rtl"></label><label>סכום<input type="number" step="0.1" data-f="amount" value="0"></label><label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="no_regulation"> ללא רגולציה</label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="partial"> חלקי</label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="theoretical_only"> תיאורטי בלבד</label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  reshut_bc: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl"></label><label>חובה<input type="number" step="0.1" data-f="obligation" value="0"></label><label>בפועל<input type="number" step="0.1" data-f="actual" value="0"></label><label style="flex-direction:row;align-items:center;gap:0.4rem;"><input type="checkbox" data-f="theoretical_only"> תיאורטי בלבד</label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  reshut_show: '<div class="ar"><div class="ar-fields"><label>שם<input type="text" data-f="name" value="" dir="rtl" class="wide"></label><label>ערוץ<input type="text" data-f="channel" value="" dir="rtl"></label><label>שעות<input type="number" step="1" data-f="hours" value=""></label><label>% תקציב<input type="number" step="0.1" data-f="budget_pct" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>',
+  link: '<div class="ar"><div class="ar-fields"><label>טקסט<input type="text" data-f="text" value="" dir="rtl" class="wide"></label><label>URL<input type="url" data-f="url" value=""></label></div><button class="del-btn" onclick="delRow(this)">✕</button></div>'
+};
+
+// ── ARRAY HELPERS ──────────────────────────────────────────────
+function addRow(containerId, tmpl) {
+  var c = document.getElementById(containerId);
+  var div = document.createElement('div');
+  div.innerHTML = tmpl;
+  c.appendChild(div.firstChild);
+}
+function delRow(btn) {
+  btn.closest('.ar').remove();
+}
+
+// ── READ ARRAY ─────────────────────────────────────────────────
+function readArray(containerId, fields) {
+  var rows = document.querySelectorAll('#' + containerId + ' > .ar');
+  var result = [];
+  rows.forEach(function(row) {
+    var obj = {};
+    fields.forEach(function(f) {
+      var el = row.querySelector('[data-f="' + f.key + '"]');
+      if (!el) return;
+      if (el.type === 'checkbox') obj[f.key] = el.checked || undefined;
+      else if (f.type === 'int') obj[f.key] = parseInt(el.value) || 0;
+      else if (f.type === 'float') obj[f.key] = parseFloat(el.value) || 0;
+      else obj[f.key] = el.value;
+    });
+    result.push(obj);
+  });
+  return result;
+}
+
+function readLinks(containerId) {
+  return readArray(containerId, [{key:'text'},{key:'url'}]);
+}
+
+function v(id) { return document.getElementById(id) ? document.getElementById(id).value : ''; }
+function vf(id) { return parseFloat(v(id)) || 0; }
+function vi(id) { return parseInt(v(id)) || 0; }
+
+// ── COLLECT DATA ───────────────────────────────────────────────
+function collectData() {
+  // overview sources (fixed 4)
+  var srcs = [];
+  document.querySelectorAll('[data-src-idx]').forEach(function(el) {
+    // group by idx
+  });
+  var srcMap = {};
+  document.querySelectorAll('[data-src-field]').forEach(function(el) {
+    var idx = el.dataset.srcIdx;
+    var field = el.dataset.srcField;
+    if (!srcMap[idx]) srcMap[idx] = {};
+    if (el.type === 'number') srcMap[idx][field] = parseFloat(el.value) || 0;
+    else srcMap[idx][field] = el.value;
+  });
+  var srcKeys = Object.keys(srcMap).sort(function(a,b){return a-b;});
+  srcKeys.forEach(function(k) { srcs.push(srcMap[k]); });
+
+  // kan budget_by_type.data
+  var bbtData = {};
+  ['2023','2024','2025'].forEach(function(yr) {
+    var inputs = document.querySelectorAll('[data-bbt-yr="' + yr + '"]');
+    bbtData[yr] = Array.from(inputs).map(function(inp) { return parseFloat(inp.value) || 0; });
+  });
+
+  // kan top_contents by year
+  function readTopContents(yr) {
+    return readArray('a_kan_top_' + yr, [
+      {key:'name'}, {key:'type'}, {key:'minutes', type:'int'}
+    ]);
+  }
+
+  // funds rows
+  function readFundRows(containerId) {
+    var rows = document.querySelectorAll('#' + containerId + ' > .ar');
+    var result = [];
+    rows.forEach(function(row) {
+      result.push({
+        name: row.querySelector('[data-f="name"]').value,
+        data: {
+          '2023': parseFloat(row.querySelector('[data-f="d2023"]').value) || 0,
+          '2024': parseFloat(row.querySelector('[data-f="d2024"]').value) || 0,
+          '2025': parseFloat(row.querySelector('[data-f="d2025"]').value) || 0
+        },
+        submitted: parseInt(row.querySelector('[data-f="submitted"]').value) || 0,
+        approved: parseInt(row.querySelector('[data-f="approved"]').value) || 0
+      });
+    });
+    return result;
+  }
+
+  function readProjRows(containerId) {
+    return readArray(containerId, [
+      {key:'name'}, {key:'fund'}, {key:'year', type:'int'}, {key:'amount', type:'int'}
+    ]);
+  }
+
+  // cable broadcasters
+  function readCableBcs(tabIdx) {
+    var rows = document.querySelectorAll('#a_cable_tab' + tabIdx + '_bcs > .ar');
+    var result = [];
+    rows.forEach(function(row) {
+      var obj = {
+        name: row.querySelector('[data-f="name"]').value
+      };
+      var sub = row.querySelector('[data-f="subtitle"]').value;
+      if (sub) obj.subtitle = sub;
+      var amt = parseFloat(row.querySelector('[data-f="amount"]').value);
+      if (!isNaN(amt)) obj.amount = amt;
+      var obl = parseFloat(row.querySelector('[data-f="obligation"]').value);
+      if (obl) obj.obligation = obl;
+      var noReg = row.querySelector('[data-f="no_regulation"]').checked;
+      if (noReg) obj.no_regulation = true;
+      var partial = row.querySelector('[data-f="partial"]').checked;
+      if (partial) obj.partial = true;
+      var theo = row.querySelector('[data-f="theoretical_only"]').checked;
+      if (theo) obj.theoretical_only = true;
+      result.push(obj);
+    });
+    return result;
+  }
+
+  // reshut broadcasters
+  function readReshotBcs() {
+    var rows = document.querySelectorAll('#a_reshut_bcs > .ar');
+    var result = [];
+    rows.forEach(function(row) {
+      var obj = {
+        name: row.querySelector('[data-f="name"]').value,
+        obligation: parseFloat(row.querySelector('[data-f="obligation"]').value) || 0,
+        actual: parseFloat(row.querySelector('[data-f="actual"]').value) || 0
+      };
+      var theo = row.querySelector('[data-f="theoretical_only"]').checked;
+      if (theo) obj.theoretical_only = true;
+      result.push(obj);
+    });
+    return result;
+  }
+
+  var data = {
+    meta: {
+      site_title: v('f_meta_site_title'),
+      last_updated: v('f_meta_last_updated'),
+      author: v('f_meta_author'),
+      description: v('f_meta_description'),
+      keywords: v('f_meta_keywords'),
+      og_image: v('f_meta_og_image') || null
+    },
+    landing: {
+      seo_description: v('f_landing_seo_description'),
+      title: v('f_landing_title'),
+      subtitle: v('f_landing_subtitle'),
+      description: v('f_landing_description'),
+      button_text: v('f_landing_button_text'),
+      about_link_text: v('f_landing_about_link_text'),
+      hero_image: v('f_landing_hero_image') || null,
+      bg_count: vi('f_landing_bg_count') || 4
+    },
+    about: {
+      title: v('f_about_title'),
+      seo_description: v('f_about_seo_description'),
+      hero_image: v('f_about_hero_image') || null,
+      sections: readArray('a_about_sections', [{key:'headline'}, {key:'content'}])
+    },
+    future: {
+      title: v('f_future_title'),
+      seo_description: v('f_future_seo_description'),
+      hero_image: v('f_future_hero_image') || null,
+      sections: readArray('a_future_sections', [{key:'headline'}, {key:'content'}])
+    },
+    overview: {
+      title: v('f_overview_title'),
+      seo_description: v('f_overview_seo_description'),
+      hero_image: v('f_overview_hero_image') || null,
+      tldr: v('f_overview_tldr'),
+      info: v('f_overview_info'),
+      sources: srcs,
+      theoretical_budget: { title: v('f_overview_theoretical_title') },
+      actual_budget: { title: v('f_overview_actual_title') },
+      disclaimer: v('f_overview_disclaimer'),
+      total_content_investment: {
+        title: v('f_overview_tci_title'),
+        info: v('f_overview_tci_info'),
+        data: readArray('a_overview_tci_data', [{key:'year',type:'int'},{key:'amount',type:'float'}])
+      },
+      call_to_action: {
+        title: v('f_overview_cta_title'),
+        subtitle: v('f_overview_cta_subtitle'),
+        image: v('f_overview_cta_image') || null
+      }
+    },
+    kan: {
+      title: v('f_kan_title'),
+      seo_description: v('f_kan_seo_description'),
+      tldr: v('f_kan_tldr'),
+      info: v('f_kan_info'),
+      big_numbers: readArray('a_kan_big_numbers', [{key:'year',type:'int'},{key:'amount',type:'float'}]),
+      regulation: { title: 'הרגולציה', text: v('f_kan_regulation_text') },
+      budget_by_type: {
+        title: v('f_kan_bbt_title'),
+        categories: readArray('a_kan_bbt_cats', [{key:'label'}]),
+        data: bbtData
+      },
+      shows_button: { text: 'לרשימת התוכניות →', link: '#' },
+      top_contents: {
+        title: v('f_kan_top_title'),
+        info: v('f_kan_top_info'),
+        '2023': readTopContents('2023'),
+        '2024': readTopContents('2024'),
+        '2025': readTopContents('2025')
+      },
+      future: {
+        status: v('f_kan_future_status'),
+        badge_text: v('f_kan_future_badge'),
+        text: v('f_kan_future_text')
+      },
+      sources_and_links: { title: 'מקורות ולינקים', links: readLinks('a_kan_links') }
+    },
+    funds: {
+      title: v('f_funds_title'),
+      seo_description: v('f_funds_seo_description'),
+      tldr: v('f_funds_tldr'),
+      total_budget: {
+        amount: vf('f_funds_total_amount'),
+        label: v('f_funds_total_label'),
+        note: v('f_funds_total_note')
+      },
+      regulation: { title: 'הרגולציה', text: v('f_funds_regulation_text') },
+      national_funds: {
+        title: v('f_funds_national_title'),
+        max_value: vf('f_funds_national_max'),
+        info: v('f_funds_national_info'),
+        funds: readFundRows('a_funds_national')
+      },
+      total_regional: {
+        amount: vf('f_funds_regional_total_amount'),
+        label: v('f_funds_regional_total_label'),
+        note: v('f_funds_regional_total_note')
+      },
+      regional_funds: {
+        title: v('f_funds_regional_title'),
+        max_value: vf('f_funds_regional_max'),
+        info: v('f_funds_regional_info'),
+        funds: readFundRows('a_funds_regional')
+      },
+      national_top_projects_count: vf('f_funds_nat_proj_count'),
+      national_top_projects: readProjRows('a_funds_nat_proj'),
+      regional_top_projects_count: vf('f_funds_reg_proj_count'),
+      regional_top_projects: readProjRows('a_funds_reg_proj'),
+      future: {
+        status: v('f_funds_future_status'),
+        badge_text: v('f_funds_future_badge'),
+        text: v('f_funds_future_text'),
+        button: { text: v('f_funds_future_btn_text'), link: v('f_funds_future_btn_link') }
+      },
+      sources_and_links: { title: 'מקורות ולינקים', links: readLinks('a_funds_links') }
+    },
+    cable: {
+      title: v('f_cable_title'),
+      seo_description: v('f_cable_seo_description'),
+      tldr: v('f_cable_tldr'),
+      disclaimer: {
+        severity: v('f_cable_disc_severity'),
+        text: v('f_cable_disc_text')
+      },
+      regulation: { title: 'הרגולציה', text: v('f_cable_regulation_text') },
+      tabs: [
+        { id: 'tab2022', label: v('f_cable_tab0_label'), description: v('f_cable_tab0_desc'), broadcasters: readCableBcs(0) },
+        { id: 'tabCurrent', label: v('f_cable_tab1_label'), description: v('f_cable_tab1_desc'), broadcasters: readCableBcs(1) },
+        { id: 'tabTheoretical', label: v('f_cable_tab2_label'), description: v('f_cable_tab2_desc'), broadcasters: readCableBcs(2) }
+      ],
+      future: {
+        status: v('f_cable_future_status'),
+        badge_text: v('f_cable_future_badge'),
+        text: v('f_cable_future_text')
+      },
+      sources_and_links: { title: 'מקורות ולינקים', links: readLinks('a_cable_links') }
+    },
+    reshut: {
+      title: v('f_reshut_title'),
+      seo_description: v('f_reshut_seo_description'),
+      tldr: v('f_reshut_tldr'),
+      info: v('f_reshut_info'),
+      info_actual: v('f_reshut_info_actual'),
+      disclaimer: {
+        severity: v('f_reshut_disc_severity'),
+        text: v('f_reshut_disc_text')
+      },
+      regulation: { title: 'הרגולציה', text: v('f_reshut_regulation_text') },
+      broadcasters: readReshotBcs(),
+      shows: {
+        title: v('f_reshut_shows_title'),
+        subtitle: v('f_reshut_shows_subtitle'),
+        rows: readArray('a_reshut_shows', [
+          {key:'name'},{key:'channel'},{key:'hours',type:'int'},{key:'budget_pct',type:'float'}
+        ]),
+        footnote: v('f_reshut_shows_footnote')
+      },
+      future: {
+        status: v('f_reshut_future_status'),
+        badge_text: v('f_reshut_future_badge'),
+        text: v('f_reshut_future_text')
+      },
+      sources_and_links: { title: 'מקורות ולינקים', links: readLinks('a_reshut_links') }
+    }
+  };
+  return data;
+}
+
+// ── EXPORT ─────────────────────────────────────────────────────
+function exportYAML() {
+  var data = collectData();
+  var yamlStr = jsyaml.dump(data, { indent: 2, lineWidth: 120, noRefs: true });
+  var blob = new Blob([yamlStr], { type: 'text/yaml;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.yaml';
+  a.click();
+  URL.revokeObjectURL(url);
+  showStatus('✓ data.yaml יורד...');
+}
+
+// ── IMPORT ─────────────────────────────────────────────────────
+document.getElementById('import-file').addEventListener('change', function(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      var data = jsyaml.load(ev.target.result);
+      populateForm(data);
+      showStatus('✓ הנתונים נטענו בהצלחה');
+    } catch(err) {
+      alert('שגיאה בקריאת ה-YAML: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function setVal(id, val) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.value = val !== null && val !== undefined ? val : '';
+}
+
+function rebuildArray(containerId, items, tmpl, fillFn) {
+  var c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  (items || []).forEach(function(item) {
+    var div = document.createElement('div');
+    div.innerHTML = tmpl;
+    var row = div.firstChild;
+    fillFn(row, item);
+    c.appendChild(row);
+  });
+}
+
+function fillRow(row, item, fields) {
+  fields.forEach(function(f) {
+    var el = row.querySelector('[data-f="' + f.key + '"]');
+    if (!el) return;
+    if (el.type === 'checkbox') el.checked = !!item[f.key];
+    else el.value = item[f.key] !== null && item[f.key] !== undefined ? item[f.key] : '';
+  });
+}
+
+function populateForm(d) {
+  // meta
+  setVal('f_meta_site_title', d.meta && d.meta.site_title);
+  setVal('f_meta_last_updated', d.meta && d.meta.last_updated);
+  setVal('f_meta_author', d.meta && d.meta.author);
+  setVal('f_meta_description', d.meta && d.meta.description);
+  setVal('f_meta_keywords', d.meta && d.meta.keywords);
+  setVal('f_meta_og_image', d.meta && d.meta.og_image);
+  // landing
+  if (d.landing) {
+    setVal('f_landing_seo_description', d.landing.seo_description);
+    setVal('f_landing_title', d.landing.title);
+    setVal('f_landing_subtitle', d.landing.subtitle);
+    setVal('f_landing_description', d.landing.description);
+    setVal('f_landing_button_text', d.landing.button_text);
+    setVal('f_landing_about_link_text', d.landing.about_link_text);
+    setVal('f_landing_hero_image', d.landing.hero_image);
+    setVal('f_landing_bg_count', d.landing.bg_count || 4);
+  }
+  // about
+  if (d.about) {
+    setVal('f_about_title', d.about.title);
+    setVal('f_about_seo_description', d.about.seo_description);
+    setVal('f_about_hero_image', d.about.hero_image);
+    rebuildArray('a_about_sections', d.about.sections, TMPL.about_section, function(row, item) {
+      fillRow(row, item, [{key:'headline'},{key:'content'}]);
+    });
+  }
+  // future
+  if (d.future) {
+    setVal('f_future_title', d.future.title);
+    setVal('f_future_seo_description', d.future.seo_description);
+    setVal('f_future_hero_image', d.future.hero_image);
+    rebuildArray('a_future_sections', d.future.sections, TMPL.future_section, function(row, item) {
+      fillRow(row, item, [{key:'headline'},{key:'content'}]);
+    });
+  }
+  // overview
+  if (d.overview) {
+    setVal('f_overview_title', d.overview.title);
+    setVal('f_overview_seo_description', d.overview.seo_description);
+    setVal('f_overview_tldr', d.overview.tldr);
+    setVal('f_overview_info', d.overview.info);
+    setVal('f_overview_disclaimer', d.overview.disclaimer);
+    setVal('f_overview_hero_image', d.overview.hero_image);
+    setVal('f_overview_theoretical_title', d.overview.theoretical_budget && d.overview.theoretical_budget.title);
+    setVal('f_overview_actual_title', d.overview.actual_budget && d.overview.actual_budget.title);
+    setVal('f_overview_tci_title', d.overview.total_content_investment && d.overview.total_content_investment.title);
+    setVal('f_overview_tci_info', d.overview.total_content_investment && d.overview.total_content_investment.info);
+    if (d.overview.total_content_investment && d.overview.total_content_investment.data) {
+      rebuildArray('a_overview_tci_data', d.overview.total_content_investment.data, TMPL.tci_data, function(row, item) {
+        fillRow(row, item, [{key:'year'},{key:'amount'}]);
+      });
+    }
+    setVal('f_overview_cta_title', d.overview.call_to_action && d.overview.call_to_action.title);
+    setVal('f_overview_cta_subtitle', d.overview.call_to_action && d.overview.call_to_action.subtitle);
+    setVal('f_overview_cta_image', d.overview.call_to_action && d.overview.call_to_action.image);
+    // sources
+    if (d.overview.sources) {
+      d.overview.sources.forEach(function(src, idx) {
+        document.querySelectorAll('[data-src-idx="' + idx + '"]').forEach(function(el) {
+          var field = el.dataset.srcField;
+          el.value = src[field] !== undefined ? src[field] : '';
+        });
+      });
+    }
+  }
+  // kan
+  if (d.kan) {
+    setVal('f_kan_title', d.kan.title);
+    setVal('f_kan_seo_description', d.kan.seo_description);
+    setVal('f_kan_tldr', d.kan.tldr);
+    setVal('f_kan_info', d.kan.info);
+    setVal('f_kan_regulation_text', d.kan.regulation && d.kan.regulation.text);
+    rebuildArray('a_kan_big_numbers', d.kan.big_numbers, TMPL.kan_bn, function(row, item) {
+      fillRow(row, item, [{key:'year'},{key:'amount'}]);
+    });
+    if (d.kan.budget_by_type) {
+      setVal('f_kan_bbt_title', d.kan.budget_by_type.title);
+      rebuildArray('a_kan_bbt_cats', d.kan.budget_by_type.categories, TMPL.kan_cat, function(row, item) {
+        fillRow(row, item, [{key:'label'}]);
+      });
+      // bbt data
+      ['2023','2024','2025'].forEach(function(yr) {
+        var vals = d.kan.budget_by_type.data && d.kan.budget_by_type.data[yr];
+        var inputs = document.querySelectorAll('[data-bbt-yr="' + yr + '"]');
+        if (vals) {
+          vals.forEach(function(val, i) {
+            if (inputs[i]) inputs[i].value = val;
+          });
+        }
+      });
+    }
+    if (d.kan.top_contents) {
+      setVal('f_kan_top_title', d.kan.top_contents.title);
+      setVal('f_kan_top_info', d.kan.top_contents.info);
+      ['2023','2024','2025'].forEach(function(yr) {
+        rebuildArray('a_kan_top_' + yr, d.kan.top_contents[yr], TMPL.kan_top, function(row, item) {
+          fillRow(row, item, [{key:'name'},{key:'type'},{key:'minutes'}]);
+        });
+      });
+    }
+    if (d.kan.future) {
+      setVal('f_kan_future_status', d.kan.future.status);
+      setVal('f_kan_future_badge', d.kan.future.badge_text);
+      setVal('f_kan_future_text', d.kan.future.text);
+    }
+    rebuildArray('a_kan_links', d.kan.sources_and_links && d.kan.sources_and_links.links, TMPL.link, function(row, item) {
+      fillRow(row, item, [{key:'text'},{key:'url'}]);
+    });
+  }
+  // funds
+  if (d.funds) {
+    setVal('f_funds_title', d.funds.title);
+    setVal('f_funds_seo_description', d.funds.seo_description);
+    setVal('f_funds_tldr', d.funds.tldr);
+    setVal('f_funds_regulation_text', d.funds.regulation && d.funds.regulation.text);
+    if (d.funds.total_budget) {
+      setVal('f_funds_total_amount', d.funds.total_budget.amount);
+      setVal('f_funds_total_label', d.funds.total_budget.label);
+      setVal('f_funds_total_note', d.funds.total_budget.note);
+    }
+    if (d.funds.national_funds) {
+      setVal('f_funds_national_title', d.funds.national_funds.title);
+      setVal('f_funds_national_max', d.funds.national_funds.max_value);
+      setVal('f_funds_national_info', d.funds.national_funds.info);
+      rebuildArray('a_funds_national', d.funds.national_funds.funds, TMPL.fund_row, function(row, item) {
+        row.querySelector('[data-f="name"]').value = item.name || '';
+        row.querySelector('[data-f="d2023"]').value = item.data && item.data['2023'] || 0;
+        row.querySelector('[data-f="d2024"]').value = item.data && item.data['2024'] || 0;
+        row.querySelector('[data-f="d2025"]').value = item.data && item.data['2025'] || 0;
+        row.querySelector('[data-f="submitted"]').value = item.submitted || 0;
+        row.querySelector('[data-f="approved"]').value = item.approved || 0;
+      });
+    }
+    if (d.funds.total_regional) {
+      setVal('f_funds_regional_total_amount', d.funds.total_regional.amount);
+      setVal('f_funds_regional_total_label', d.funds.total_regional.label);
+      setVal('f_funds_regional_total_note', d.funds.total_regional.note);
+    }
+    if (d.funds.regional_funds) {
+      setVal('f_funds_regional_title', d.funds.regional_funds.title);
+      setVal('f_funds_regional_max', d.funds.regional_funds.max_value);
+      setVal('f_funds_regional_info', d.funds.regional_funds.info);
+      rebuildArray('a_funds_regional', d.funds.regional_funds.funds, TMPL.fund_row, function(row, item) {
+        row.querySelector('[data-f="name"]').value = item.name || '';
+        row.querySelector('[data-f="d2023"]').value = item.data && item.data['2023'] || 0;
+        row.querySelector('[data-f="d2024"]').value = item.data && item.data['2024'] || 0;
+        row.querySelector('[data-f="d2025"]').value = item.data && item.data['2025'] || 0;
+        row.querySelector('[data-f="submitted"]').value = item.submitted || 0;
+        row.querySelector('[data-f="approved"]').value = item.approved || 0;
+      });
+    }
+    setVal('f_funds_nat_proj_count', d.funds.national_top_projects_count || 10);
+    rebuildArray('a_funds_nat_proj', d.funds.national_top_projects, TMPL.proj_row_with_year, function(row, item) {
+      fillRow(row, item, [{key:'name'},{key:'fund'},{key:'year'},{key:'amount'}]);
+    });
+    setVal('f_funds_reg_proj_count', d.funds.regional_top_projects_count || 10);
+    rebuildArray('a_funds_reg_proj', d.funds.regional_top_projects, TMPL.proj_row_with_year, function(row, item) {
+      fillRow(row, item, [{key:'name'},{key:'fund'},{key:'year'},{key:'amount'}]);
+    });
+    if (d.funds.future) {
+      setVal('f_funds_future_status', d.funds.future.status);
+      setVal('f_funds_future_badge', d.funds.future.badge_text);
+      setVal('f_funds_future_text', d.funds.future.text);
+      setVal('f_funds_future_btn_text', d.funds.future.button && d.funds.future.button.text);
+      setVal('f_funds_future_btn_link', d.funds.future.button && d.funds.future.button.link);
+    }
+    rebuildArray('a_funds_links', d.funds.sources_and_links && d.funds.sources_and_links.links, TMPL.link, function(row, item) {
+      fillRow(row, item, [{key:'text'},{key:'url'}]);
+    });
+  }
+  // cable
+  if (d.cable) {
+    setVal('f_cable_title', d.cable.title);
+    setVal('f_cable_seo_description', d.cable.seo_description);
+    setVal('f_cable_tldr', d.cable.tldr);
+    setVal('f_cable_regulation_text', d.cable.regulation && d.cable.regulation.text);
+    if (d.cable.disclaimer) {
+      setVal('f_cable_disc_severity', d.cable.disclaimer.severity);
+      setVal('f_cable_disc_text', d.cable.disclaimer.text);
+    }
+    if (d.cable.tabs) {
+      d.cable.tabs.forEach(function(tab, idx) {
+        setVal('f_cable_tab' + idx + '_label', tab.label);
+        setVal('f_cable_tab' + idx + '_desc', tab.description);
+        rebuildArray('a_cable_tab' + idx + '_bcs', tab.broadcasters, TMPL.cable_bc, function(row, item) {
+          row.querySelector('[data-f="name"]').value = item.name || '';
+          row.querySelector('[data-f="subtitle"]').value = item.subtitle || '';
+          row.querySelector('[data-f="amount"]').value = item.amount !== undefined ? item.amount : 0;
+          row.querySelector('[data-f="obligation"]').value = item.obligation || 0;
+          row.querySelector('[data-f="no_regulation"]').checked = !!item.no_regulation;
+          row.querySelector('[data-f="partial"]').checked = !!item.partial;
+          row.querySelector('[data-f="theoretical_only"]').checked = !!item.theoretical_only;
+        });
+      });
+    }
+    if (d.cable.future) {
+      setVal('f_cable_future_status', d.cable.future.status);
+      setVal('f_cable_future_badge', d.cable.future.badge_text);
+      setVal('f_cable_future_text', d.cable.future.text);
+    }
+    rebuildArray('a_cable_links', d.cable.sources_and_links && d.cable.sources_and_links.links, TMPL.link, function(row, item) {
+      fillRow(row, item, [{key:'text'},{key:'url'}]);
+    });
+  }
+  // reshut
+  if (d.reshut) {
+    setVal('f_reshut_title', d.reshut.title);
+    setVal('f_reshut_seo_description', d.reshut.seo_description);
+    setVal('f_reshut_tldr', d.reshut.tldr);
+    setVal('f_reshut_info', d.reshut.info);
+    setVal('f_reshut_info_actual', d.reshut.info_actual);
+    setVal('f_reshut_regulation_text', d.reshut.regulation && d.reshut.regulation.text);
+    if (d.reshut.disclaimer) {
+      setVal('f_reshut_disc_severity', d.reshut.disclaimer.severity);
+      setVal('f_reshut_disc_text', d.reshut.disclaimer.text);
+    }
+    rebuildArray('a_reshut_bcs', d.reshut.broadcasters, TMPL.reshut_bc, function(row, item) {
+      row.querySelector('[data-f="name"]').value = item.name || '';
+      row.querySelector('[data-f="obligation"]').value = item.obligation || 0;
+      row.querySelector('[data-f="actual"]').value = item.actual || 0;
+      row.querySelector('[data-f="theoretical_only"]').checked = !!item.theoretical_only;
+    });
+    if (d.reshut.shows) {
+      setVal('f_reshut_shows_title', d.reshut.shows.title);
+      setVal('f_reshut_shows_subtitle', d.reshut.shows.subtitle);
+      setVal('f_reshut_shows_footnote', d.reshut.shows.footnote);
+      rebuildArray('a_reshut_shows', d.reshut.shows.rows, TMPL.reshut_show, function(row, item) {
+        fillRow(row, item, [{key:'name'},{key:'channel'},{key:'hours'},{key:'budget_pct'}]);
+      });
+    }
+    if (d.reshut.future) {
+      setVal('f_reshut_future_status', d.reshut.future.status);
+      setVal('f_reshut_future_badge', d.reshut.future.badge_text);
+      setVal('f_reshut_future_text', d.reshut.future.text);
+    }
+    rebuildArray('a_reshut_links', d.reshut.sources_and_links && d.reshut.sources_and_links.links, TMPL.link, function(row, item) {
+      fillRow(row, item, [{key:'text'},{key:'url'}]);
+    });
+  }
+}
+
+// ── STATUS BAR ─────────────────────────────────────────────────
+function showStatus(msg) {
+  var bar = document.getElementById('status-bar');
+  bar.textContent = msg;
+  bar.classList.add('show');
+  setTimeout(function() { bar.classList.remove('show'); }, 2500);
+}
+</script>
+</body>
+</html>
