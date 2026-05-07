@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap URL to be added once the site is deployed:
+# Sitemap: https://your-domain.com/sitemap.xml
