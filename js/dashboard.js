@@ -163,22 +163,22 @@ function initSwipeNavigation() {
 }
 
 function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
-  const threshold = 50; // minimum swipe distance in pixels
+  const threshold = 50;
   const diff = startX - endX;
+
+  // page IDs that don't match their filename
+  const filenameMap = { 'landing': 'index' };
+  const toFile = id => (filenameMap[id] || id) + '.html';
 
   // RTL (Hebrew): Swipe right (diff < 0) = next page
   if (diff < -threshold) {
     const nextPage = pageMap[currentPage];
-    if (nextPage) {
-      window.location.href = nextPage + '.html';
-    }
+    if (nextPage) window.location.href = toFile(nextPage);
   }
   // RTL (Hebrew): Swipe left (diff > 0) = previous page
   else if (diff > threshold) {
     const prevPage = pageMapReverse[currentPage];
-    if (prevPage) {
-      window.location.href = prevPage + '.html';
-    }
+    if (prevPage) window.location.href = toFile(prevPage);
   }
 }
 
