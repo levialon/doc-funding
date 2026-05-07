@@ -122,25 +122,25 @@ function initInfoModal() {
 /* --- Swipe Navigation (Mobile) --- */
 function initSwipeNavigation() {
   const pageMap = {
-    'landing': 'overview',    // landing → overview
-    'overview': 'funds',      // overview → funds
-    'funds': 'kan',           // funds → kan
-    'kan': 'cable',           // kan → cable
-    'cable': 'reshut',        // cable → reshut
-    'reshut': 'about',        // reshut → about
-    'about': 'future',        // about → future
-    'future': 'sources'       // future → sources
+    'landing_desktop': 'overview', // index → overview
+    'overview': 'funds',           // overview → funds
+    'funds': 'kan',                // funds → kan
+    'kan': 'cable',                // kan → cable
+    'cable': 'reshut',             // cable → reshut
+    'reshut': 'about',             // reshut → about
+    'about': 'future',             // about → future
+    'future': 'sources'            // future → sources
   };
 
   const pageMapReverse = {
-    'overview': 'landing',    // overview → landing
-    'funds': 'overview',      // funds → overview
-    'kan': 'funds',           // kan → funds
-    'cable': 'kan',           // cable → kan
-    'reshut': 'cable',        // reshut → cable
-    'about': 'reshut',        // about → reshut
-    'future': 'about',        // future → about
-    'sources': 'future'       // sources → future
+    'overview': 'landing_desktop', // overview → index
+    'funds': 'overview',           // funds → overview
+    'kan': 'funds',                // kan → funds
+    'cable': 'kan',                // cable → kan
+    'reshut': 'cable',             // reshut → cable
+    'about': 'reshut',             // about → reshut
+    'future': 'about',             // future → about
+    'sources': 'future'            // sources → future
   };
 
   const bodyClass = document.body.className;
@@ -167,7 +167,7 @@ function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
   const diff = startX - endX;
 
   // page IDs that don't match their filename
-  const filenameMap = { 'landing': 'index' };
+  const filenameMap = { 'landing_desktop': 'index', 'landing': 'index_lp2' };
   const toFile = id => (filenameMap[id] || id) + '.html';
 
   // RTL (Hebrew): Swipe right (diff < 0) = next page
