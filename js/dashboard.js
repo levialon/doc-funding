@@ -122,7 +122,7 @@ function initInfoModal() {
 /* --- Swipe Navigation (Mobile) --- */
 function initSwipeNavigation() {
   const pageMap = {
-    'index': 'overview',      // landing → overview
+    'landing': 'overview',    // landing → overview
     'overview': 'funds',      // overview → funds
     'funds': 'kan',           // funds → kan
     'kan': 'cable',           // kan → cable
@@ -133,7 +133,7 @@ function initSwipeNavigation() {
   };
 
   const pageMapReverse = {
-    'overview': 'index',      // overview → landing
+    'overview': 'landing',    // overview → landing
     'funds': 'overview',      // funds → overview
     'kan': 'funds',           // kan → funds
     'cable': 'kan',           // cable → kan

@@ -2033,4 +2033,9 @@ text-decoration:underline;
   .broadcaster-grid-cable { grid-template-columns: 1fr; }
   .big-number { font-size: 32px; }
   #overviewBar { margin-left: -1.5rem; margin-right: -1.5rem; width: calc(100% + 3rem); }
+
+  /* CTA overlay text sizing for mobile */
+  .cta-overlay { padding: 1.25rem; }
+  .cta-title { font-size: 28px; margin-bottom: 0.35rem; }
+  .cta-subtitle { font-size: 14px; }
 }
