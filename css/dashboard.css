@@ -2335,11 +2335,24 @@ color:#e05050;
   overflow-y: auto;
 }
 
-.lpd-logo {
-  height: 107px;
-  width: auto;
-  display: block;
-  background: #ffffff;
+.lpd-title {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 700;
+  color: #e05050;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+.lpd-subtitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: -6px;
+  line-height: 1.5;
+  background-color:#e05050;
+padding:3px;
+border-radius: 5px;
 }
 
 .lpd-description {
