@@ -151,20 +151,28 @@ function initSwipeNavigation() {
 
   let touchStartX = 0;
   let touchEndX = 0;
+  let touchStartY = 0;
+  let touchEndY = 0;
 
   document.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
   });
 
   document.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe(currentPage, touchStartX, touchEndX, pageMap, pageMapReverse);
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe(currentPage, touchStartX, touchEndX, touchStartY, touchEndY, pageMap, pageMapReverse);
   });
 }
 
-function handleSwipe(currentPage, startX, endX, pageMap, pageMapReverse) {
-  const threshold = 50;
+function handleSwipe(currentPage, startX, endX, startY, endY, pageMap, pageMapReverse) {
+  const threshold = 60;
   const diff = startX - endX;
+  const diffY = Math.abs(startY - endY);
+
+  // Ignore if vertical movement is greater than horizontal (user is scrolling)
+  if (diffY > Math.abs(diff)) return;
 
   // page IDs that don't match their filename
   const filenameMap = { 'landing_desktop': 'index', 'landing': 'index_lp2' };
